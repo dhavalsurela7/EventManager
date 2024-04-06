@@ -8,11 +8,10 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5  rounded ">
 
         <div class="form-group m-2">
-          <label></label>
-            <select formControlName="Event_Name"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
-                
+            <label>Select Event</label>
+            <select formControlName="Event_Name" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
+
                 <option *ngFor=" let e of result" value={{e.Event_Name}}>{{e.Event_Name}}</option>
             </select>
         </div>

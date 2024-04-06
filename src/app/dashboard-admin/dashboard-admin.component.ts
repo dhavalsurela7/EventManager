@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -6,10 +6,14 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard-admin.component.html',
   styleUrl: './dashboard-admin.component.css'
 })
-export class DashboardAdminComponent {
-   selectedcomponent : string
-   debugger
-load(component : string) : void{
- this.selectedcomponent = component
-}
+export class DashboardAdminComponent implements OnInit {
+
+  selectedcomponent: string
+  ngOnInit(): void {
+    this.selectedcomponent = ''
+  }
+  debugger
+  load(component: string): void {
+    this.selectedcomponent = component
+  }
 }

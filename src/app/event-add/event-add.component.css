@@ -1,17 +1,17 @@
 .register-form {
     margin: 0px;
     padding: 0px;
-  
 
-  
-   
+
+
+
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
 
 form {
     height: fit-content;
-    background-color: cadetblue;
-    
+
+
 }

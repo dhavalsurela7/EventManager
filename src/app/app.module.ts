@@ -11,6 +11,8 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventPublishComponent } from './event-publish/event-publish.component';
 import { ActivityAddComponent } from './activity-add/activity-add.component';
+import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 
 @NgModule({
@@ -22,10 +24,12 @@ import { ActivityAddComponent } from './activity-add/activity-add.component';
     DashboardAdminComponent,
     EventAddComponent,
     EventPublishComponent,
-    ActivityAddComponent
+    ActivityAddComponent,
+    DashboardUserComponent,
+    EventListComponent
 
 
-    
+
   ],
   imports: [
     BrowserModule,

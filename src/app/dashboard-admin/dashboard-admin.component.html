@@ -47,21 +47,13 @@
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 " routerLink="/dashboard-admin">Admin Dashboard</a>
 
     <ul class="navbar-nav flex-row d-md-none">
-        <li class="nav-item text-nowrap">
-            <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false"
-                aria-label="Toggle search">
-                <svg class="bi">
-                    <use xlink:href="#search" />
-                </svg>
-            </button>
-        </li>
+
         <li class="nav-item text-nowrap">
             <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <svg class="bi">
-                    <use xlink:href="#list" />
+                    <use xlink:href="#plus-circle" />
                 </svg>
             </button>
         </li>
@@ -83,8 +75,8 @@
                 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
-                                routerLink="/dashboard-admin">
+                            <a routerLink="[]" (click)="load('')"
+                                class="nav-link d-flex align-items-center gap-2 active" aria-current="page">
                                 <svg class="bi">
                                     <use xlink:href="#house-fill" />
                                 </svg>
@@ -121,7 +113,8 @@
                     </h6>
                     <ul class="nav flex-column mb-auto">
                         <li class="nav-item">
-                            <a routerLink="[]" (click)="load('activity-add')" class="nav-link d-flex align-items-center gap-2" >
+                            <a routerLink="[]" (click)="load('activity-add')"
+                                class="nav-link d-flex align-items-center gap-2">
                                 <svg class="bi">
                                     <use xlink:href="#file-earmark-text" />
                                 </svg>
@@ -158,7 +151,7 @@
         </div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
+            <app-event-list *ngIf=" selectedcomponent == ''"></app-event-list>
             <app-event-add *ngIf=" selectedcomponent =='event-add'"></app-event-add>
             <app-event-publish *ngIf=" selectedcomponent =='event-publish'"></app-event-publish>
             <app-activity-add *ngIf=" selectedcomponent =='activity-add'"></app-activity-add>

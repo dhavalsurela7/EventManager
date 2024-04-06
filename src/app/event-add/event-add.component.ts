@@ -14,7 +14,7 @@ import { ApiCallService } from '../Services/api-call.service';
   templateUrl: './event-add.component.html',
   styleUrl: './event-add.component.css',
 })
-export class EventAddComponent {
+export class EventAddComponent implements OnInit {
   form: FormGroup = new FormGroup({
     Event_Name: new FormControl(''),
     Event_Start_Date: new FormControl(''),
@@ -28,7 +28,7 @@ export class EventAddComponent {
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -108,11 +108,11 @@ export class EventAddComponent {
             reader.readAsDataURL(file);
           }
         }
-        else{
+        else {
           alert("Image should be less than 2mb")
         }
       }
-      else{
+      else {
         alert("Only jpeg, jpg and png format are supported")
       }
     }
