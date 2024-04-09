@@ -11,6 +11,10 @@ import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.compo
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventPublishComponent } from './event-publish/event-publish.component';
 import { ActivityAddComponent } from './activity-add/activity-add.component';
+import { ActivityPriceComponent } from './activity-price/activity-price.component';
+import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -22,7 +26,10 @@ import { ActivityAddComponent } from './activity-add/activity-add.component';
     DashboardAdminComponent,
     EventAddComponent,
     EventPublishComponent,
-    ActivityAddComponent
+    ActivityAddComponent,
+    ActivityPriceComponent,
+    DashboardUserComponent,
+    EventListComponent
 
 
     
@@ -34,7 +41,8 @@ import { ActivityAddComponent } from './activity-add/activity-add.component';
     HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

@@ -43,8 +43,8 @@
 
 </svg>
 
-<header class="navbar bg-primary" data-bs-theme="dark">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 " routerLink="/dashboard-admin">Admin Dashboard</a>
+<header class="navbar bg-danger" data-bs-theme="dark">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 " routerLink="/dashboard-user">User Dashboard</a>
 
     <ul class="navbar-nav flex-row d-md-none">
         <li class="nav-item text-nowrap">
@@ -84,7 +84,7 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
-                                routerLink="/dashboard-admin">
+                                routerLink="/dashboard-user">
                                 <svg class="bi">
                                     <use xlink:href="#house-fill" />
                                 </svg>
@@ -92,21 +92,21 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a routerLink="[]" (click)="load('event-add')"
+                            <a routerLink="[]" (click)="load('event-list')"
                                 class="nav-link d-flex align-items-center gap-2">
                                 <svg class="bi">
-                                    <use xlink:href="#plus-circle" />
+                                    <use xlink:href="#file-earmark-text" />
                                 </svg>
-                                Add Event
+                                All Events
                             </a>
                         </li>
                         <li class="nav-item">
                             <a routerLink="[]" (click)="load('event-publish')"
                                 class="nav-link d-flex align-items-center gap-2" href="#">
                                 <svg class="bi">
-                                    <use xlink:href="#publish" />
+                                    <use xlink:href="#calendar3" />
                                 </svg>
-                                Publish Event
+                                Calendar
                             </a>
                         </li>
 
@@ -114,32 +114,7 @@
 
                     </ul>
 
-                    <h6
-                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                        <span>Activity</span>
-
-                    </h6>
-                    <ul class="nav flex-column mb-auto">
-                        <li class="nav-item">
-                            <a routerLink="[]" (click)="load('activity-add')" class="nav-link d-flex align-items-center gap-2" >
-                                <svg class="bi">
-                                    <use xlink:href="#file-earmark-text" />
-                                </svg>
-                                Add Activity
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a routerLink="[]" (click)="load('activity-price')" class="nav-link d-flex align-items-center gap-2" href="#">
-                                <svg class="bi">
-                                    <use xlink:href="#rupee" />
-                                </svg>
-                                Add Price
-                            </a>
-                        </li>
-
-
-                    </ul>
-
+                  
                     <hr class="my-3">
 
                     <ul class="nav flex-column mb-auto">
@@ -159,10 +134,8 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-            <app-event-add *ngIf=" selectedcomponent =='event-add'"></app-event-add>
-            <app-event-publish *ngIf=" selectedcomponent =='event-publish'"></app-event-publish>
-            <app-activity-add *ngIf=" selectedcomponent =='activity-add'"></app-activity-add>
-            <app-activity-price *ngIf=" selectedcomponent =='activity-price'"></app-activity-price>
+            <app-event-list *ngIf=" selectedcomponent =='event-list'"></app-event-list>
+            
             <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
 

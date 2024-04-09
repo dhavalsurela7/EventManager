@@ -1,10 +1,10 @@
 .register-form {
     margin: 0px;
     padding: 0px;
-    height: 100vh;
+  
 
-    background-image: url("../../assets/bg2.jpg");
-    background-size: cover;
+  
+   
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,6 @@
 
 form {
     height: fit-content;
-    background-color: black;
-    color: white;
- 
+    background-color: cadetblue;
+    
 }

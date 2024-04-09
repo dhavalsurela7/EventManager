@@ -1,0 +1,13 @@
+<div class="card text-center m-3" *ngFor="let e of result">
+    <div class="card-header">
+        {{e.Event_Start_Date }}
+      </div>
+    <div class="card-body" >
+      <h5 class="card-title">{{e.Event_Name}}</h5>
+      <p class="card-text">{{e.Event_Description}}</p>
+      <a href="#" class="btn btn-danger">Details</a>
+    </div>
+    <div class="card-footer text-body-secondary">
+        {{e.Event_End_Date }}
+      </div>
+  </div>

@@ -14,7 +14,7 @@ import { ApiCallService } from '../Services/api-call.service';
   templateUrl: './event-add.component.html',
   styleUrl: './event-add.component.css',
 })
-export class EventAddComponent {
+export class EventAddComponent implements OnInit {
   form: FormGroup = new FormGroup({
     Event_Name: new FormControl(''),
     Event_Start_Date: new FormControl(''),

@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 
 import { ApiCallService } from '../Services/api-call.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-user',
@@ -24,7 +25,8 @@ export class LoginUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private apicall: ApiCallService
+    private apicall: ApiCallService,
+    private router : Router
   ) {}
 
   ngOnInit(): void {
@@ -58,13 +60,7 @@ export class LoginUserComponent implements OnInit {
       console.warn(result);
       if (result != null && result != '' && result != undefined) {
         if (result['Message'] == '200|Login Success') {
-          document.getElementById('result').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('result').style.display = 'none';
-          }, 3000);
-
-          console.log('Success');
+          this.router.navigate(['/dashboard-user']);
         } else {
           document.getElementById('failure').style.display = 'block';
           this.form.reset();
