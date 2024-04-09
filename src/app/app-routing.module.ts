@@ -39,6 +39,7 @@ const routes: Routes = [
     path: 'event-publish',
     component: EventPublishComponent,
   },
+
   {
     path: 'activity-add',
     component: ActivityAddComponent,
@@ -46,7 +47,7 @@ const routes: Routes = [
   {
     path: 'activity-price',
     component: ActivityPriceComponent,
-  }
+  },
 ];
 
 @NgModule({

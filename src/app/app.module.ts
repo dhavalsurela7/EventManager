@@ -17,6 +17,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { DatePipe } from '@angular/common';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { DatePipe } from '@angular/common';
     ActivityPriceComponent,
     DashboardUserComponent,
     EventListComponent
+
 
 
     

@@ -1,13 +1,44 @@
 <div class="card text-center m-3" *ngFor="let e of result">
     <div class="card-header">
-        {{e.Event_Start_Date }}
+       Start Date : {{e.Event_Start_Date }} End Date :    {{e.Event_End_Date }}
       </div>
     <div class="card-body" >
       <h5 class="card-title">{{e.Event_Name}}</h5>
       <p class="card-text">{{e.Event_Description}}</p>
-      <a href="#" class="btn btn-danger">Details</a>
+      <a  class="btn btn-danger" (click)="details(e.Event_Name)">Details</a>
     </div>
-    <div class="card-footer text-body-secondary">
-        {{e.Event_End_Date }}
-      </div>
+ 
   </div>
+
+
+
+  <div class="container">
+            
+    <table class="table  table-bordered border-success-subtle table-hover text-center " id="pdfTable"
+        *ngIf="activityresult!=null">
+        <thead>
+            
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Price</th>
+
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let exp of activityresult">
+            <tr>
+                <td>{{exp.Activity_Name}}</td>
+                <td>{{exp.Activity_Description }}</td>
+                <td>{{exp.Activity_Start_Datetime }}</td>
+                <td>{{exp.Activity_End_Datetime }}</td>
+                <td>{{exp.Activity_Price }}</td>
+
+            </tr>
+        </tbody>
+
+
+    </table>
+</div>
