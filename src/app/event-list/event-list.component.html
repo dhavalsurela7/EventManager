@@ -1,40 +1,26 @@
-<div class="card text-center m-3" *ngFor="let e of result">
-    <div class="card-header">
-       Start Date : {{e.Event_Start_Date }} End Date :    {{e.Event_End_Date }}
-      </div>
-    <div class="card-body" >
-      <h5 class="card-title">{{e.Event_Name}}</h5>
-      <p class="card-text">{{e.Event_Description}}</p>
-      <a  class="btn btn-danger" (click)="details(e.Event_Name)">Details</a>
-    </div>
- 
-  </div>
-
-
-
-  <div class="container">
+<div class="container m-3">
             
     <table class="table  table-bordered border-success-subtle table-hover text-center " id="pdfTable"
-        *ngIf="activityresult!=null">
+        *ngIf="result!=null">
         <thead>
             
             <tr>
-                <th>Name</th>
-                <th>Description</th>
+                <th>Event Name</th>
+                <th>Event Description</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Price</th>
+                <th>Details</th>
 
             </tr>
         </thead>
 
-        <tbody *ngFor="let exp of activityresult">
+        <tbody *ngFor="let exp of result">
             <tr>
-                <td>{{exp.Activity_Name}}</td>
-                <td>{{exp.Activity_Description }}</td>
-                <td>{{exp.Activity_Start_Datetime }}</td>
-                <td>{{exp.Activity_End_Datetime }}</td>
-                <td>{{exp.Activity_Price }}</td>
+                <td>{{exp.Event_Name}}</td>
+                <td>{{exp.Event_Description }}</td>
+                <td>{{exp.Event_Start_Date }}</td>
+                <td>{{exp.Event_End_Date }}</td>
+                <td><button class="btn btn-danger" (click)="details(exp.Event_Name,exp.Event_Start_Date,exp.Event_End_Date,exp.Event_Description,exp.Event_Image)">Click</button></td>
 
             </tr>
         </tbody>
@@ -42,3 +28,53 @@
 
     </table>
 </div>
+
+<div *ngIf="flag == true">
+<div class="card text-center m-3" >
+    <div class="card-header">
+       Start Date : {{estartdate }} End Date :    {{eenddate }}
+      </div>
+      <img [src]="'data:image/jpeg;base64,'+eimage" class="card-img-top" alt="Event Image">
+    <div class="card-body" >
+      <h5 class="card-title">{{ename}}</h5>
+      <p class="card-text">{{edescription}}</p>
+     
+    </div>
+    
+    <div class="container">
+            
+        <table class="table  table-bordered border-success-subtle table-hover text-center " id="pdfTable"
+            *ngIf="activityresult!=null">
+            <thead>
+                
+                <tr>
+                    <th>Activity Name</th>
+                    <th>Activity Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Price</th>
+    
+                </tr>
+            </thead>
+    
+            <tbody *ngFor="let exp of activityresult">
+                <tr>
+                    <td>{{exp.Activity_Name}}</td>
+                    <td>{{exp.Activity_Description }}</td>
+                    <td>{{exp.Activity_Start_Datetime }}</td>
+                    <td>{{exp.Activity_End_Datetime }}</td>
+                    <td>{{exp.Activity_Price}}</td>
+    
+                </tr>
+            </tbody>
+    
+    
+        </table>
+    </div>
+ 
+  </div>
+</div>
+
+ 
+
+

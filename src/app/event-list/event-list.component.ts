@@ -13,6 +13,12 @@ export class EventListComponent implements OnInit {
   result: event[];
   activityresult: any;
   startdate: string;
+  flag = false;
+  ename : string
+  estartdate : string
+  eenddate : string
+  edescription : string
+  eimage : string
 
   submitted = false;
 
@@ -35,11 +41,6 @@ export class EventListComponent implements OnInit {
         console.log(res);
         this.result = res.ArrayOfResponse;
 
-        // this.result.forEach(element => {
-        // element.Event_Start_Date =  element.Event_Start_Date.toString().substring(0,9),
-        // element.Event_End_Date = element.Event_End_Date.toString().substring(0,9)
-
-        // });
         this.result.map((e) => {
           e.Event_Start_Date = e.Event_Start_Date.toString().substring(0, 10);
           e.Event_End_Date = e.Event_End_Date.toString().substring(0, 10);
@@ -48,7 +49,14 @@ export class EventListComponent implements OnInit {
     });
   }
 
-  details(Event_Name: string) {
+  details(Event_Name: string,Event_Start_Date:string,Event_End_Date:string,Event_Description:string,Event_Image:string) {
+    this.flag = true;
+    this.ename = Event_Name
+    this.estartdate = Event_Start_Date
+    this.eenddate = Event_End_Date
+    this.edescription = Event_Description
+    this.eimage = Event_Image
+
     // this.router.navigate(['/activity-list'],{ state: { Event_Name: Event_Name } })
     var url2 =
       'https://localhost:44376/api/ActivityController/ActivityOperation';
