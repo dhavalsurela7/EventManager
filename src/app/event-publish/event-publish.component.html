@@ -1,11 +1,11 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Add Event</h1>
+    <h1 class="h2">Publish Event</h1>
 
 </div>
 
-<div class="register-form ">
+<div class="register-form " *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5  rounded ">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 bg-primary rounded ">
 
         <div class="form-group m-2">
           <label></label>
@@ -23,7 +23,7 @@
 
         <div class="form-group m-3 d-flex justify-content-evenly">
             <div class="p-3">
-                <button type="submit" class="btn   btn-primary">Publish</button>
+                <button type="submit" class="btn   btn-light">Publish</button>
             </div>
 
         </div>
@@ -40,3 +40,9 @@
 
     </form>
 </div>
+
+<ng-template #elseblock >
+<div class="alert alert-warning" role="alert">
+    No Unpublished Events
+  </div>
+</ng-template>

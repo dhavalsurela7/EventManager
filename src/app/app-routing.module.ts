@@ -9,6 +9,7 @@ import { EventPublishComponent } from './event-publish/event-publish.component';
 import { ActivityAddComponent } from './activity-add/activity-add.component';
 import { ActivityPriceComponent } from './activity-price/activity-price.component';
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
+import { myauthGuard } from './myauth.guard';
 
 const routes: Routes = [
   {
@@ -26,27 +27,14 @@ const routes: Routes = [
   {
     path: 'dashboard-admin',
     component: DashboardAdminComponent,
+    canActivate: [myauthGuard],
+    data: { role: 'admin' },
   },
   {
     path: 'dashboard-user',
     component: DashboardUserComponent,
-  },
-  {
-    path: 'event-add',
-    component: EventAddComponent,
-  },
-  {
-    path: 'event-publish',
-    component: EventPublishComponent,
-  },
-
-  {
-    path: 'activity-add',
-    component: ActivityAddComponent,
-  },
-  {
-    path: 'activity-price',
-    component: ActivityPriceComponent,
+    canActivate: [myauthGuard],
+    data: { role: 'user' },
   },
 ];
 

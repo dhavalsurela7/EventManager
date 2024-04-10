@@ -3,9 +3,9 @@
 
 </div>
 
-<div class="register-form ">
+<div class="register-form">
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5  rounded ">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 bg-primary rounded ">
 
     <div class="form-group m-2">
       <label>Event Name</label>
@@ -63,7 +63,11 @@
 
     <div class="form-group m-3 d-flex justify-content-evenly">
       <div class="p-3">
-        <button type="submit" class="btn   btn-primary">Add</button>
+        <button type="submit" class="btn  btn-light">Add</button>
+      </div>
+    
+      <div class="p-3">
+        <button type="button" class="btn  btn-light" (click)="share.load('activity-add')" >Next</button>
       </div>
 
     </div>

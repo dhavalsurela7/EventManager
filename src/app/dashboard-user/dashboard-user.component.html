@@ -83,7 +83,7 @@
                 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
+                            <a class="nav-link d-flex align-items-center gap-2 active text-danger" aria-current="page"
                                 routerLink="/dashboard-user">
                                 <svg class="bi">
                                     <use xlink:href="#house-fill" />
@@ -93,7 +93,7 @@
                         </li>
                         <li class="nav-item">
                             <a routerLink="[]" (click)="load('event-list')"
-                                class="nav-link d-flex align-items-center gap-2">
+                                class="nav-link d-flex align-items-center gap-2 text-danger">
                                 <svg class="bi">
                                     <use xlink:href="#file-earmark-text" />
                                 </svg>
@@ -102,7 +102,7 @@
                         </li>
                         <li class="nav-item">
                             <a routerLink="[]" (click)="load('event-publish')"
-                                class="nav-link d-flex align-items-center gap-2" href="#">
+                                class="nav-link d-flex align-items-center gap-2 text-danger" href="#">
                                 <svg class="bi">
                                     <use xlink:href="#calendar3" />
                                 </svg>
@@ -120,7 +120,7 @@
                     <ul class="nav flex-column mb-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="#">
+                            <a class="nav-link d-flex align-items-center gap-2 text-danger" [routerLink]="['/login-user']" onclick="sessionStorage.clear()">
                                 <svg class="bi">
                                     <use xlink:href="#door-closed" />
                                 </svg>

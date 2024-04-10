@@ -60,6 +60,9 @@ export class LoginAdminComponent implements OnInit{
       console.warn(result);
       if (result != null && result != '' && result != undefined) {
         if (result['Message'] == '200|Login Success') {
+          sessionStorage.clear();
+          sessionStorage.setItem("Role","Admin")
+          sessionStorage.setItem("IsLoggedIn",String(true))
           this.router.navigate(['/dashboard-admin']);
         } else {
           document.getElementById('failure').style.display = 'block';

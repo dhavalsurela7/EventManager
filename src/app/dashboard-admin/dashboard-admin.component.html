@@ -83,8 +83,8 @@
                 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
-                                routerLink="/dashboard-admin">
+                            <a class="nav-link d-flex align-items-center gap-2 active" (click)="share.load('event-list')" aria-current="page"
+                                routerLink="[]">
                                 <svg class="bi">
                                     <use xlink:href="#house-fill" />
                                 </svg>
@@ -92,7 +92,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a routerLink="[]" (click)="load('event-add')"
+                            <a routerLink="[]" (click)="share.load('event-add')"
                                 class="nav-link d-flex align-items-center gap-2">
                                 <svg class="bi">
                                     <use xlink:href="#plus-circle" />
@@ -101,7 +101,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a routerLink="[]" (click)="load('event-publish')"
+                            <a routerLink="[]" (click)="share.load('event-publish')"
                                 class="nav-link d-flex align-items-center gap-2" href="#">
                                 <svg class="bi">
                                     <use xlink:href="#publish" />
@@ -121,7 +121,7 @@
                     </h6>
                     <ul class="nav flex-column mb-auto">
                         <li class="nav-item">
-                            <a routerLink="[]" (click)="load('activity-add')" class="nav-link d-flex align-items-center gap-2" >
+                            <a routerLink="[]" (click)="share.load('activity-add')" class="nav-link d-flex align-items-center gap-2" >
                                 <svg class="bi">
                                     <use xlink:href="#file-earmark-text" />
                                 </svg>
@@ -129,7 +129,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a routerLink="[]" (click)="load('activity-price')" class="nav-link d-flex align-items-center gap-2" href="#">
+                            <a routerLink="[]" (click)="share.load('activity-price')" class="nav-link d-flex align-items-center gap-2" href="#">
                                 <svg class="bi">
                                     <use xlink:href="#rupee" />
                                 </svg>
@@ -145,7 +145,7 @@
                     <ul class="nav flex-column mb-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="#">
+                            <a class="nav-link d-flex align-items-center gap-2" [routerLink]="['/login-admin']" onclick="sessionStorage.clear()">
                                 <svg class="bi">
                                     <use xlink:href="#door-closed" />
                                 </svg>
@@ -159,11 +159,13 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-            <app-event-add *ngIf=" selectedcomponent =='event-add'"></app-event-add>
-            <app-event-publish *ngIf=" selectedcomponent =='event-publish'"></app-event-publish>
-            <app-activity-add *ngIf=" selectedcomponent =='activity-add'"></app-activity-add>
-            <app-activity-price *ngIf=" selectedcomponent =='activity-price'"></app-activity-price>
+            <app-event-add *ngIf=" share.selectedcomponent =='event-add'"></app-event-add>
+            <app-event-publish *ngIf=" share.selectedcomponent =='event-publish'"></app-event-publish>
+            <app-activity-add *ngIf=" share.selectedcomponent =='activity-add'"></app-activity-add>
+            <app-activity-price *ngIf=" share.selectedcomponent =='activity-price'"></app-activity-price>
+            <app-event-list *ngIf=" share.selectedcomponent =='event-list'"></app-event-list>
             <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+         
 
 
         </main>

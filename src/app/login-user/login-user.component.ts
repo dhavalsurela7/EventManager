@@ -60,6 +60,9 @@ export class LoginUserComponent implements OnInit {
       console.warn(result);
       if (result != null && result != '' && result != undefined) {
         if (result['Message'] == '200|Login Success') {
+          sessionStorage.clear();
+          sessionStorage.setItem("Role","User")
+          sessionStorage.setItem("IsLoggedIn",String(true))
           this.router.navigate(['/dashboard-user']);
         } else {
           document.getElementById('failure').style.display = 'block';

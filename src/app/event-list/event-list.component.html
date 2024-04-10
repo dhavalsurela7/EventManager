@@ -1,6 +1,6 @@
 <div class="container m-3">
             
-    <table class="table  table-bordered border-success-subtle table-hover text-center " id="pdfTable"
+    <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
         *ngIf="result!=null">
         <thead>
             
@@ -20,7 +20,7 @@
                 <td>{{exp.Event_Description }}</td>
                 <td>{{exp.Event_Start_Date }}</td>
                 <td>{{exp.Event_End_Date }}</td>
-                <td><button class="btn btn-danger" (click)="details(exp.Event_Name,exp.Event_Start_Date,exp.Event_End_Date,exp.Event_Description,exp.Event_Image)">Click</button></td>
+                <td><button class="btn  btn-outline-secondary" (click)="details(exp.Event_Name,exp.Event_Start_Date,exp.Event_End_Date,exp.Event_Description,exp.Event_Image)">Click</button></td>
 
             </tr>
         </tbody>
@@ -32,7 +32,7 @@
 <div *ngIf="flag == true">
 <div class="card text-center m-3" >
     <div class="card-header">
-       Start Date : {{estartdate }} End Date :    {{eenddate }}
+       Start Date : {{estartdate }} &nbsp; &nbsp; End Date :    {{eenddate }}
       </div>
       <img [src]="'data:image/jpeg;base64,'+eimage" class="card-img-top" alt="Event Image">
     <div class="card-body" >
@@ -43,7 +43,7 @@
     
     <div class="container">
             
-        <table class="table  table-bordered border-success-subtle table-hover text-center " id="pdfTable"
+        <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
             *ngIf="activityresult!=null">
             <thead>
                 

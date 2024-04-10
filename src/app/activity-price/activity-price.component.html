@@ -1,11 +1,12 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Add Event</h1>
+    <h1 class="h2">Add Price</h1>
 
 </div>
 
-<div class="register-form ">
+<div class="register-form " *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
+    <div *ngIf="activityresult!= null && activityresult!=''&& activityresult!= undefined; else elseblock2" >
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5  rounded ">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 bg-primary rounded ">
 
         <div class="form-group m-2">
             <label>Event Name</label>
@@ -43,8 +44,14 @@
 
         <div class="form-group m-3 d-flex justify-content-evenly">
             <div class="p-3">
-                <button type="submit" class="btn   btn-primary">Add Price</button>
+                <button type="button" class="btn  btn-light" (click)="share.load('activity-add')" >Back</button>
+              </div>
+            <div class="p-3">
+                <button type="submit" class="btn   btn-light">Add Price</button>
             </div>
+            <div class="p-3">
+                <button type="button" class="btn  btn-light" (click)="share.load('event-publish')" >Next</button>
+              </div>
 
         </div>
 
@@ -60,12 +67,17 @@
 
     </form>
 </div>
+</div>
 
-<div class="alert alert-success" id="result" style = "display: none;" role="alert">
-    Price added Successful !!
-  </div>
-  
 
-  <div class="alert alert-danger" id="failure" style = "display: none;" role="alert">
-    Failed !
-  </div>
+  <ng-template #elseblock >
+    <div class="alert alert-warning" role="alert">
+        No Events Available
+      </div>
+    </ng-template>
+
+    <ng-template #elseblock2 >
+        <div class="alert alert-warning" role="alert">
+            No Activities Available
+          </div>
+        </ng-template>

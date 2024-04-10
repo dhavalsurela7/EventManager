@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 
 import { ApiCallService } from '../Services/api-call.service';
+import { DashboardService } from '../Services/dashboard.service';
 
 @Component({
   selector: 'app-activity-add',
@@ -29,7 +30,8 @@ export class ActivityAddComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private apicall: ApiCallService
+    private apicall: ApiCallService,
+    public share : DashboardService
   ) {}
 
   ngOnInit(): void {
