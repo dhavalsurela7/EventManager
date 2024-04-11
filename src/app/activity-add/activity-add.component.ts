@@ -9,56 +9,60 @@ import {
 
 import { ApiCallService } from '../Services/api-call.service';
 import { DashboardService } from '../Services/dashboard.service';
+import { min } from 'rxjs';
 
 @Component({
   selector: 'app-activity-add',
   templateUrl: './activity-add.component.html',
-  styleUrl: './activity-add.component.css'
+  styleUrl: './activity-add.component.css',
 })
+
 export class ActivityAddComponent implements OnInit {
+
+  EventName : string;
+  Mindate : string;
+  Maxdate : string;
+
   form: FormGroup = new FormGroup({
     Activity_Name: new FormControl(''),
     Activity_Description: new FormControl(''),
     Activity_Start_Datetime: new FormControl(''),
     Activity_End_Datetime: new FormControl(''),
-    Event_Name : new FormControl('')
-
+    Event_Name: new FormControl(''),
   });
   submitted = false;
   Base64: string;
-  result : any;
+  result: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
-    public share : DashboardService
+    public share: DashboardService
   ) {}
 
   ngOnInit(): void {
+    
     this.form = this.formBuilder.group({
       Activity_Name: ['', Validators.required],
       Activity_Description: ['', [Validators.required]],
-      
+
       Activity_Start_Datetime: ['', [Validators.required]],
       Activity_End_Datetime: ['', [Validators.required]],
       Event_Name: ['', Validators.required],
-      
     });
-
     var url = 'https://localhost:44376/api/EventController/EventOperation';
-    var data =  {
-      flag:"SELECTNAME"
-    }
-   
-    this.apicall.call(url,JSON.stringify(data)).subscribe((res:any) => {
+    var data = {
+      flag: 'SELECTNAME',
+    };
+
+    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         console.log(res);
         this.result = res.ArrayOfResponse;
 
         console.log(this.result);
       }
-
-    })
+    });
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -72,14 +76,16 @@ export class ActivityAddComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    var url = 'https://localhost:44376/api/ActivityController/ActivityOperation';
+    var url =
+      'https://localhost:44376/api/ActivityController/ActivityOperation';
     var data = {
       flag: 'INSERT',
       Activity_Name: this.form.controls['Activity_Name'].value,
       Activity_Description: this.form.controls['Activity_Description'].value,
-      Activity_Start_Datetime: this.form.controls['Activity_Start_Datetime'].value,
+      Activity_Start_Datetime:
+        this.form.controls['Activity_Start_Datetime'].value,
       Activity_End_Datetime: this.form.controls['Activity_End_Datetime'].value,
-      Event_Name: this.form.controls['Event_Name'].value
+      Event_Name: this.form.controls['Event_Name'].value,
     };
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
       console.warn(result);
@@ -105,4 +111,16 @@ export class ActivityAddComponent implements OnInit {
     this.submitted = false;
   }
 
+  eventdate(){
+    
+    this.EventName = this.form.controls['Event_Name'].value,
+    this.result.forEach(element => {
+      if (element.Event_Name == this.EventName) {
+        this.Mindate = element.Event_Start_Date.toString().substring(0,10).split('-').reverse().join('-')+"T00:00";
+        console.log(this.Mindate)
+        this.Maxdate = element.Event_End_Date.toString().substring(0,10).split('-').reverse().join('-')+"T00:00";
+        console.log(this.Maxdate)
+      }
+    });
+  }
 }

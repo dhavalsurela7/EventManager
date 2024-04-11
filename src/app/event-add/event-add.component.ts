@@ -25,7 +25,7 @@ export class EventAddComponent implements OnInit {
   });
   submitted = false;
   Base64: string;
-
+  Currentdate : string;
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
@@ -33,6 +33,9 @@ export class EventAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    debugger
+    this.Currentdate =new Date().toISOString().slice(0, 10);;
+    console.log(this.Currentdate)
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
 

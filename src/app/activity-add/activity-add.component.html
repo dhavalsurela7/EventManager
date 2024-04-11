@@ -9,7 +9,7 @@
 
         <div class="form-group m-2">
             <label></label>
-            <select formControlName="Event_Name" class="form-control"
+            <select formControlName="Event_Name" class="form-control" (change)="eventdate()"
                 [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
 
                 <option *ngFor=" let e of result" value={{e.Event_Name}}>{{e.Event_Name}}</option>
@@ -28,17 +28,16 @@
 
         <div class="form-group m-2">
             <label>Starting DateTime</label>
-            <input type="datetime-local" formControlName="Activity_Start_Datetime" class="form-control"
+            <input type="datetime-local" formControlName="Activity_Start_Datetime" [max]="form.get('Activity_End_Datetime')?.value" [min]="Mindate" [max]="Maxdate" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['Activity_Start_Datetime'].errors }" />
             <div *ngIf="submitted && f['Activity_Start_Datetime'].errors" class="invalid-feedback">
                 <div *ngIf="f['Activity_Start_Datetime'].errors['required']">Starting DateTime is required</div>
-
             </div>
         </div>
 
         <div class="form-group m-2">
             <label>Ending DateTime</label>
-            <input type="datetime-local" formControlName="Activity_End_Datetime" class="form-control"
+            <input type="datetime-local" formControlName="Activity_End_Datetime" [min]="form.get('Activity_Start_Datetime')?.value" [min]="Mindate" [max]="Maxdate" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['Activity_End_Datetime'].errors }" />
             <div *ngIf="submitted && f['Activity_End_Datetime'].errors" class="invalid-feedback">
                 <div *ngIf="f['Activity_End_Datetime'].errors['required']">Ending DateTime is required</div>
@@ -66,15 +65,15 @@
 
         <div class="form-group m-3 d-flex justify-content-evenly">
             <div class="p-3">
-                <button type="button" class="btn  btn-light" (click)="share.load('event-add')" >Back</button>
-              </div>
+                <button type="button" class="btn  btn-light" (click)="share.load('event-add')">Back</button>
+            </div>
             <div class="p-3">
                 <button type="submit" class="btn   btn-light">Add</button>
             </div>
             <div class="p-3">
-                <button type="button" class="btn  btn-light" (click)="share.load('activity-price')" >Next</button>
-              </div>
-        
+                <button type="button" class="btn  btn-light" (click)="share.load('activity-price')">Next</button>
+            </div>
+
         </div>
 
         <div class="alert alert-success" id="result" style="display: none;" role="alert">
@@ -90,8 +89,8 @@
     </form>
 </div>
 
-<ng-template #elseblock >
+<ng-template #elseblock>
     <div class="alert alert-warning" role="alert">
         No Events Available
-      </div>
-    </ng-template>
+    </div>
+</ng-template>

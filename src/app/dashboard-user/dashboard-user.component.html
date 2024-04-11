@@ -83,7 +83,8 @@
                 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 active text-danger" aria-current="page"
+                            <a routerLink="[]" (click)="load('')"
+                                class="nav-link d-flex align-items-center gap-2 active text-danger" aria-current="page"
                                 routerLink="/dashboard-user">
                                 <svg class="bi">
                                     <use xlink:href="#house-fill" />
@@ -114,13 +115,14 @@
 
                     </ul>
 
-                  
+
                     <hr class="my-3">
 
                     <ul class="nav flex-column mb-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 text-danger" [routerLink]="['/login-user']" onclick="sessionStorage.clear()">
+                            <a class="nav-link d-flex align-items-center gap-2 text-danger"
+                                [routerLink]="['/login-user']" onclick="sessionStorage.clear()">
                                 <svg class="bi">
                                     <use xlink:href="#door-closed" />
                                 </svg>
@@ -134,8 +136,42 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
+            <div *ngIf=" selectedcomponent ==''" class="container m-3">
+                <table class="table  table-bordered border-secondary table-hover text-center " *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
+                    <thead>
+                        <tr><td class="bg-danger text-light" colspan="4">Ongoing Events</td></tr>
+                        <tr>
+                            <th>Event Name</th>
+                            <th>Event Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody *ngFor="let exp of result">
+                        <tr>
+                            <td>{{exp.Event_Name}}</td>
+                            <td>{{exp.Event_Description }}</td>
+                            <td>{{exp.Event_Start_Date }}</td>
+                            <td>{{exp.Event_End_Date }}</td>
+
+
+                        </tr>
+                    </tbody>
+
+
+                </table>
+                <ng-template #elseblock>
+                    <div class="alert alert-warning" role="alert">
+                        No Ongoing Events
+                    </div>
+                </ng-template>
+            </div>
+
             <app-event-list *ngIf=" selectedcomponent =='event-list'"></app-event-list>
-            
+
             <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
 

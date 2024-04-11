@@ -19,7 +19,7 @@
 
     <div class="form-group m-2">
       <label>Starting Date</label>
-      <input type="date" formControlName="Event_Start_Date" class="form-control"
+      <input type="date" formControlName="Event_Start_Date" class="form-control" [min]="Currentdate"
         [ngClass]="{ 'is-invalid': submitted && f['Event_Start_Date'].errors }" />
       <div *ngIf="submitted && f['Event_Start_Date'].errors" class="invalid-feedback">
         <div *ngIf="f['Event_Start_Date'].errors['required']">Starting Date is required</div>
@@ -30,6 +30,7 @@
     <div class="form-group m-2">
       <label>Ending Date</label>
       <input type="date" formControlName="Event_End_Date" class="form-control"
+        [min]="form.get('Event_Start_Date')?.value" [min]="Currentdate"
         [ngClass]="{ 'is-invalid': submitted && f['Event_End_Date'].errors }" />
       <div *ngIf="submitted && f['Event_End_Date'].errors" class="invalid-feedback">
         <div *ngIf="f['Event_End_Date'].errors['required']">Ending Date is required</div>
@@ -65,9 +66,9 @@
       <div class="p-3">
         <button type="submit" class="btn  btn-light">Add</button>
       </div>
-    
+
       <div class="p-3">
-        <button type="button" class="btn  btn-light" (click)="share.load('activity-add')" >Next</button>
+        <button type="button" class="btn  btn-light" (click)="share.load('activity-add')">Next</button>
       </div>
 
     </div>

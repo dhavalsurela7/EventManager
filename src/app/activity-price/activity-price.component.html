@@ -4,80 +4,72 @@
 </div>
 
 <div class="register-form " *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
-    <div *ngIf="activityresult!= null && activityresult!=''&& activityresult!= undefined; else elseblock2" >
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 bg-primary rounded ">
 
         <div class="form-group m-2">
             <label>Event Name</label>
-            <select formControlName="Event_Name"
-            class="form-control"
-            (change)="activity($event)"
-            [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
-                
+            <select formControlName="Event_Name" class="form-control" (change)="activity($event)"
+                [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
+
                 <option *ngFor=" let e of result" value={{e.Event_Name}}>{{e.Event_Name}}</option>
             </select>
         </div>
 
-        <div class="form-group m-2">
-            <label>Activity Name</label>
-              <select formControlName="Activity_Name"
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f['Activity_Name'].errors }">
-                  
-                  <option *ngFor=" let f of activityresult" value={{f.Activity_Name}}>{{f.Activity_Name}}</option>
-              </select>
-          </div>
+  
+            <div class="form-group m-2">
+                <label>Activity Name</label>
+                <select formControlName="Activity_Name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['Activity_Name'].errors }">
 
-          <div class="form-group m-2">
-            <label>Activity Price</label>
-            <input type="number" formControlName="Activity_Price" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Activity_Price'].errors }" />
-            <div *ngIf="submitted && f['Activity_Price'].errors" class="invalid-feedback">
-                <div *ngIf="f['Activity_Price'].errors['required']">Activity Price is required</div>
+                    <option *ngFor=" let f of activityresult" value={{f.Activity_Name}}>{{f.Activity_Name}}</option>
+                </select>
+            </div>
+
+            <div class="form-group m-2">
+                <label>Activity Price</label>
+                <input type="number" formControlName="Activity_Price" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['Activity_Price'].errors }" />
+                <div *ngIf="submitted && f['Activity_Price'].errors" class="invalid-feedback">
+                    <div *ngIf="f['Activity_Price'].errors['required']">Activity Price is required</div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group m-3 d-flex justify-content-evenly">
+                <div class="p-3">
+                    <button type="button" class="btn  btn-light" (click)="share.load('activity-add')">Back</button>
+                </div>
+                <div class="p-3">
+                    <button type="submit" class="btn   btn-light">Add Price</button>
+                </div>
+                <div class="p-3">
+                    <button type="button" class="btn  btn-light" (click)="share.load('event-publish')">Next</button>
+                </div>
 
             </div>
-        </div>
 
-
-
-
-        <div class="form-group m-3 d-flex justify-content-evenly">
-            <div class="p-3">
-                <button type="button" class="btn  btn-light" (click)="share.load('activity-add')" >Back</button>
-              </div>
-            <div class="p-3">
-                <button type="submit" class="btn   btn-light">Add Price</button>
+            <div class="alert alert-success" id="result" style="display: none;" role="alert">
+                Added Successful !!
             </div>
-            <div class="p-3">
-                <button type="button" class="btn  btn-light" (click)="share.load('event-publish')" >Next</button>
-              </div>
-
-        </div>
-
-        <div class="alert alert-success" id="result" style="display: none;" role="alert">
-            Added Successful !!
-        </div>
 
 
-        <div class="alert alert-danger" id="failure" style="display: none;" role="alert">
-            Failed !
-        </div>
+            <div class="alert alert-danger" id="failure" style="display: none;" role="alert">
+                Failed !
+            </div>
 
 
     </form>
-</div>
+
 </div>
 
 
-  <ng-template #elseblock >
+<ng-template #elseblock>
     <div class="alert alert-warning" role="alert">
         No Events Available
-      </div>
-    </ng-template>
+    </div>
+</ng-template>
 
-    <ng-template #elseblock2 >
-        <div class="alert alert-warning" role="alert">
-            No Activities Available
-          </div>
-        </ng-template>
