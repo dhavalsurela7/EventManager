@@ -33,9 +33,9 @@ export class EventAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger
+
     this.Currentdate =new Date().toISOString().slice(0, 10);;
-    console.log(this.Currentdate)
+  
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
 
@@ -51,7 +51,7 @@ export class EventAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    debugger;
+
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -67,7 +67,7 @@ export class EventAddComponent implements OnInit {
       Event_Description: this.form.controls['Event_Description'].value,
     };
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
-      console.warn(result);
+   
       if (result != null && result != '' && result != undefined) {
         if (result['Message'] == '200|Event added successfully') {
           document.getElementById('result').style.display = 'block';
@@ -76,14 +76,14 @@ export class EventAddComponent implements OnInit {
             document.getElementById('result').style.display = 'none';
           }, 3000);
 
-          console.log('Success');
+    
         } else {
           document.getElementById('failure').style.display = 'block';
           this.form.reset();
           setTimeout(() => {
             document.getElementById('failure').style.display = 'none';
           }, 3000);
-          console.log('failure');
+
         }
       }
     });
@@ -105,7 +105,7 @@ export class EventAddComponent implements OnInit {
           reader.onload = () => {
             const base64: string = reader.result as string;
 
-            console.log(base64.split(',')[1]);
+       
             this.Base64 = base64.split(',')[1];
           };
 

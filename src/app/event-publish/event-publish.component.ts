@@ -39,10 +39,10 @@ result : any
    
     this.apicall.call(url,JSON.stringify(data)).subscribe((res:any) => {
       if (res != null && res != '' && res != undefined) {
-        console.log(res);
+   
         this.result = res.ArrayOfResponse;
 
-        console.log(this.result);
+
       }
 
     })
@@ -63,10 +63,10 @@ result : any
    
     this.apicall.call(url,JSON.stringify(data)).subscribe((res:any) => {
       if (res != null && res != '' && res != undefined) {
-        console.log(res);
+    
         this.result = res.ArrayOfResponse;
 
-        console.log(this.result);
+      
       }
 
     })

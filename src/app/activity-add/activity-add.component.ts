@@ -57,10 +57,10 @@ export class ActivityAddComponent implements OnInit {
 
     this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
-        console.log(res);
+     
         this.result = res.ArrayOfResponse;
 
-        console.log(this.result);
+    
       }
     });
   }
@@ -70,7 +70,7 @@ export class ActivityAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    debugger;
+
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -88,7 +88,7 @@ export class ActivityAddComponent implements OnInit {
       Event_Name: this.form.controls['Event_Name'].value,
     };
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
-      console.warn(result);
+
       if (result != null && result != '' && result != undefined) {
         if (result['Message'] == '200|Activity added successfully') {
           document.getElementById('result').style.display = 'block';
@@ -97,14 +97,14 @@ export class ActivityAddComponent implements OnInit {
             document.getElementById('result').style.display = 'none';
           }, 3000);
 
-          console.log('Success');
+     
         } else {
           document.getElementById('failure').style.display = 'block';
           this.form.reset();
           setTimeout(() => {
             document.getElementById('failure').style.display = 'none';
           }, 3000);
-          console.log('failure');
+ 
         }
       }
     });
@@ -117,9 +117,9 @@ export class ActivityAddComponent implements OnInit {
     this.result.forEach(element => {
       if (element.Event_Name == this.EventName) {
         this.Mindate = element.Event_Start_Date.toString().substring(0,10).split('-').reverse().join('-')+"T00:00";
-        console.log(this.Mindate)
+     
         this.Maxdate = element.Event_End_Date.toString().substring(0,10).split('-').reverse().join('-')+"T00:00";
-        console.log(this.Maxdate)
+    
       }
     });
   }

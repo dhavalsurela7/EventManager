@@ -42,7 +42,7 @@ export class LoginAdminComponent implements OnInit{
   }
 
   onSubmit(): void {
-    debugger;
+
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -57,7 +57,7 @@ export class LoginAdminComponent implements OnInit{
       Admin_Password: this.form.controls['Admin_Password'].value,
     };
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
-      console.warn(result);
+  
       if (result != null && result != '' && result != undefined) {
         if (result['Message'] == '200|Login Success') {
           sessionStorage.clear();
@@ -70,7 +70,7 @@ export class LoginAdminComponent implements OnInit{
           setTimeout(() => {
             document.getElementById('failure').style.display = 'none';
           }, 3000);
-          console.log('failure');
+       
         }
       }
     });

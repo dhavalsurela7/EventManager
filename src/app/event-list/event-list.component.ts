@@ -1,4 +1,4 @@
-import { event } from '../Models/Event';
+import {event} from '../Models/Event'
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../Services/api-call.service';
 import { Router } from '@angular/router';
@@ -38,7 +38,7 @@ export class EventListComponent implements OnInit {
 
     this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
-        console.log(res);
+  
         this.result = res.ArrayOfResponse;
 
         this.result.map((e) => {
@@ -66,7 +66,7 @@ export class EventListComponent implements OnInit {
     };
     this.apicall.call(url2, JSON.stringify(data2)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
-        console.log(res);
+
         this.activityresult = res.ArrayOfResponse;
       }
     });

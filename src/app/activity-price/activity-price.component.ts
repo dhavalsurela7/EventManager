@@ -44,10 +44,9 @@ activityresult : any
    
     this.apicall.call(url,JSON.stringify(data)).subscribe((res:any) => {
       if (res != null && res != '' && res != undefined) {
-        console.log(res);
+     
         this.result = res.ArrayOfResponse;
 
-        console.log(this.result);
       }
 
     })
@@ -66,10 +65,10 @@ activityresult : any
    
     this.apicall.call(url,JSON.stringify(data)).subscribe((res:any) => {
       if (res != null && res != '' && res != undefined) {
-        console.log(res);
+  
         this.activityresult = res.ArrayOfResponse;
 
-        console.log(this.activityresult);
+
       }
 
     })
@@ -88,14 +87,14 @@ activityresult : any
    
     this.apicall.call(url,JSON.stringify(data)).subscribe((res:any) => {
       if (res != null && res != '' && res != undefined) {
-        console.log(res);
+       
         this.result = res.ArrayOfResponse;
         document.getElementById('result').style.display = 'block';
         this.form.reset();
         setTimeout(() => {
           document.getElementById('result').style.display = 'none';
         }, 3000);
-        console.log(this.result);
+       
         this.form.reset();
       }
       else{

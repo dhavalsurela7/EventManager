@@ -45,7 +45,7 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit(): void {
-    debugger;
+
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -61,7 +61,7 @@ export class RegisterUserComponent implements OnInit {
       User_Mobile: this.form.controls['User_Mobile'].value,
     };
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
-      console.warn(result);
+   
       if (result != null && result != '' && result != undefined) {
         if (result['Message'] == '200|Registration Success') {
           document.getElementById('result').style.display = 'block';
@@ -70,14 +70,14 @@ export class RegisterUserComponent implements OnInit {
             document.getElementById('result').style.display = 'none';
           }, 3000);
 
-          console.log('Success');
+   
         } else {
           document.getElementById('failure').style.display = 'block';
           this.form.reset();
           setTimeout(() => {
             document.getElementById('failure').style.display = 'none';
           }, 3000);
-          console.log('failure');
+     
         }
       }
     });
