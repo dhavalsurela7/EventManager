@@ -3,7 +3,7 @@
     padding: 0px;
     height: 100vh;
 
-    background-image: url("../../assets/bg2.jpg");
+    background-color: #e3dceb;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -12,7 +12,7 @@
 
 form {
     height: fit-content;
-    background-color: black;
+    background-color: #8c5480;
     color: white;
  
 }

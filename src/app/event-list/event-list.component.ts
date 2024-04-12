@@ -50,6 +50,7 @@ export class EventListComponent implements OnInit {
   }
 
   details(Event_Name: string,Event_Start_Date:string,Event_End_Date:string,Event_Description:string,Event_Image:string) {
+    debugger
     this.flag = true;
     this.ename = Event_Name
     this.estartdate = Event_Start_Date

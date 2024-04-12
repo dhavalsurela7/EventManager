@@ -1,15 +1,15 @@
-<div class="container m-3">
+<div class="container m-1">
             
     <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
         *ngIf="result!=null">
         <thead>
             
             <tr>
-                <th>Event Name</th>
-                <th>Event Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Details</th>
+                <th class="text-light">Event Name</th>
+                <th class="text-light">Event Description</th>
+                <th class="text-light">Start Date</th>
+                <th class="text-light">End Date</th>
+                <th class="text-light">Details</th>
 
             </tr>
         </thead>
@@ -20,7 +20,7 @@
                 <td>{{exp.Event_Description }}</td>
                 <td>{{exp.Event_Start_Date }}</td>
                 <td>{{exp.Event_End_Date }}</td>
-                <td><button class="btn  btn-outline-secondary" (click)="details(exp.Event_Name,exp.Event_Start_Date,exp.Event_End_Date,exp.Event_Description,exp.Event_Image)">Click</button></td>
+                <td><button class="btn" style="border-color: #8c5480" (click)="details(exp.Event_Name,exp.Event_Start_Date,exp.Event_End_Date,exp.Event_Description,exp.Event_Image)">Click</button></td>
 
             </tr>
         </tbody>
@@ -30,7 +30,7 @@
 </div>
 
 <div *ngIf="flag == true">
-<div class="card text-center m-3" >
+<div class="card text-center m-4"  style="background-color: #e3dceb;" >
     <div class="card-header">
        Start Date : {{estartdate }} &nbsp; &nbsp; End Date :    {{eenddate }}
       </div>
@@ -47,12 +47,12 @@
             *ngIf="activityresult!=null">
             <thead>
                 
-                <tr>
-                    <th>Activity Name</th>
-                    <th>Activity Description</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Price</th>
+                <tr >
+                    <th class="text-light">Activity Name</th>
+                    <th class="text-light">Activity Description</th>
+                    <th class="text-light">Start Date</th>
+                    <th class="text-light">End Date</th>
+                    <th class="text-light">Price</th>
     
                 </tr>
             </thead>

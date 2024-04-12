@@ -5,7 +5,7 @@
 
 <div class="register-form">
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 bg-primary rounded ">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 rounded ">
 
     <div class="form-group m-2">
       <label>Event Name</label>
@@ -20,6 +20,7 @@
     <div class="form-group m-2">
       <label>Starting Date</label>
       <input type="date" formControlName="Event_Start_Date" class="form-control" [min]="Currentdate"
+      [max]="form.get('Event_End_Date')?.value" 
         [ngClass]="{ 'is-invalid': submitted && f['Event_Start_Date'].errors }" />
       <div *ngIf="submitted && f['Event_Start_Date'].errors" class="invalid-feedback">
         <div *ngIf="f['Event_Start_Date'].errors['required']">Starting Date is required</div>
@@ -62,7 +63,7 @@
 
 
 
-    <div class="form-group m-3 d-flex justify-content-evenly">
+    <div class="form-group m-1 d-flex justify-content-evenly">
       <div class="p-3">
         <button type="submit" class="btn  btn-light">Add</button>
       </div>

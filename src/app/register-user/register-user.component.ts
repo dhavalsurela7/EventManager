@@ -31,7 +31,7 @@ export class RegisterUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      User_Name: ['', Validators.required],
+      User_Name: ['', Validators.required,Validators.pattern("/^[a-z ,.'-]+$/i")],
 
       User_Email: ['', [Validators.required, Validators.email]],
       User_Address: ['', [Validators.required]],
@@ -87,4 +87,16 @@ export class RegisterUserComponent implements OnInit {
     this.submitted = false;
     this.form.reset();
   }
+ name(event)
+{   
+   var k;  
+   k = event.charCode; 
+   return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k==32); 
+}
+mobile(event)
+{   
+   var k;  
+   k = event.charCode;  
+   return( k>47 && k<58 || k == 8 ); 
+}
 }

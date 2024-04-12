@@ -15,6 +15,9 @@ import { ActivityPriceComponent } from './activity-price/activity-price.componen
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { DatePipe } from '@angular/common';
+import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
+import { EventUpdateComponent } from './event-update/event-update.component';
 
 
 
@@ -30,7 +33,9 @@ import { DatePipe } from '@angular/common';
     ActivityAddComponent,
     ActivityPriceComponent,
     DashboardUserComponent,
-    EventListComponent
+    EventListComponent,
+    HomeComponent,
+    EventUpdateComponent
 
 
 
@@ -40,7 +45,10 @@ import { DatePipe } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path: '', redirectTo: '/home', pathMatch: 'full'},
+      ]),
   ],
   providers: [
     provideClientHydration(),

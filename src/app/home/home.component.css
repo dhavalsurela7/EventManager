@@ -1,0 +1,32 @@
+@import url(//fonts.googleapis.com/css?family=Dosis:400);
+
+img {
+    max-width: 100%;
+}
+
+h2 {
+    font-family: 'Dosis', sans-serif;
+    font-size: 72px;
+    line-height: 72px;
+    padding-top: 76px;
+    margin-bottom: 78px;
+}
+
+#content {
+    padding-bottom: 52px;
+}
+
+.block1 {
+    padding-top: 42px;
+    text-align: center;
+}
+
+.block1 .block1_title {
+    font: 33px/36px 'Dosis', sans-serif;
+}
+
+.block1 .block1_title span {
+    display: block;
+    font-size: 24px;
+    padding-top: 3px;
+}

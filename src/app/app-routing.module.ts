@@ -10,11 +10,16 @@ import { ActivityAddComponent } from './activity-add/activity-add.component';
 import { ActivityPriceComponent } from './activity-price/activity-price.component';
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
 import { myauthGuard } from './myauth.guard';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
     path: 'register-user',
     component: RegisterUserComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   {
     path: 'login-user',

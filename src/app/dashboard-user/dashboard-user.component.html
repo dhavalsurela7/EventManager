@@ -43,8 +43,8 @@
 
 </svg>
 
-<header class="navbar bg-danger" data-bs-theme="dark">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 " routerLink="/dashboard-user">User Dashboard</a>
+<header class="navbar" style="background-color: #8c5480;">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-light" routerLink="/dashboard-user">User Dashboard</a>
 
     <ul class="navbar-nav flex-row d-md-none">
         <li class="nav-item text-nowrap">
@@ -72,8 +72,8 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-            <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
+        <div class="sidebar col-md-3 col-lg-2 p-0" style="background-color: #e3dceb;">
+            <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebarMenu"
                 aria-labelledby="sidebarMenuLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
@@ -84,7 +84,7 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a routerLink="[]" (click)="load('')"
-                                class="nav-link d-flex align-items-center gap-2 active text-danger" aria-current="page"
+                                class="nav-link d-flex align-items-center gap-2 active text-black" aria-current="page"
                                 routerLink="/dashboard-user">
                                 <svg class="bi">
                                     <use xlink:href="#house-fill" />
@@ -94,22 +94,14 @@
                         </li>
                         <li class="nav-item">
                             <a routerLink="[]" (click)="load('event-list')"
-                                class="nav-link d-flex align-items-center gap-2 text-danger">
+                                class="nav-link d-flex align-items-center gap-2 text-black">
                                 <svg class="bi">
                                     <use xlink:href="#file-earmark-text" />
                                 </svg>
                                 All Events
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a routerLink="[]" (click)="load('event-publish')"
-                                class="nav-link d-flex align-items-center gap-2 text-danger" href="#">
-                                <svg class="bi">
-                                    <use xlink:href="#calendar3" />
-                                </svg>
-                                Calendar
-                            </a>
-                        </li>
+                       
 
 
 
@@ -121,7 +113,7 @@
                     <ul class="nav flex-column mb-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 text-danger"
+                            <a class="nav-link d-flex align-items-center gap-2 text-black"
                                 [routerLink]="['/login-user']" onclick="sessionStorage.clear()">
                                 <svg class="bi">
                                     <use xlink:href="#door-closed" />
@@ -134,14 +126,14 @@
             </div>
         </div>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 " >
 
             <div *ngIf=" selectedcomponent ==''" class="container m-3">
                 <table class="table  table-bordered border-secondary table-hover text-center " *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
                     <thead>
-                        <tr><td class="bg-danger text-light" colspan="4">Ongoing Events</td></tr>
+                        <tr><td class=" text-light"  style="background-color: #8c5480;" colspan="4">Ongoing Events</td></tr>
                         <tr>
-                            <th>Event Name</th>
+                            <th >Event Name</th>
                             <th>Event Description</th>
                             <th>Start Date</th>
                             <th>End Date</th>

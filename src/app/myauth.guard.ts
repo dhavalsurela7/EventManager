@@ -57,7 +57,7 @@ export class myauthGuard implements CanActivate {
       return true;
     }
 
-    this.route.navigate(['/login-user']);
+    this.route.navigate(['/home']);
     return false;
   }
 }
