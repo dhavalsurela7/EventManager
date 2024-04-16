@@ -13,7 +13,9 @@ h2 {
 }
 
 #content {
-    padding-bottom: 52px;
+ 
+    width: 100vw;
+    height: 100vh;
 }
 
 .block1 {

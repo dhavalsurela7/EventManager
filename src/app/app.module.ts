@@ -18,6 +18,7 @@ import { DatePipe } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { EventUpdateComponent } from './event-update/event-update.component';
+import { EventDeleteComponent } from './event-delete/event-delete.component';
 
 
 
@@ -35,7 +36,8 @@ import { EventUpdateComponent } from './event-update/event-update.component';
     DashboardUserComponent,
     EventListComponent,
     HomeComponent,
-    EventUpdateComponent
+    EventUpdateComponent,
+    EventDeleteComponent
 
 
 

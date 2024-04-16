@@ -24,6 +24,7 @@ export class ActivityPriceComponent {
   
 result : any
 activityresult : any
+isactive = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -108,4 +109,17 @@ activityresult : any
     })
     this.submitted = false;
   }
+
+  name(event)
+  {   
+     var k;  
+     k = event.charCode; 
+     return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k==32); 
+  }
+  mobile(event)
+{   
+   var k;  
+   k = event.charCode;  
+   return( k>47 && k<58 || k == 8 ); 
+}
 }

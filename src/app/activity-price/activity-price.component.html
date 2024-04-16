@@ -9,14 +9,14 @@
 
         <div class="form-group m-2">
             <label>Event Name</label>
-            <select formControlName="Event_Name" class="form-control" (change)="activity($event)"
+            <select formControlName="Event_Name" class="form-control" (change)="activity($event); isactive=true"
                 [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
 
                 <option *ngFor=" let e of result" value={{e.Event_Name}}>{{e.Event_Name}}</option>
             </select>
         </div>
 
-  
+        <div *ngIf=" activityresult!= null && activityresult!=''&& activityresult!= undefined; else elseblock2">
             <div class="form-group m-2">
                 <label>Activity Name</label>
                 <select formControlName="Activity_Name" class="form-control"
@@ -28,7 +28,7 @@
 
             <div class="form-group m-2">
                 <label>Activity Price</label>
-                <input type="number" formControlName="Activity_Price" class="form-control"
+                <input type="text" formControlName="Activity_Price" class="form-control" (keypress)="mobile($event)"
                     [ngClass]="{ 'is-invalid': submitted && f['Activity_Price'].errors }" />
                 <div *ngIf="submitted && f['Activity_Price'].errors" class="invalid-feedback">
                     <div *ngIf="f['Activity_Price'].errors['required']">Activity Price is required</div>
@@ -60,7 +60,7 @@
             <div class="alert alert-danger" id="failure" style="display: none;" role="alert">
                 Failed !
             </div>
-
+        </div>
 
     </form>
 
@@ -68,8 +68,13 @@
 
 
 <ng-template #elseblock>
-    <div class="alert alert-warning" role="alert">
+    <div class="alert" style=" background-color: #e3dceb;" role="alert">
         No Events Available
     </div>
 </ng-template>
 
+<ng-template  #elseblock2 style=" background-color: #e3dceb;">
+    <div *ngIf="isactive == true " class="alert" role="alert">
+        No Activities Available
+    </div>
+</ng-template>
