@@ -1,6 +1,12 @@
-td{
+td {
     background-color: #e3dceb;
 }
-th{
+
+th {
     background-color: #8c5480;
+}
+
+.spinner {
+
+    margin-top: 45vh;
 }

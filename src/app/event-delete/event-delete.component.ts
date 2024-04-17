@@ -19,9 +19,9 @@ export class EventDeleteComponent implements OnInit {
     Event_Name: new FormControl(''),
   });
   submitted = false;
-
+  show = false;
   result: any;
-
+  select = false;
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService
@@ -31,7 +31,7 @@ export class EventDeleteComponent implements OnInit {
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
     });
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    var url = 'api/EventController/EventOperation';
     var data = {
       flag: 'SELECTALL',
     };
@@ -39,6 +39,7 @@ export class EventDeleteComponent implements OnInit {
     this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         this.result = res.ArrayOfResponse;
+        this.show = true;
       }
     });
   }
@@ -48,8 +49,13 @@ export class EventDeleteComponent implements OnInit {
   }
 
   onSubmit(): void {
+   
     this.submitted = true;
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    if (this.select==false) {
+      return
+      
+    }
+    var url = 'api/EventController/EventOperation';
     var data = {
       flag: 'DELETE',
       Event_Name: this.form.controls['Event_Name'].value,
@@ -57,13 +63,13 @@ export class EventDeleteComponent implements OnInit {
 
     this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
-        if (res['Message'] == '200|Event Deleted successfully') {
+        if (res['ID'] == '200') {
           document.getElementById('result').style.display = 'block';
           this.form.reset();
           setTimeout(() => {
             document.getElementById('result').style.display = 'none';
           }, 3000);
-
+          this.ngOnInit();
      
         } else {
           document.getElementById('failure').style.display = 'block';
@@ -76,5 +82,6 @@ export class EventDeleteComponent implements OnInit {
       }
     });
     this.submitted = false;
+    this.select= false
   }
 }

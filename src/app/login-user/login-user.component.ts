@@ -30,6 +30,7 @@ export class LoginUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    sessionStorage.clear();
     this.form = this.formBuilder.group({
       User_Email: ['', [Validators.required, Validators.email]],
 
@@ -48,7 +49,7 @@ export class LoginUserComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    var url = 'https://localhost:44376/api/UserController/UserOperation';
+    var url = 'api/UserController/UserOperation';
     var data = {
       flag: 'login',
 
@@ -59,7 +60,7 @@ export class LoginUserComponent implements OnInit {
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
   
       if (result != null && result != '' && result != undefined) {
-        if (result['Message'] == '200|Login Success') {
+        if (result['ID'] == '200') {
           sessionStorage.clear();
           sessionStorage.setItem("Role","User")
           sessionStorage.setItem("IsLoggedIn",String(true))
@@ -78,8 +79,5 @@ export class LoginUserComponent implements OnInit {
     this.submitted = false;
   }
 
-  // onReset(): void {
-  //   this.submitted = false;
-  //   this.form.reset();
-  // }
+
 }

@@ -19,7 +19,7 @@ export class EventListComponent implements OnInit {
   eenddate : string
   edescription : string
   eimage : string
-
+  show = false;
   submitted = false;
 
   transformedEvent: event[];
@@ -31,7 +31,7 @@ export class EventListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    var url = 'api/EventController/EventOperation';
     var data = {
       flag: 'SELECT',
     };
@@ -40,7 +40,7 @@ export class EventListComponent implements OnInit {
       if (res != null && res != '' && res != undefined) {
   
         this.result = res.ArrayOfResponse;
-
+        this.show = true;
         this.result.map((e) => {
           e.Event_Start_Date = e.Event_Start_Date.toString().substring(0, 10);
           e.Event_End_Date = e.Event_End_Date.toString().substring(0, 10);
@@ -50,7 +50,7 @@ export class EventListComponent implements OnInit {
   }
 
   details(Event_Name: string,Event_Start_Date:string,Event_End_Date:string,Event_Description:string,Event_Image:string) {
-    debugger
+
     this.flag = true;
     this.ename = Event_Name
     this.estartdate = Event_Start_Date
@@ -60,7 +60,7 @@ export class EventListComponent implements OnInit {
 
     // this.router.navigate(['/activity-list'],{ state: { Event_Name: Event_Name } })
     var url2 =
-      'https://localhost:44376/api/ActivityController/ActivityOperation';
+      'api/ActivityController/ActivityOperation';
     var data2 = {
       flag: 'SELECT',
       Event_Name: Event_Name,

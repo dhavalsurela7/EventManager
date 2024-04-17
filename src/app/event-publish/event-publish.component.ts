@@ -20,9 +20,9 @@ export class EventPublishComponent implements OnInit{
 
   });
   submitted = false;
-  
+  select = false;
 result : any
-
+show = false;
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService
@@ -32,7 +32,7 @@ result : any
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
     });
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    var url = 'api/EventController/EventOperation';
     var data =  {
       flag : 'SELECTNAME'
     }
@@ -41,7 +41,7 @@ result : any
       if (res != null && res != '' && res != undefined) {
    
         this.result = res.ArrayOfResponse;
-
+        this.show = true;
 
       }
 
@@ -54,7 +54,11 @@ result : any
 
   onSubmit(): void {
     this.submitted = true;
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    if (this.select==false) {
+      return
+      
+    }
+    var url = 'api/EventController/EventOperation';
     var data =  {
       flag : 'PUBLISH',
       Event_Name : this.form.controls['Event_Name'].value,
@@ -63,14 +67,27 @@ result : any
    
     this.apicall.call(url,JSON.stringify(data)).subscribe((res:any) => {
       if (res != null && res != '' && res != undefined) {
-    
-        this.result = res.ArrayOfResponse;
-
-      
+        if (res['ID'] == '200') {
+          document.getElementById('result').style.display = 'block';
+          this.form.reset();
+          setTimeout(() => {
+            document.getElementById('result').style.display = 'none';
+          }, 3000);
+          this.ngOnInit();
+     
+        } else {
+          document.getElementById('failure').style.display = 'block';
+          this.form.reset();
+          setTimeout(() => {
+            document.getElementById('failure').style.display = 'none';
+          }, 3000);
+ 
+        }
       }
 
     })
     this.submitted = false;
+    this.select = false
   }
 
 }

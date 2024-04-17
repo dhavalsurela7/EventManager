@@ -11,7 +11,7 @@
       <label>Event Name</label>
       <input type="text" formControlName="Event_Name" class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }" />
-      <div *ngIf="submitted && f['Event_Name'].errors" class="invalid-feedback">
+      <div *ngIf="submitted && f['Event_Name'].errors" class="text-warning">
         <div *ngIf="f['Event_Name'].errors['required']">Email is required</div>
 
       </div>
@@ -22,7 +22,7 @@
       <input type="date" formControlName="Event_Start_Date" class="form-control" [min]="Currentdate"
       [max]="form.get('Event_End_Date')?.value" 
         [ngClass]="{ 'is-invalid': submitted && f['Event_Start_Date'].errors }" />
-      <div *ngIf="submitted && f['Event_Start_Date'].errors" class="invalid-feedback">
+      <div *ngIf="submitted && f['Event_Start_Date'].errors" class="text-warning">
         <div *ngIf="f['Event_Start_Date'].errors['required']">Starting Date is required</div>
 
       </div>
@@ -33,7 +33,7 @@
       <input type="date" formControlName="Event_End_Date" class="form-control"
         [min]="form.get('Event_Start_Date')?.value" [min]="Currentdate"
         [ngClass]="{ 'is-invalid': submitted && f['Event_End_Date'].errors }" />
-      <div *ngIf="submitted && f['Event_End_Date'].errors" class="invalid-feedback">
+      <div *ngIf="submitted && f['Event_End_Date'].errors" class="text-warning">
         <div *ngIf="f['Event_End_Date'].errors['required']">Ending Date is required</div>
 
       </div>
@@ -43,7 +43,10 @@
       <label>Image</label>
       <input type="file" formControlName="Event_Image" class="form-control" (change)="base($event)"
         [ngClass]="{ 'is-invalid': submitted }" />
-
+        <div *ngIf="submitted && f['Event_Image'].errors" class="text-warning">
+          <div *ngIf="f['Event_Image'].errors['required']">Image is required</div>
+  
+        </div>
     </div>
 
 
@@ -53,7 +56,7 @@
       <label>Description</label>
       <input type="text" formControlName="Event_Description" class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['Event_Description'].errors }" />
-      <div *ngIf="submitted && f['Event_Description'].errors" class="invalid-feedback">
+      <div *ngIf="submitted && f['Event_Description'].errors" class="text-warning">
         <div *ngIf="f['Event_Description'].errors['required']">Description is required</div>
 
 

@@ -33,7 +33,7 @@ export class ActivityAddComponent implements OnInit {
   submitted = false;
   Base64: string;
   result: any;
-
+  show = false
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
@@ -50,7 +50,7 @@ export class ActivityAddComponent implements OnInit {
       Activity_End_Datetime: ['', [Validators.required]],
       Event_Name: ['', Validators.required],
     });
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    var url = 'api/EventController/EventOperation';
     var data = {
       flag: 'SELECTNAME',
     };
@@ -59,7 +59,7 @@ export class ActivityAddComponent implements OnInit {
       if (res != null && res != '' && res != undefined) {
      
         this.result = res.ArrayOfResponse;
-
+        this.show = true;
     
       }
     });
@@ -77,7 +77,7 @@ export class ActivityAddComponent implements OnInit {
       return;
     }
     var url =
-      'https://localhost:44376/api/ActivityController/ActivityOperation';
+      'api/ActivityController/ActivityOperation';
     var data = {
       flag: 'INSERT',
       Activity_Name: this.form.controls['Activity_Name'].value,
@@ -90,14 +90,14 @@ export class ActivityAddComponent implements OnInit {
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
 
       if (result != null && result != '' && result != undefined) {
-        if (result['Message'] == '200|Activity added successfully') {
+        if (result['ID'] == '200') {
           document.getElementById('result').style.display = 'block';
           this.form.reset();
           setTimeout(() => {
             document.getElementById('result').style.display = 'none';
           }, 3000);
 
-     
+          this.ngOnInit();
         } else {
           document.getElementById('failure').style.display = 'block';
           this.form.reset();

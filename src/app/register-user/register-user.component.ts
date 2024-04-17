@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 
 import { ApiCallService } from '../Services/api-call.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-user',
@@ -26,17 +27,29 @@ export class RegisterUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private apicall: ApiCallService
+    private apicall: ApiCallService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      User_Name: ['', Validators.required,Validators.pattern("/^[a-z ,.'-]+$/i")],
+      User_Name: [
+        '',
+        Validators.required,
+        Validators.pattern("/^[a-z ,.'-]+$/i"),
+      ],
 
       User_Email: ['', [Validators.required, Validators.email]],
       User_Address: ['', [Validators.required]],
       User_Password: ['', [Validators.required, Validators.minLength(6)]],
-      User_Mobile: ['', [Validators.required, Validators.minLength(10)]],
+      User_Mobile: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
     });
   }
 
@@ -45,13 +58,12 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit(): void {
-
     this.submitted = true;
 
     if (this.form.invalid) {
       return;
     }
-    var url = 'https://localhost:44376/api/UserController/UserOperation';
+    var url = 'api/UserController/UserOperation';
     var data = {
       flag: 'register',
       User_Name: this.form.controls['User_Name'].value,
@@ -61,23 +73,15 @@ export class RegisterUserComponent implements OnInit {
       User_Mobile: this.form.controls['User_Mobile'].value,
     };
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
-   
       if (result != null && result != '' && result != undefined) {
-        if (result['Message'] == '200|Registration Success') {
-          document.getElementById('result').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('result').style.display = 'none';
-          }, 3000);
-
-   
+        if (result['ID'] == '200') {
+          this.router.navigate(['/login-user']);
         } else {
           document.getElementById('failure').style.display = 'block';
           this.form.reset();
           setTimeout(() => {
             document.getElementById('failure').style.display = 'none';
           }, 3000);
-     
         }
       }
     });
@@ -87,16 +91,14 @@ export class RegisterUserComponent implements OnInit {
     this.submitted = false;
     this.form.reset();
   }
- name(event)
-{   
-   var k;  
-   k = event.charCode; 
-   return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k==32); 
-}
-mobile(event)
-{   
-   var k;  
-   k = event.charCode;  
-   return( k>47 && k<58 || k == 8 ); 
-}
+  name(event) {
+    var k;
+    k = event.charCode;
+    return (k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32;
+  }
+  mobile(event) {
+    var k;
+    k = event.charCode;
+    return (k > 47 && k < 58) || k == 8;
+  }
 }

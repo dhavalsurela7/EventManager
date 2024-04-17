@@ -1,9 +1,9 @@
-<div class="container m-1">
-            
+<div class="container m-1" *ngIf="show; else spinner">
+
     <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
-        *ngIf="result!=null">
+        *ngIf="result!= null &&  result!= undefined; else elseblock">
         <thead>
-            
+
             <tr>
                 <th class="text-light">Event Name</th>
                 <th class="text-light">Event Description</th>
@@ -20,7 +20,9 @@
                 <td>{{exp.Event_Description }}</td>
                 <td>{{exp.Event_Start_Date }}</td>
                 <td>{{exp.Event_End_Date }}</td>
-                <td><button class="btn" style="border-color: #8c5480" (click)="details(exp.Event_Name,exp.Event_Start_Date,exp.Event_End_Date,exp.Event_Description,exp.Event_Image)">Click</button></td>
+                <td><button class="btn" style="border-color: #8c5480"
+                        (click)="details(exp.Event_Name,exp.Event_Start_Date,exp.Event_End_Date,exp.Event_Description,exp.Event_Image)">Click</button>
+                </td>
 
             </tr>
         </tbody>
@@ -30,51 +32,61 @@
 </div>
 
 <div *ngIf="flag == true">
-<div class="card text-center m-4"  style="background-color: #e3dceb;" >
-    <div class="card-header">
-       Start Date : {{estartdate }} &nbsp; &nbsp; End Date :    {{eenddate }}
-      </div>
-      <img [src]="'data:image/jpeg;base64,'+eimage" class="card-img-top" alt="Event Image">
-    <div class="card-body" >
-      <h5 class="card-title">{{ename}}</h5>
-      <p class="card-text">{{edescription}}</p>
-     
+    <div class="card text-center m-4" style="background-color: #e3dceb;">
+        <div class="card-header">
+            Start Date : {{estartdate }} &nbsp; &nbsp; End Date : {{eenddate }}
+        </div>
+        <img [src]="'data:image/jpeg;base64,'+eimage" class="card-img-top" alt="Event Image">
+        <div class="card-body">
+            <h5 class="card-title">{{ename}}</h5>
+            <p class="card-text">{{edescription}}</p>
+
+        </div>
+
+        <div class="container">
+
+            <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
+                *ngIf="activityresult!=null">
+                <thead>
+
+                    <tr>
+                        <th class="text-light">Activity Name</th>
+                        <th class="text-light">Activity Description</th>
+                        <th class="text-light">Start Date</th>
+                        <th class="text-light">End Date</th>
+                        <th class="text-light">Price</th>
+
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let exp of activityresult">
+                    <tr>
+                        <td>{{exp.Activity_Name}}</td>
+                        <td>{{exp.Activity_Description }}</td>
+                        <td>{{exp.Activity_Start_Datetime }}</td>
+                        <td>{{exp.Activity_End_Datetime }}</td>
+                        <td>{{exp.Activity_Price}}</td>
+
+                    </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+
     </div>
-    
-    <div class="container">
-            
-        <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
-            *ngIf="activityresult!=null">
-            <thead>
-                
-                <tr >
-                    <th class="text-light">Activity Name</th>
-                    <th class="text-light">Activity Description</th>
-                    <th class="text-light">Start Date</th>
-                    <th class="text-light">End Date</th>
-                    <th class="text-light">Price</th>
-    
-                </tr>
-            </thead>
-    
-            <tbody *ngFor="let exp of activityresult">
-                <tr>
-                    <td>{{exp.Activity_Name}}</td>
-                    <td>{{exp.Activity_Description }}</td>
-                    <td>{{exp.Activity_Start_Datetime }}</td>
-                    <td>{{exp.Activity_End_Datetime }}</td>
-                    <td>{{exp.Activity_Price}}</td>
-    
-                </tr>
-            </tbody>
-    
-    
-        </table>
-    </div>
- 
-  </div>
 </div>
+    <ng-template #elseblock>
+        <div class="alert alert-warning" role="alert">
+            No Events
+        </div>
+    </ng-template>
 
- 
 
-
+<ng-template #spinner>
+    <div class="spinner d-flex justify-content-center ">
+        <div class="spinner-border" role="status" style="color: #8c5480;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>

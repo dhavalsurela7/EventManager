@@ -34,7 +34,7 @@ export class EventUpdateComponent implements OnInit {
   eenddate : string
   edescription : string
   eimage : string
-
+select = false;
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
@@ -51,10 +51,10 @@ export class EventUpdateComponent implements OnInit {
       New_Event_Name: ['', Validators.required],
       Event_Start_Date: ['', [Validators.required]],
       Event_End_Date: ['', [Validators.required]],
-      Event_Image : [''],
+      Event_Image : ['',Validators.required],
       Event_Description: ['', [Validators.required]],
     });
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    var url = 'api/EventController/EventOperation';
     var data = {
       flag: 'SELECTALL',
     };
@@ -75,7 +75,7 @@ export class EventUpdateComponent implements OnInit {
 
   details() {
   
-    debugger
+   this.select = true;
     // this.flag = true;
     this.ename = this.form.controls['Event_Name'].value,
   
@@ -97,11 +97,14 @@ export class EventUpdateComponent implements OnInit {
   onSubmit(): void {
 
     this.submitted = true;
-
+if (this.select == false) {
+  return
+  
+}
     if (this.form.invalid) {
       return;
     }
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    var url = 'api/EventController/EventOperation';
     var data = {
       flag: 'UPDATE',
       Event_Name: this.form.controls['Event_Name'].value,
@@ -114,13 +117,13 @@ export class EventUpdateComponent implements OnInit {
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
    
       if (result != null && result != '' && result != undefined) {
-        if (result['Message'] == '200|Event added successfully') {
+        if (result['ID'] == '200') {
           document.getElementById('result').style.display = 'block';
           this.form.reset();
           setTimeout(() => {
             document.getElementById('result').style.display = 'none';
           }, 3000);
-
+          this.ngOnInit();
     
         } else {
           document.getElementById('failure').style.display = 'block';
@@ -133,6 +136,7 @@ export class EventUpdateComponent implements OnInit {
       }
     });
     this.submitted = false;
+    this.select=  false;
   }
 
   base(event: any) {

@@ -30,6 +30,7 @@ export class LoginAdminComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    sessionStorage.clear();
     this.form = this.formBuilder.group({
       Admin_Email: ['', [Validators.required, Validators.email]],
 
@@ -48,7 +49,7 @@ export class LoginAdminComponent implements OnInit{
     if (this.form.invalid) {
       return;
     }
-    var url = 'https://localhost:44376/api/AdminController/AdminOperation';
+    var url = 'api/AdminController/AdminOperation';
     var data = {
       flag: 'login',
 
@@ -59,7 +60,7 @@ export class LoginAdminComponent implements OnInit{
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
   
       if (result != null && result != '' && result != undefined) {
-        if (result['Message'] == '200|Login Success') {
+        if (result['ID'] == '200') {
           sessionStorage.clear();
           sessionStorage.setItem("Role","Admin")
           sessionStorage.setItem("IsLoggedIn",String(true))

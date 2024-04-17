@@ -12,7 +12,7 @@ export class DashboardUserComponent implements OnInit {
   constructor(private apicall: ApiCallService) {}
   ngOnInit(): void {
     this.selectedcomponent = '';
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    var url = 'api/EventController/EventOperation';
     var data = {
       flag: 'SELECTONGOING',
     };

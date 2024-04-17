@@ -41,7 +41,7 @@ export class EventAddComponent implements OnInit {
 
       Event_Start_Date: ['', [Validators.required]],
       Event_End_Date: ['', [Validators.required]],
-      Event_Image: [''],
+      Event_Image: ['',Validators.required],
       Event_Description: ['', [Validators.required]],
     });
   }
@@ -57,7 +57,7 @@ export class EventAddComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    var url = 'https://localhost:44376/api/EventController/EventOperation';
+    var url = 'api/EventController/EventOperation';
     var data = {
       flag: 'INSERT',
       Event_Name: this.form.controls['Event_Name'].value,
@@ -69,7 +69,7 @@ export class EventAddComponent implements OnInit {
     this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
    
       if (result != null && result != '' && result != undefined) {
-        if (result['Message'] == '200|Event added successfully') {
+        if (result['ID'] == '200') {
           document.getElementById('result').style.display = 'block';
           this.form.reset();
           setTimeout(() => {
