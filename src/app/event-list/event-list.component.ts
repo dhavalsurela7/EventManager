@@ -31,12 +31,12 @@ export class EventListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    var url = 'api/EventController/EventOperation';
+
     var data = {
       flag: 'SELECT',
     };
-
-    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
+    //select all published events
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
   
         this.result = res.ArrayOfResponse;
@@ -58,14 +58,13 @@ export class EventListComponent implements OnInit {
     this.edescription = Event_Description
     this.eimage = Event_Image
 
-    // this.router.navigate(['/activity-list'],{ state: { Event_Name: Event_Name } })
-    var url2 =
-      'api/ActivityController/ActivityOperation';
+
     var data2 = {
       flag: 'SELECT',
       Event_Name: Event_Name,
     };
-    this.apicall.call(url2, JSON.stringify(data2)).subscribe((res: any) => {
+    //retrieving activities based on event name
+    this.apicall.activityapiservice(JSON.stringify(data2)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
 
         this.activityresult = res.ArrayOfResponse;

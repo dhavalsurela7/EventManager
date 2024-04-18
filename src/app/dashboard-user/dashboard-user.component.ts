@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../Services/api-call.service';
+import { DashboardService } from '../Services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard-user',
@@ -8,16 +9,16 @@ import { ApiCallService } from '../Services/api-call.service';
 })
 export class DashboardUserComponent implements OnInit {
   result:any
-  selectedcomponent: string;
-  constructor(private apicall: ApiCallService) {}
+
+  constructor(private apicall: ApiCallService,public share : DashboardService) {}
   ngOnInit(): void {
-    this.selectedcomponent = '';
-    var url = 'api/EventController/EventOperation';
+    this.share.selectedcomponent = '';
+ 
     var data = {
       flag: 'SELECTONGOING',
     };
 
-    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
   
         this.result = res.ArrayOfResponse;
@@ -30,7 +31,5 @@ export class DashboardUserComponent implements OnInit {
     });
   }
 
-  load(component: string): void {
-    this.selectedcomponent = component;
-  }
+
 }

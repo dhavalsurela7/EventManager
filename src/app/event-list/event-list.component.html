@@ -1,7 +1,7 @@
 <div class="container m-1" *ngIf="show; else spinner">
 
     <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
-        *ngIf="result!= null &&  result!= undefined; else elseblock">
+        *ngIf="result!= null && result.length!=0 &&result!= undefined; else elseblock">
         <thead>
 
             <tr>
@@ -77,8 +77,8 @@
     </div>
 </div>
     <ng-template #elseblock>
-        <div class="alert alert-warning" role="alert">
-            No Events
+        <div class="alert my-3 " role="alert" style="background-color: #e3dceb;">
+            No Published Events
         </div>
     </ng-template>
 

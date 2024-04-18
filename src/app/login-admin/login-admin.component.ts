@@ -16,26 +16,24 @@ import { Router } from '@angular/router';
   styleUrl: './login-admin.component.css',
 })
 export class LoginAdminComponent implements OnInit{
-  form: FormGroup = new FormGroup({
-    Admin_Email: new FormControl(''),
-
-    Admin_Password: new FormControl(''),
-  });
+  form: FormGroup;
   submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
     private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    sessionStorage.clear();
+  ) {
     this.form = this.formBuilder.group({
       Admin_Email: ['', [Validators.required, Validators.email]],
 
       Admin_Password: ['', [Validators.required, Validators.minLength(6)]],
     });
+  }
+
+  ngOnInit(): void {
+    sessionStorage.clear();
+   
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -49,7 +47,7 @@ export class LoginAdminComponent implements OnInit{
     if (this.form.invalid) {
       return;
     }
-    var url = 'api/AdminController/AdminOperation';
+   
     var data = {
       flag: 'login',
 
@@ -57,7 +55,8 @@ export class LoginAdminComponent implements OnInit{
 
       Admin_Password: this.form.controls['Admin_Password'].value,
     };
-    this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
+    //admin login
+    this.apicall.adminapiservice(JSON.stringify(data)).subscribe((result) => {
   
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {

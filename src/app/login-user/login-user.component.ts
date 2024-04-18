@@ -16,26 +16,24 @@ import { Router } from '@angular/router';
   styleUrl: './login-user.component.css',
 })
 export class LoginUserComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    User_Email: new FormControl(''),
-
-    User_Password: new FormControl(''),
-  });
+  form: FormGroup;
   submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
     private router : Router
-  ) {}
-
-  ngOnInit(): void {
-    sessionStorage.clear();
+  ) {
     this.form = this.formBuilder.group({
       User_Email: ['', [Validators.required, Validators.email]],
 
       User_Password: ['', [Validators.required, Validators.minLength(6)]],
     });
+  }
+
+  ngOnInit(): void {
+    sessionStorage.clear();
+   
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -49,7 +47,7 @@ export class LoginUserComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    var url = 'api/UserController/UserOperation';
+
     var data = {
       flag: 'login',
 
@@ -57,7 +55,8 @@ export class LoginUserComponent implements OnInit {
 
       User_Password: this.form.controls['User_Password'].value,
     };
-    this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
+    //user login
+    this.apicall.userapiservice(JSON.stringify(data)).subscribe((result) => {
   
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {

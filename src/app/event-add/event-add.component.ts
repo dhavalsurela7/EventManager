@@ -16,13 +16,7 @@ import { DashboardService } from '../Services/dashboard.service';
   styleUrl: './event-add.component.css',
 })
 export class EventAddComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    Event_Name: new FormControl(''),
-    Event_Start_Date: new FormControl(''),
-    Event_End_Date: new FormControl(''),
-    Event_Image: new FormControl(''),
-    Event_Description: new FormControl(''),
-  });
+  form: FormGroup;
   submitted = false;
   Base64: string;
   Currentdate : string;
@@ -30,12 +24,7 @@ export class EventAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
     public share : DashboardService
-  ) {}
-
-  ngOnInit(): void {
-
-    this.Currentdate =new Date().toISOString().slice(0, 10);;
-  
+  ) {
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
 
@@ -46,18 +35,25 @@ export class EventAddComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+
+    this.Currentdate =new Date().toISOString().slice(0, 10);;
+  
+    
+  }
+
   get f(): {  } {
     return this.form.controls;
   }
 
   onSubmit(): void {
-
+debugger
     this.submitted = true;
 
     if (this.form.invalid) {
       return;
     }
-    var url = 'api/EventController/EventOperation';
+
     var data = {
       flag: 'INSERT',
       Event_Name: this.form.controls['Event_Name'].value,
@@ -66,7 +62,8 @@ export class EventAddComponent implements OnInit {
       Event_Image: this.Base64,
       Event_Description: this.form.controls['Event_Description'].value,
     };
-    this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
+    //insert event
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((result) => {
    
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
@@ -91,6 +88,7 @@ export class EventAddComponent implements OnInit {
   }
 
   base(event: any) {
+    
     if (event.target.files && event.target.files[0]) {
       if (
         event.target.files[0].type === 'image/jpeg' ||

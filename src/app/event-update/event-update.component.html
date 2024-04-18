@@ -2,8 +2,8 @@
   <h1 class="h2">Update Event</h1>
 
 </div>
-
-<div class="register-form">
+<div class="container" *ngIf="show">
+<div class="register-form" *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 rounded ">
 
@@ -97,4 +97,11 @@
 
 
   </form>
+</div>
+
+<ng-template #elseblock >
+  <div class="alert my-3 " role="alert" style="background-color: #e3dceb;">
+  No Events to Update
+</div>
+</ng-template>
 </div>

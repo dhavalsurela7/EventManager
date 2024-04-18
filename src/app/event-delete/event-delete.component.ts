@@ -15,9 +15,7 @@ import { ApiCallService } from '../Services/api-call.service';
   styleUrl: './event-delete.component.css',
 })
 export class EventDeleteComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    Event_Name: new FormControl(''),
-  });
+  form: FormGroup;
   submitted = false;
   show = false;
   result: any;
@@ -25,18 +23,20 @@ export class EventDeleteComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
     });
-    var url = 'api/EventController/EventOperation';
+  }
+
+  ngOnInit(): void {
+    
+
     var data = {
       flag: 'SELECTALL',
     };
-
-    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
+    //select all events
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         this.result = res.ArrayOfResponse;
         this.show = true;
@@ -55,13 +55,13 @@ export class EventDeleteComponent implements OnInit {
       return
       
     }
-    var url = 'api/EventController/EventOperation';
+
     var data = {
       flag: 'DELETE',
       Event_Name: this.form.controls['Event_Name'].value,
     };
-
-    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
+    //delete event
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         if (res['ID'] == '200') {
           document.getElementById('result').style.display = 'block';

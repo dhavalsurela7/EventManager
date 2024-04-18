@@ -15,11 +15,7 @@ import { DashboardService } from '../Services/dashboard.service';
   styleUrl: './activity-price.component.css',
 })
 export class ActivityPriceComponent {
-  form: FormGroup = new FormGroup({
-    Event_Name: new FormControl(''),
-    Activity_Name: new FormControl(''),
-    Activity_Price: new FormControl(''),
-  });
+  form: FormGroup
   submitted = false;
   show = false;
   result: any;
@@ -30,20 +26,22 @@ export class ActivityPriceComponent {
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
     public share: DashboardService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
       Activity_Name: ['', Validators.required],
       Activity_Price: ['', Validators.required],
     });
-    var url = 'api/EventController/EventOperation';
+  }
+
+  ngOnInit(): void {
+   
+
     var data = {
       flag: 'SELECTNAME',
     };
-
-    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
+    //retrieving event names
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         this.result = res.ArrayOfResponse;
         this.show = true;
@@ -56,13 +54,13 @@ export class ActivityPriceComponent {
   }
 
   activity(event: any) {
-    var url = 'api/ActivityController/ActivityOperation';
+
     var data = {
       flag: 'SELECTNAME',
       Event_Name: this.form.controls['Event_Name'].value,
     };
-
-    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
+    //retrieving activity names based on event name
+    this.apicall.activityapiservice( JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         this.activityresult = res.ArrayOfResponse;
       }
@@ -71,15 +69,15 @@ export class ActivityPriceComponent {
 
   onSubmit(): void {
     this.submitted = true;
-    var url = 'api/ActivityController/ActivityOperation';
+ 
     var data = {
       flag: 'SETPRICE',
       Event_Name: this.form.controls['Event_Name'].value,
       Activity_Name: this.form.controls['Activity_Name'].value,
       Activity_Price: this.form.controls['Activity_Price'].value,
     };
-
-    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
+    //updating price column
+    this.apicall.activityapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         if (res['ID'] == '200') {
           this.result = res.ArrayOfResponse;

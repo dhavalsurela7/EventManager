@@ -16,32 +16,20 @@ import { min } from 'rxjs';
   templateUrl: './activity-add.component.html',
   styleUrl: './activity-add.component.css',
 })
-
 export class ActivityAddComponent implements OnInit {
-
-  EventName : string;
-  Mindate : string;
-  Maxdate : string;
-
-  form: FormGroup = new FormGroup({
-    Activity_Name: new FormControl(''),
-    Activity_Description: new FormControl(''),
-    Activity_Start_Datetime: new FormControl(''),
-    Activity_End_Datetime: new FormControl(''),
-    Event_Name: new FormControl(''),
-  });
+  EventName: string;
+  Mindate: string;
+  Maxdate: string;
+  form: FormGroup;
   submitted = false;
   Base64: string;
   result: any;
-  show = false
+  show = false;
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
     public share: DashboardService
-  ) {}
-
-  ngOnInit(): void {
-    
+  ) {
     this.form = this.formBuilder.group({
       Activity_Name: ['', Validators.required],
       Activity_Description: ['', [Validators.required]],
@@ -50,17 +38,20 @@ export class ActivityAddComponent implements OnInit {
       Activity_End_Datetime: ['', [Validators.required]],
       Event_Name: ['', Validators.required],
     });
-    var url = 'api/EventController/EventOperation';
+  }
+
+  ngOnInit(): void {
+
     var data = {
       flag: 'SELECTNAME',
     };
-
-    this.apicall.call(url, JSON.stringify(data)).subscribe((res: any) => {
+    //retrieving event names
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
-     
         this.result = res.ArrayOfResponse;
+        console.log(this.result)
         this.show = true;
-    
+        console.log(this.show)
       }
     });
   }
@@ -70,14 +61,12 @@ export class ActivityAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-
     this.submitted = true;
 
     if (this.form.invalid) {
       return;
     }
-    var url =
-      'api/ActivityController/ActivityOperation';
+
     var data = {
       flag: 'INSERT',
       Activity_Name: this.form.controls['Activity_Name'].value,
@@ -87,8 +76,8 @@ export class ActivityAddComponent implements OnInit {
       Activity_End_Datetime: this.form.controls['Activity_End_Datetime'].value,
       Event_Name: this.form.controls['Event_Name'].value,
     };
-    this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
-
+    //insert activity 
+    this.apicall.activityapiservice( JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
           document.getElementById('result').style.display = 'block';
@@ -104,23 +93,30 @@ export class ActivityAddComponent implements OnInit {
           setTimeout(() => {
             document.getElementById('failure').style.display = 'none';
           }, 3000);
- 
         }
       }
     });
     this.submitted = false;
   }
 
-  eventdate(){
-    
-    this.EventName = this.form.controls['Event_Name'].value,
-    this.result.forEach(element => {
-      if (element.Event_Name == this.EventName) {
-        this.Mindate = element.Event_Start_Date.toString().substring(0,10).split('-').reverse().join('-')+"T00:00";
-     
-        this.Maxdate = element.Event_End_Date.toString().substring(0,10).split('-').reverse().join('-')+"T00:00";
-    
-      }
-    });
+  eventdate() {
+    (this.EventName = this.form.controls['Event_Name'].value),
+      this.result.forEach((element) => {
+        if (element.Event_Name == this.EventName) {
+          this.Mindate =
+            element.Event_Start_Date.toString()
+              .substring(0, 10)
+              .split('-')
+              .reverse()
+              .join('-') + 'T00:00';
+
+          this.Maxdate =
+            element.Event_End_Date.toString()
+              .substring(0, 10)
+              .split('-')
+              .reverse()
+              .join('-') + 'T00:00';
+        }
+      });
   }
 }

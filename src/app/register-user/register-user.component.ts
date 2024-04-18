@@ -16,22 +16,14 @@ import { Router } from '@angular/router';
   styleUrl: './register-user.component.css',
 })
 export class RegisterUserComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    User_Name: new FormControl(''),
-    User_Email: new FormControl(''),
-    User_Address: new FormControl(''),
-    User_Password: new FormControl(''),
-    User_Mobile: new FormControl(''),
-  });
+  form: FormGroup;
   submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
     private router: Router
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.form = this.formBuilder.group({
       User_Name: [
         '',
@@ -53,6 +45,8 @@ export class RegisterUserComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {}
+
   get f() {
     return this.form.controls;
   }
@@ -63,7 +57,7 @@ export class RegisterUserComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    var url = 'api/UserController/UserOperation';
+   
     var data = {
       flag: 'register',
       User_Name: this.form.controls['User_Name'].value,
@@ -72,7 +66,8 @@ export class RegisterUserComponent implements OnInit {
       User_Password: this.form.controls['User_Password'].value,
       User_Mobile: this.form.controls['User_Mobile'].value,
     };
-    this.apicall.call(url, JSON.stringify(data)).subscribe((result) => {
+    //insert user
+    this.apicall.userapiservice( JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
           this.router.navigate(['/login-user']);

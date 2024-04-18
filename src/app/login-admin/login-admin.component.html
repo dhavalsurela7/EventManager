@@ -11,9 +11,9 @@
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['Admin_Email'].errors }"
         />
-        <div *ngIf="submitted && f['Admin_Email'].errors" class="invalid-feedback">
+        <div *ngIf="submitted && f['Admin_Email'].errors" class="text-warning">
           <div *ngIf="f['Admin_Email'].errors['required']">Email is required</div>
-          <div *ngIf="f['Admin_Email'].errors['Admin_Email']">Email is invalid</div>
+          <div *ngIf="f['Admin_Email'].errors['email']">Email is invalid</div>
         </div>
       </div>
   
@@ -29,7 +29,7 @@
           class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f['Admin_Password'].errors }"
         />
-        <div *ngIf="submitted && f['Admin_Password'].errors" class="invalid-feedback">
+        <div *ngIf="submitted && f['Admin_Password'].errors" class="text-warning">
           <div *ngIf="f['Admin_Password'].errors['required']">Password is required</div>
           <div *ngIf="f['Admin_Password'].errors['minlength']">
             Password must be at least 6 characters
