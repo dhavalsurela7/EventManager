@@ -1,17 +1,94 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../Services/dashboard.service';
-
+import { ApiCallService } from '../Services/api-call.service';
 
 @Component({
   selector: 'app-dashboard-admin',
   templateUrl: './dashboard-admin.component.html',
-  styleUrl: './dashboard-admin.component.css'
+  styleUrl: './dashboard-admin.component.css',
 })
-export class DashboardAdminComponent implements OnInit{
+export class DashboardAdminComponent implements OnInit {
+  publishresult: any;
+  unpublishresult: any;
+  deleteresult: any;
 
-constructor(public share:DashboardService){}
+  constructor(
+    public share: DashboardService,
+    private apicall: ApiCallService
+  ) {}
+  result: any;
+  show = false;
   ngOnInit(): void {
-    this.share.selectedcomponent = 'event-list'
+    this.share.selectedcomponent = '';
+
+    var data = {
+      flag: 'SELECTALL',
+    };
+    //select all events
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
+      if (res != null && res != '' && res != undefined) {
+        this.result = res.ArrayOfResponse;
+        this.show = true;
+
+        this.result.map((e) => {
+          e.Event_Start_Date = e.Event_Start_Date.toString().substring(0, 10);
+          e.Event_End_Date = e.Event_End_Date.toString().substring(0, 10);
+        });
+      }
+    });
   }
 
+  publish(eventname: string) {
+    var data = {
+      flag: 'PUBLISH',
+      Event_Name: eventname,
+    };
+    //retrieving activities based on event name
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
+      if (res != null && res != '' && res != undefined) {
+        if (res['ID'] == '200') {
+          this.publishresult = res.ArrayOfResponse;
+
+          this.ngOnInit();
+        }
+      }
+    });
+  }
+
+  unpublish(eventname: string) {
+    var data = {
+      flag: 'UNPUBLISH',
+      Event_Name: eventname,
+    };
+    //retrieving activities based on event name
+    this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
+      if (res != null && res != '' && res != undefined) {
+        if (res['ID'] == '200') {
+          this.unpublishresult = res.ArrayOfResponse;
+          this.ngOnInit();
+        }
+      }
+    });
+  }
+
+  delete(eventname: string) {
+    var del = confirm('Are you sure ?');
+    if (del) {
+      var data = {
+        flag: 'DELETE',
+        Event_Name: eventname,
+      };
+      //retrieving activities based on event name
+      this.apicall
+        .eventapiservice(JSON.stringify(data))
+        .subscribe((res: any) => {
+          if (res != null && res != '' && res != undefined) {
+            if (res['ID'] == '200') {
+              this.deleteresult = res.ArrayOfResponse;
+              this.ngOnInit();
+            }
+          }
+        });
+    }
+  }
 }

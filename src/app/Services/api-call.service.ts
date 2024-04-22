@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class ApiCallService {
   }
   
   public activityapiservice(data) {
-    const endpoint = 'api/EventController/EventOperation';
+    const endpoint = 'api/ActivityController/ActivityOperation';
     this.fullurl = this.url + endpoint;
     const headers = {
       'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ export class ApiCallService {
     return this.http.post(this.fullurl, data, { headers: headers });
   }
 
-  public adminapiservice(data) {
+  public adminapiservice(data):Observable<any> {
     const endpoint = 'api/AdminController/AdminOperation';
     this.fullurl = this.url + endpoint;
     const headers = {

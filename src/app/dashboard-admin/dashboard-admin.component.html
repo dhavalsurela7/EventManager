@@ -45,7 +45,8 @@
             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
     </symbol>
     <symbol id="list" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        <path fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
     </symbol>
 
 
@@ -56,7 +57,7 @@
         Dashboard</a>
 
     <ul class="navbar-nav flex-row d-md-none">
-       
+
         <li class="nav-item text-nowrap">
             <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
@@ -84,7 +85,7 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <button class="nav-link d-flex align-items-center gap-2 active text-black"
-                                (click)="share.load('event-list')" aria-current="page">
+                                (click)="share.load('')" aria-current="page">
                                 <svg class="bi">
                                     <use xlink:href="#house-fill" />
                                 </svg>
@@ -174,12 +175,54 @@
         </div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div *ngIf=" share.selectedcomponent ==''" class="container m-3">
+                <table class="table  table-bordered border-secondary table-hover text-center "
+                    *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
+                    <thead>
+                        <tr>
+                            <td class="text-light" style="background-color: #8c5480;" colspan="7">All Events</td>
+                        </tr>
+                        <tr>
+                            <th>Event Name</th>
+                            <th>Event Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Publish</th>
+                            <th>Unpublish</th>
+                            <th>Delete</th>
 
+
+                        </tr>
+                    </thead>
+
+                    <tbody *ngFor="let exp of result">
+                        <tr>
+                            <td>{{exp.Event_Name}}</td>
+                            <td>{{exp.Event_Description }}</td>
+                            <td>{{exp.Event_Start_Date }}</td>
+                            <td>{{exp.Event_End_Date }}</td>
+                            <td><button class="btn text-light" style="background-color: #8c5480" [disabled]="exp.isActive=='True'"
+                                    (click)="publish(exp.Event_Name)">Publish</button>
+                            </td>
+                            <td><button class="btn text-light" style="background-color: #8c5480"
+                                    [disabled]="exp.isActive=='False'"
+                                    (click)="unpublish(exp.Event_Name)">Unpublish</button></td>
+                            <td><button class="btn text-light" style="background-color: #B33D68"
+                                    (click)="delete(exp.Event_Name)">Delete</button></td>
+
+
+                        </tr>
+                    </tbody>
+
+
+                </table>
+
+            </div>
             <app-event-add *ngIf=" share.selectedcomponent =='event-add'"></app-event-add>
             <app-event-publish *ngIf=" share.selectedcomponent =='event-publish'"></app-event-publish>
             <app-activity-add *ngIf=" share.selectedcomponent =='activity-add'"></app-activity-add>
             <app-activity-price *ngIf=" share.selectedcomponent =='activity-price'"></app-activity-price>
-            <app-event-list *ngIf=" share.selectedcomponent =='event-list'"></app-event-list>
+
             <app-event-update *ngIf=" share.selectedcomponent =='event-update'"></app-event-update>
             <app-event-delete *ngIf=" share.selectedcomponent =='event-delete'"></app-event-delete>
             <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
@@ -187,5 +230,13 @@
 
 
         </main>
+
+
     </div>
 </div>
+
+<ng-template #elseblock>
+    <div class="alert my-3 " role="alert" style="background-color: #e3dceb;">
+        No Events !!
+    </div>
+</ng-template>

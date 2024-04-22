@@ -24,10 +24,12 @@ const routes: Routes = [
   {
     path: 'login-user',
     component: LoginUserComponent,
+
   },
   {
     path: 'login-admin',
     component: LoginAdminComponent,
+   
   },
   {
     path: 'dashboard-admin',

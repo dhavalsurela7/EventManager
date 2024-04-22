@@ -12,7 +12,7 @@
       <select formControlName="Event_Name" class="form-control"
         [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }" (change)="details()">
 
-        <option *ngFor=" let e of result" value={{e.Event_Name}}>{{e.Event_Name}}</option>
+        <option *ngFor=" let e of result"  value={{e.Event_Name}}>{{e.Event_Name}}</option>
       </select>
       <div *ngIf="submitted" class="text-warning">
         <div *ngIf="select == false">Event Name is required</div>

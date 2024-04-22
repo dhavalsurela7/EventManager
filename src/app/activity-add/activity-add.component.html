@@ -8,7 +8,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 rounded ">
 
         <div class="form-group m-2">
-            <label></label>
+            <label>Event Name</label>
             <select formControlName="Event_Name" class="form-control" (change)="eventdate()"
                 [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
 

@@ -15,9 +15,10 @@ import { DashboardService } from '../Services/dashboard.service';
   styleUrl: './activity-price.component.css',
 })
 export class ActivityPriceComponent {
-  form: FormGroup
+  form: FormGroup;
   submitted = false;
   show = false;
+  activityshow = false;
   result: any;
   activityresult: any;
   isactive = false;
@@ -35,8 +36,6 @@ export class ActivityPriceComponent {
   }
 
   ngOnInit(): void {
-   
-
     var data = {
       flag: 'SELECTNAME',
     };
@@ -44,6 +43,7 @@ export class ActivityPriceComponent {
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         this.result = res.ArrayOfResponse;
+
         this.show = true;
       }
     });
@@ -54,22 +54,25 @@ export class ActivityPriceComponent {
   }
 
   activity(event: any) {
-
     var data = {
       flag: 'SELECTNAME',
       Event_Name: this.form.controls['Event_Name'].value,
     };
     //retrieving activity names based on event name
-    this.apicall.activityapiservice( JSON.stringify(data)).subscribe((res: any) => {
-      if (res != null && res != '' && res != undefined) {
-        this.activityresult = res.ArrayOfResponse;
-      }
-    });
+    this.apicall
+      .activityapiservice(JSON.stringify(data))
+      .subscribe((res: any) => {
+        if (res != null && res != '' && res != undefined) {
+          this.activityresult = res.ArrayOfResponse;
+
+          this.activityshow = true;
+        }
+      });
   }
 
   onSubmit(): void {
     this.submitted = true;
- 
+
     var data = {
       flag: 'SETPRICE',
       Event_Name: this.form.controls['Event_Name'].value,
@@ -77,26 +80,28 @@ export class ActivityPriceComponent {
       Activity_Price: this.form.controls['Activity_Price'].value,
     };
     //updating price column
-    this.apicall.activityapiservice(JSON.stringify(data)).subscribe((res: any) => {
-      if (res != null && res != '' && res != undefined) {
-        if (res['ID'] == '200') {
-          this.result = res.ArrayOfResponse;
-          document.getElementById('result').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('result').style.display = 'none';
-          }, 3000);
+    this.apicall
+      .activityapiservice(JSON.stringify(data))
+      .subscribe((res: any) => {
+        if (res != null && res != '' && res != undefined) {
+          if (res['ID'] == '200') {
+            this.result = res.ArrayOfResponse;
+            document.getElementById('result').style.display = 'block';
+            this.form.reset();
+            setTimeout(() => {
+              document.getElementById('result').style.display = 'none';
+            }, 3000);
 
-          this.form.reset();
-        } else {
-          document.getElementById('failure').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('failure').style.display = 'none';
-          }, 3000);
+            this.form.reset();
+          } else {
+            document.getElementById('failure').style.display = 'block';
+            this.form.reset();
+            setTimeout(() => {
+              document.getElementById('failure').style.display = 'none';
+            }, 3000);
+          }
         }
-      }
-    });
+      });
     this.submitted = false;
   }
 

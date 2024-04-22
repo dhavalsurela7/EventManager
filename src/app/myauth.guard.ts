@@ -33,6 +33,7 @@ export class myauthGuard implements CanActivate {
       
     }
 
+
     if (
       sessionStorage.getItem('Role') == 'User' &&
       route.data['role'] == 'user'

@@ -73,8 +73,8 @@
     </div>
 </ng-template>
 
-<ng-template  #elseblock2 style=" background-color: #e3dceb;">
-    <div class="alert my-3 " role="alert" style="background-color: #e3dceb;">
+<ng-template  #elseblock2>
+    <div class="alert my-3 text-warning" role="alert"   *ngIf="activityshow==true">
         No Activities Available
     </div>
 </ng-template>

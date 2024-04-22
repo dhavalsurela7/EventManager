@@ -41,6 +41,7 @@ export class EventListComponent implements OnInit {
   
         this.result = res.ArrayOfResponse;
         this.show = true;
+        console.log(this.result)
         this.result.map((e) => {
           e.Event_Start_Date = e.Event_Start_Date.toString().substring(0, 10);
           e.Event_End_Date = e.Event_End_Date.toString().substring(0, 10);
