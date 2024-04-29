@@ -1,3 +1,4 @@
+<app-toasts aria-live="polite" aria-atomic="true" class="ngb-toasts"></app-toasts>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Add Activity</h1>
 
@@ -19,9 +20,10 @@
         <div class="form-group m-2">
             <label>Activity Name</label>
             <input type="text" formControlName="Activity_Name" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Activity_Name'].errors }" />
-            <div *ngIf="submitted && f['Activity_Name'].errors" class="invalid-feedback">
+                [ngClass]="{ 'is-invalid': submitted && f['Activity_Name'].errors }" (keypress)="name($event)"/>
+            <div *ngIf="submitted && f['Activity_Name'].errors" class="text-warning">
                 <div *ngIf="f['Activity_Name'].errors['required']">Activity Name is required</div>
+                <div *ngIf="f['Activity_Name'].errors['pattern']">Activity Name is invalid</div>
 
             </div>
         </div>
@@ -30,7 +32,7 @@
             <label>Starting DateTime</label>
             <input type="datetime-local" formControlName="Activity_Start_Datetime" [max]="form.get('Activity_End_Datetime')?.value" [min]="Mindate" [max]="Maxdate" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['Activity_Start_Datetime'].errors }" />
-            <div *ngIf="submitted && f['Activity_Start_Datetime'].errors" class="invalid-feedback">
+            <div *ngIf="submitted && f['Activity_Start_Datetime'].errors" class="text-warning">
                 <div *ngIf="f['Activity_Start_Datetime'].errors['required']">Starting DateTime is required</div>
             </div>
         </div>
@@ -39,7 +41,7 @@
             <label>Ending DateTime</label>
             <input type="datetime-local" formControlName="Activity_End_Datetime" [min]="form.get('Activity_Start_Datetime')?.value" [min]="Mindate" [max]="Maxdate" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['Activity_End_Datetime'].errors }" />
-            <div *ngIf="submitted && f['Activity_End_Datetime'].errors" class="invalid-feedback">
+            <div *ngIf="submitted && f['Activity_End_Datetime'].errors" class="text-warning">
                 <div *ngIf="f['Activity_End_Datetime'].errors['required']">Ending DateTime is required</div>
 
             </div>
@@ -53,7 +55,7 @@
             <label>Description</label>
             <input type="text" formControlName="Activity_Description" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['Activity_Description'].errors }" />
-            <div *ngIf="submitted && f['Activity_Description'].errors" class="invalid-feedback">
+            <div *ngIf="submitted && f['Activity_Description'].errors" class="text-warning">
                 <div *ngIf="f['Activity_Description'].errors['required']">Description is required</div>
 
 
@@ -76,14 +78,6 @@
 
         </div>
 
-        <div class="alert alert-success" id="result" style="display: none;" role="alert">
-            Activity Added Successful !!
-        </div>
-
-
-        <div class="alert alert-danger" id="failure" style="display: none;" role="alert">
-            Failed !
-        </div>
 
 
     </form>

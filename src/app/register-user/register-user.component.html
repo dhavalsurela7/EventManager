@@ -1,3 +1,4 @@
+<app-toasts aria-live="polite" aria-atomic="true" class="ngb-toasts"></app-toasts>
 <div class="register-form ">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="m-3 p-4 rounded ">
 
@@ -9,6 +10,7 @@
         [ngClass]="{ 'is-invalid': submitted && f['User_Name'].errors }" (keypress)="name($event)" />
       <div *ngIf="submitted && f['User_Name'].errors" class="text-warning">
         <div *ngIf="f['User_Name'].errors['required']">Fullname is required</div>
+        <div *ngIf="f['User_Name'].errors['pattern']">Fullname is not valid</div>
       </div>
     </div>
 
@@ -18,7 +20,7 @@
         [ngClass]="{ 'is-invalid': submitted && f['User_Email'].errors }" />
       <div *ngIf="submitted && f['User_Email'].errors" class="text-warning">
         <div *ngIf="f['User_Email'].errors['required']">Email is required</div>
-        <div *ngIf="f['User_Email'].errors['User_Email']">Email is invalid</div>
+        <div *ngIf="f['User_Email'].errors['pattern']">Email is invalid</div>
       </div>
     </div>
 
@@ -29,6 +31,7 @@
         [ngClass]="{ 'is-invalid': submitted && f['User_Address'].errors }" />
       <div *ngIf="submitted && f['User_Address'].errors" class="text-warning">
         <div *ngIf="f['User_Address'].errors['required']">Address is required</div>
+        <div *ngIf="f['User_Address'].errors['pattern']">Address is invalid</div>
       </div>
     </div>
 
@@ -39,22 +42,18 @@
         [ngClass]="{ 'is-invalid': submitted && f['User_Password'].errors }" />
       <div *ngIf="submitted && f['User_Password'].errors" class="text-warning">
         <div *ngIf="f['User_Password'].errors['required']">Password is required</div>
-        <div *ngIf="f['User_Password'].errors['minlength']">
-          Password must be at least 6 characters
-        </div>
-
+        <div *ngIf="f['User_Password'].errors['pattern']">Password is weak</div>
       </div>
     </div>
 
     <div class="form-group m-2">
       <label>Mobile</label>
-      <input type="text" formControlName="User_Mobile" class="form-control" (keypress)="mobile($event)"
+      <input type="text" formControlName="User_Mobile" class="form-control" (keypress)="number($event)"
         [ngClass]="{ 'is-invalid': submitted && f['User_Mobile'].errors }" />
       <div *ngIf="submitted && f['User_Mobile'].errors" class="text-warning">
         <div *ngIf="f['User_Mobile'].errors['required']">Mobile is required</div>
-        <div *ngIf="f['User_Mobile'].errors['minlength'] || f['User_Mobile'].errors['maxlength'] ">
-          Mobile must be 10 characters
-        </div>
+        <div *ngIf="f['User_Mobile'].errors['pattern']">Mobile is invalid</div>
+      
 
       </div>
     </div>
@@ -68,15 +67,6 @@
       </div>
 
     </div>
-
-    <div class="alert alert-success" id="result" style="display: none;" role="alert">
-      Registration Successful !!
-    </div>
-
-    <div class="alert alert-danger" id="failure" style="display: none;" role="alert">
-      Registration Failed !
-    </div>
-
 
   </form>
 </div>

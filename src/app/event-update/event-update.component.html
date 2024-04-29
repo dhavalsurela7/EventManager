@@ -1,3 +1,4 @@
+<app-toasts aria-live="polite" aria-atomic="true" class="ngb-toasts"></app-toasts>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Update Event</h1>
 
@@ -23,9 +24,10 @@
     <div class="form-group m-2">
       <label>New Event Name</label>
       <input type="text" formControlName="New_Event_Name" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f['New_Event_Name'].errors  }" />
+        [ngClass]="{ 'is-invalid': submitted && f['New_Event_Name'].errors  }" (keypress)="name($event)" />
       <div *ngIf="submitted && f['New_Event_Name'].errors && select==true" class="text-warning">
         <div *ngIf="f['New_Event_Name'].errors['required']">New Event Name is required</div>
+        <div *ngIf="f['New_Event_Name'].errors['pattern']">New Event Name is invalid</div>
 
       </div>
     </div>
@@ -84,15 +86,6 @@
         <button type="button" class="btn  btn-light" (click)="share.load('activity-add')">Next</button>
       </div>
 
-    </div>
-
-    <div class="alert alert-success" id="result" style="display: none;" role="alert">
-      Event Updated Successful !!
-    </div>
-
-
-    <div class="alert alert-danger" id="failure" style="display: none;" role="alert">
-      Failed !
     </div>
 
 

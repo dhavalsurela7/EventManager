@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Input} from '@angular/core';
+import { Input } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -22,43 +22,50 @@ export class myauthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!sessionStorage.getItem('IsLoggedIn')) {
-      if (route.data['role'] == 'user') {
-        this.route.navigate(['/login-user']);
-        return false;
-      } else if (route.data['role'] == 'admin') {
-        this.route.navigate(['/login-admin']);
-        return false;
+    if (typeof window !== 'undefined') {
+      if (!sessionStorage.getItem('IsLoggedIn')) {
+        if (route.data['role'] == 'user') {
+          this.route.navigate(['/login-user']);
+          return false;
+        } else if (route.data['role'] == 'admin') {
+          this.route.navigate(['/login-admin']);
+          return false;
+        }
       }
-      
+
+      if (
+        sessionStorage.getItem('Role') == 'User' &&
+        route.data['role'] == 'user'
+      ) {
+        return true;
+      }
+
+      if (
+        sessionStorage.getItem('Role') == 'Admin' &&
+        route.data['role'] == 'admin'
+      ) {
+        return true;
+      }
+
+      if (
+        sessionStorage.getItem('Role') == 'Admin' &&
+        route.data['role'] == 'user'
+      ) {
+        this.route.navigate(['/dashboard-admin']);
+        return true;
+      }
+
+      if (
+        sessionStorage.getItem('Role') == 'User' &&
+        route.data['role'] == 'admin'
+      ) {
+        this.route.navigate(['/dashboard-user']);
+        return true;
+      }
+
+      this.route.navigate(['/home']);
+      return false;
     }
-
-
-    if (
-      sessionStorage.getItem('Role') == 'User' &&
-      route.data['role'] == 'user'
-    ) {
-      return true;
-    }
-
-    if (
-      sessionStorage.getItem('Role') == 'Admin' &&
-      route.data['role'] == 'admin'
-    ) {
-      return true;
-    }
-
-    if(sessionStorage.getItem('Role') == 'Admin'&& route.data['role'] =='user' ){
-      this.route.navigate(['/dashboard-admin']);
-      return true;
-    }
-
-    if(sessionStorage.getItem('Role') == 'User'&& route.data['role'] =='admin' ){
-      this.route.navigate(['/dashboard-user']);
-      return true;
-    }
-
-    this.route.navigate(['/home']);
     return false;
   }
 }

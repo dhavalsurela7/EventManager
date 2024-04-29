@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DashboardService {
   selectedcomponent: string;
+  JWTToken : string
   constructor() {}
   load(component: string): void {
     this.selectedcomponent = component;

@@ -1,4 +1,4 @@
-
+<app-toasts aria-live="polite" aria-atomic="true" class="ngb-toasts"></app-toasts>
 <div class="register-form ">
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5  rounded " >
@@ -13,7 +13,7 @@
         />
         <div *ngIf="submitted && f['Admin_Email'].errors" class="text-warning">
           <div *ngIf="f['Admin_Email'].errors['required']">Email is required</div>
-          <div *ngIf="f['Admin_Email'].errors['email']">Email is invalid</div>
+          <div *ngIf="f['Admin_Email'].errors['pattern']">Email is invalid</div>
         </div>
       </div>
   
@@ -31,9 +31,8 @@
         />
         <div *ngIf="submitted && f['Admin_Password'].errors" class="text-warning">
           <div *ngIf="f['Admin_Password'].errors['required']">Password is required</div>
-          <div *ngIf="f['Admin_Password'].errors['minlength']">
-            Password must be at least 6 characters
-          </div>
+          <div *ngIf="f['Admin_Password'].errors['pattern']">Password is invalid</div>
+          
           
         </div>
       </div>
@@ -48,14 +47,7 @@
   
       </div>
 
-      <div class="alert alert-success" id="result" style = "display: none;" role="alert">
-        Login Successful !!
-      </div>
-      
-
-      <div class="alert alert-danger" id="failure" style = "display: none;" role="alert">
-        Login Failed !
-      </div>
+     
 
 
     </form>

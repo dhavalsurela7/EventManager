@@ -19,6 +19,12 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { EventUpdateComponent } from './event-update/event-update.component';
 import { EventDeleteComponent } from './event-delete/event-delete.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
+import { CommonModule, CurrencyPipe} from '@angular/common';
+import { FormatDirective } from './format.directive';
+
+
 
 
 
@@ -37,7 +43,11 @@ import { EventDeleteComponent } from './event-delete/event-delete.component';
     EventListComponent,
     HomeComponent,
     EventUpdateComponent,
-    EventDeleteComponent
+    EventDeleteComponent,
+    ToastsContainerComponent,
+    FormatDirective,
+   
+ 
 
 
 
@@ -48,13 +58,15 @@ import { EventDeleteComponent } from './event-delete/event-delete.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot([
       {path: '', redirectTo: '/home', pathMatch: 'full'},
       ]),
   ],
   providers: [
     provideClientHydration(),
-    DatePipe
+    DatePipe,
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

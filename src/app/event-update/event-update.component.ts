@@ -10,6 +10,8 @@ import {
 import { ApiCallService } from '../Services/api-call.service';
 import { DashboardService } from '../Services/dashboard.service';
 import { event } from '../Models/Event';
+import { CharacterAndOptionalSpace,name}  from '../Validation'
+import { ToastService } from '../Services/toast.service';
 
 @Component({
   selector: 'app-event-update',
@@ -32,11 +34,12 @@ export class EventUpdateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
-    public share: DashboardService
+    public share: DashboardService,
+    private toastService : ToastService
   ) {
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
-      New_Event_Name: ['', Validators.required],
+      New_Event_Name: ['', [Validators.required,Validators.pattern(CharacterAndOptionalSpace)]],
       Event_Start_Date: ['', [Validators.required]],
       Event_End_Date: ['', [Validators.required]],
       Event_Image: ['', Validators.required],
@@ -46,7 +49,6 @@ export class EventUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.Currentdate = new Date().toISOString().slice(0, 10);
-
 
     var data = {
       flag: 'SELECTALL',
@@ -64,6 +66,10 @@ export class EventUpdateComponent implements OnInit {
     return this.form.controls;
   }
 
+  name(event){
+    return name(event)
+  }
+  //setting selected event's details in form
   details() {
     this.select = true;
     // this.flag = true;
@@ -99,7 +105,7 @@ export class EventUpdateComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-   
+
     var data = {
       flag: 'UPDATE',
       Event_Name: this.form.controls['Event_Name'].value,
@@ -113,18 +119,12 @@ export class EventUpdateComponent implements OnInit {
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
-          document.getElementById('result').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('result').style.display = 'none';
-          }, 3000);
+          this.toastService.show('Event updated successfuly', { classname: 'bg-success text-light', delay: 2000 });
+
           this.ngOnInit();
         } else {
-          document.getElementById('failure').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('failure').style.display = 'none';
-          }, 3000);
+          this.toastService.show('Error in Event updating', { classname: 'bg-danger text-light', delay: 2000 });
+
         }
       }
     });
@@ -132,6 +132,8 @@ export class EventUpdateComponent implements OnInit {
     this.select = false;
   }
 
+  //converting image to base64 string
+  //if image is in jpeg,png.jpg format and less than 2mb
   base(event: any) {
     if (event.target.files && event.target.files[0]) {
       if (

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule, CurrencyPipe} from '@angular/common';
 import {
   AbstractControl,
   FormBuilder,
@@ -8,6 +9,9 @@ import {
 } from '@angular/forms';
 import { ApiCallService } from '../Services/api-call.service';
 import { DashboardService } from '../Services/dashboard.service';
+import {number} from '../Validation'
+import { ToastService } from '../Services/toast.service';
+import $ from "jquery";
 
 @Component({
   selector: 'app-activity-price',
@@ -26,7 +30,10 @@ export class ActivityPriceComponent {
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
-    public share: DashboardService
+    public share: DashboardService,
+    private toastService : ToastService,
+    private currencyPipe : CurrencyPipe,
+    
   ) {
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
@@ -39,6 +46,7 @@ export class ActivityPriceComponent {
     var data = {
       flag: 'SELECTNAME',
     };
+  
     //retrieving event names
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
@@ -72,7 +80,9 @@ export class ActivityPriceComponent {
 
   onSubmit(): void {
     this.submitted = true;
-
+    if (this.form.invalid) {
+      return;
+    }
     var data = {
       flag: 'SETPRICE',
       Event_Name: this.form.controls['Event_Name'].value,
@@ -86,33 +96,34 @@ export class ActivityPriceComponent {
         if (res != null && res != '' && res != undefined) {
           if (res['ID'] == '200') {
             this.result = res.ArrayOfResponse;
-            document.getElementById('result').style.display = 'block';
-            this.form.reset();
-            setTimeout(() => {
-              document.getElementById('result').style.display = 'none';
-            }, 3000);
+            this.toastService.show('Price added successfuly', { classname: 'bg-success text-light', delay: 2000 });
 
             this.form.reset();
           } else {
-            document.getElementById('failure').style.display = 'block';
-            this.form.reset();
-            setTimeout(() => {
-              document.getElementById('failure').style.display = 'none';
-            }, 3000);
+            this.toastService.show('Error in Price adding', { classname: 'bg-danger text-light', delay: 2000 });
+
           }
         }
       });
     this.submitted = false;
   }
 
-  name(event) {
-    var k;
-    k = event.charCode;
-    return (k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32;
-  }
-  mobile(event) {
-    var k;
-    k = event.charCode;
-    return (k > 47 && k < 58) || k == 8;
-  }
+
+
+ 
+
+  //validation on keypress for numbers only
+  number(event) {
+    return number(event)
 }
+
+
+}
+
+
+
+
+
+
+
+

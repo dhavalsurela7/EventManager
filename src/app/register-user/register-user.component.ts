@@ -9,6 +9,16 @@ import {
 
 import { ApiCallService } from '../Services/api-call.service';
 import { Router } from '@angular/router';
+import {
+  IsValidName,
+  IsValidEmail,
+  IsValidPassword,
+  IsValidAddress,
+  IsValidMobile,
+  name,
+  number
+} from '../Validation';
+import { ToastService } from '../Services/toast.service';
 
 @Component({
   selector: 'app-register-user',
@@ -22,26 +32,15 @@ export class RegisterUserComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
-    private router: Router
+    private router: Router,
+    private toastService : ToastService
   ) {
     this.form = this.formBuilder.group({
-      User_Name: [
-        '',
-        Validators.required,
-        Validators.pattern("/^[a-z ,.'-]+$/i"),
-      ],
-
-      User_Email: ['', [Validators.required, Validators.email]],
-      User_Address: ['', [Validators.required]],
-      User_Password: ['', [Validators.required, Validators.minLength(6)]],
-      User_Mobile: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10),
-        ],
-      ],
+      User_Name: ['', Validators.required, Validators.pattern(IsValidName)],
+      User_Email: ['', [Validators.required, Validators.pattern(IsValidEmail)]],
+      User_Address: ['',[Validators.required, Validators.pattern(IsValidAddress)],],
+      User_Password: ['',[Validators.required,Validators.pattern(IsValidPassword),],],
+      User_Mobile: ['',[Validators.required,Validators.pattern(IsValidMobile),],],
     });
   }
 
@@ -57,7 +56,7 @@ export class RegisterUserComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-   
+
     var data = {
       flag: 'register',
       User_Name: this.form.controls['User_Name'].value,
@@ -67,33 +66,27 @@ export class RegisterUserComponent implements OnInit {
       User_Mobile: this.form.controls['User_Mobile'].value,
     };
     //insert user
-    this.apicall.userapiservice( JSON.stringify(data)).subscribe((result) => {
+    this.apicall.userapiservice(JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
           this.router.navigate(['/login-user']);
         } else {
           document.getElementById('failure').style.display = 'block';
           this.form.reset();
-          setTimeout(() => {
-            document.getElementById('failure').style.display = 'none';
-          }, 3000);
+          this.toastService.show('Registration failed', { classname: 'bg-danger text-light', delay: 2000 });
+
         }
       }
     });
   }
 
-  onReset(): void {
-    this.submitted = false;
-    this.form.reset();
-  }
+  //validation on keypress for alphabets and space only
   name(event) {
-    var k;
-    k = event.charCode;
-    return (k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32;
+   return name(event)
   }
-  mobile(event) {
-    var k;
-    k = event.charCode;
-    return (k > 47 && k < 58) || k == 8;
+
+  //validation on keypress for numbers only
+  number(event) {
+  return number(event)
   }
 }

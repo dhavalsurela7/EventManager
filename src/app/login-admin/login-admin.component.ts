@@ -9,31 +9,41 @@ import {
 
 import { ApiCallService } from '../Services/api-call.service';
 import { Router } from '@angular/router';
+import { IsValidEmail, IsValidPassword } from '../Validation';
+import { ToastService } from '../Services/toast.service';
 
 @Component({
   selector: 'app-login-admin',
   templateUrl: './login-admin.component.html',
   styleUrl: './login-admin.component.css',
 })
-export class LoginAdminComponent implements OnInit{
+export class LoginAdminComponent implements OnInit {
   form: FormGroup;
   submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
-    private router: Router
+    private router: Router,
+    private toastService : ToastService
   ) {
     this.form = this.formBuilder.group({
-      Admin_Email: ['', [Validators.required, Validators.email]],
+      Admin_Email: [
+        '',
+        [Validators.required, Validators.pattern(IsValidEmail)],
+      ],
 
-      Admin_Password: ['', [Validators.required, Validators.minLength(6)]],
+      Admin_Password: [
+        '',
+        [Validators.required, Validators.pattern(IsValidPassword)],
+      ],
     });
   }
 
   ngOnInit(): void {
-    sessionStorage.clear();
-   
+    if (typeof window !== 'undefined') {
+      sessionStorage.clear();
+    }
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -41,13 +51,12 @@ export class LoginAdminComponent implements OnInit{
   }
 
   onSubmit(): void {
-
     this.submitted = true;
 
     if (this.form.invalid) {
       return;
     }
-   
+
     var data = {
       flag: 'login',
 
@@ -57,20 +66,15 @@ export class LoginAdminComponent implements OnInit{
     };
     //admin login
     this.apicall.adminapiservice(JSON.stringify(data)).subscribe((result) => {
-  
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
           sessionStorage.clear();
-          sessionStorage.setItem("Role","Admin")
-          sessionStorage.setItem("IsLoggedIn",String(true))
+          sessionStorage.setItem('Role', 'Admin');
+          sessionStorage.setItem('IsLoggedIn', String(true));
           this.router.navigate(['/dashboard-admin']);
         } else {
-          document.getElementById('failure').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('failure').style.display = 'none';
-          }, 3000);
-       
+          this.toastService.show('Login Failed', { classname: 'bg-danger text-light', delay: 2000 });
+
         }
       }
     });

@@ -10,6 +10,10 @@ import {
 import { ApiCallService } from '../Services/api-call.service';
 import { DashboardService } from '../Services/dashboard.service';
 import { min } from 'rxjs';
+import { CharacterAndOptionalSpace, name } from '../Validation';
+import { event } from '../Models/Event';
+import { ToastService } from '../Services/toast.service';
+
 
 @Component({
   selector: 'app-activity-add',
@@ -28,20 +32,23 @@ export class ActivityAddComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
-    public share: DashboardService
+    public share: DashboardService,
+    private toastService : ToastService
   ) {
     this.form = this.formBuilder.group({
-      Activity_Name: ['', Validators.required],
+      Activity_Name: [
+        '',
+        [Validators.required, Validators.pattern(CharacterAndOptionalSpace)],
+      ],
       Activity_Description: ['', [Validators.required]],
 
       Activity_Start_Datetime: ['', [Validators.required]],
       Activity_End_Datetime: ['', [Validators.required]],
-      Event_Name: ['', Validators.required],
+      Event_Name: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
-
     var data = {
       flag: 'SELECTNAME',
     };
@@ -49,9 +56,8 @@ export class ActivityAddComponent implements OnInit {
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         this.result = res.ArrayOfResponse;
-        console.log(this.result)
+
         this.show = true;
-        console.log(this.show)
       }
     });
   }
@@ -59,7 +65,9 @@ export class ActivityAddComponent implements OnInit {
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
-
+  name(event) {
+    return name(event);
+  }
   onSubmit(): void {
     this.submitted = true;
 
@@ -76,29 +84,27 @@ export class ActivityAddComponent implements OnInit {
       Activity_End_Datetime: this.form.controls['Activity_End_Datetime'].value,
       Event_Name: this.form.controls['Event_Name'].value,
     };
-    //insert activity 
-    this.apicall.activityapiservice( JSON.stringify(data)).subscribe((result) => {
-      if (result != null && result != '' && result != undefined) {
-        if (result['ID'] == '200') {
-          document.getElementById('result').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('result').style.display = 'none';
-          }, 3000);
+    //insert activity
+    this.apicall
+      .activityapiservice(JSON.stringify(data))
+      .subscribe((result) => {
+        if (result != null && result != '' && result != undefined) {
+          if (result['ID'] == '200') {
+            this.toastService.show('Activity added successfuly', { classname: 'bg-success text-light', delay: 2000 });
 
-          this.ngOnInit();
-        } else {
-          document.getElementById('failure').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('failure').style.display = 'none';
-          }, 3000);
+
+            this.ngOnInit();
+          } else {
+            this.toastService.show('Error in Activity adding', { classname: 'bg-danger text-light', delay: 2000 });
+
+          }
         }
-      }
-    });
+      });
     this.submitted = false;
   }
 
+  //getting event start date and end date
+  //to use for activity start and end date validtions
   eventdate() {
     (this.EventName = this.form.controls['Event_Name'].value),
       this.result.forEach((element) => {

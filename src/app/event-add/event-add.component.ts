@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
+
 import {
   AbstractControl,
   FormBuilder,
@@ -9,6 +10,9 @@ import {
 
 import { ApiCallService } from '../Services/api-call.service';
 import { DashboardService } from '../Services/dashboard.service';
+import {CharacterAndOptionalSpace,name} from '../Validation'
+import {NgbToast} from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../Services/toast.service'
 
 @Component({
   selector: 'app-event-add',
@@ -19,35 +23,36 @@ export class EventAddComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   Base64: string;
-  Currentdate : string;
+  bootstrap : any = ""
+  Currentdate: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
-    public share : DashboardService
+    public share: DashboardService,
+    public toastService: ToastService
   ) {
     this.form = this.formBuilder.group({
-      Event_Name: ['', Validators.required],
-
+      Event_Name: ['', [Validators.required,Validators.pattern(CharacterAndOptionalSpace)]],
       Event_Start_Date: ['', [Validators.required]],
       Event_End_Date: ['', [Validators.required]],
-      Event_Image: ['',Validators.required],
+      Event_Image: ['', Validators.required],
       Event_Description: ['', [Validators.required]],
     });
   }
-
+  isTemplate(toast) { return toast.textOrTpl instanceof TemplateRef; }
   ngOnInit(): void {
-
-    this.Currentdate =new Date().toISOString().slice(0, 10);;
-  
-    
+    //getting current date
+    this.Currentdate = new Date().toISOString().slice(0, 10);
   }
 
-  get f(): {  } {
+  get f(): {} {
     return this.form.controls;
   }
-
+name(event){
+  return name(event)
+}
   onSubmit(): void {
-debugger
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -64,31 +69,20 @@ debugger
     };
     //insert event
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((result) => {
-   
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
-          document.getElementById('result').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('result').style.display = 'none';
-          }, 3000);
-
-    
+        this.toastService.show('Event added successfuly', { classname: 'bg-success text-light', delay: 2000 });
         } else {
-          document.getElementById('failure').style.display = 'block';
-          this.form.reset();
-          setTimeout(() => {
-            document.getElementById('failure').style.display = 'none';
-          }, 3000);
-
+          this.toastService.show('Error in Event adding', { classname: 'bg-danger text-light', delay: 2000 });
         }
       }
     });
     this.submitted = false;
   }
 
+  //converting image to base64 string
+  //if image is in jpeg,png.jpg format and less than 2mb 
   base(event: any) {
-    
     if (event.target.files && event.target.files[0]) {
       if (
         event.target.files[0].type === 'image/jpeg' ||
@@ -103,20 +97,17 @@ debugger
           reader.onload = () => {
             const base64: string = reader.result as string;
 
-       
             this.Base64 = base64.split(',')[1];
           };
 
           if (file) {
             reader.readAsDataURL(file);
           }
+        } else {
+          alert('Image should be less than 2mb');
         }
-        else{
-          alert("Image should be less than 2mb")
-        }
-      }
-      else{
-        alert("Only jpeg, jpg and png format are supported")
+      } else {
+        alert('Only jpeg, jpg and png format are supported');
       }
     }
   }

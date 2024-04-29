@@ -43,7 +43,7 @@ export class DashboardAdminComponent implements OnInit {
       flag: 'PUBLISH',
       Event_Name: eventname,
     };
-    //retrieving activities based on event name
+    //update isactive to 1 
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         if (res['ID'] == '200') {
@@ -60,7 +60,7 @@ export class DashboardAdminComponent implements OnInit {
       flag: 'UNPUBLISH',
       Event_Name: eventname,
     };
-    //retrieving activities based on event name
+    //update isactive to 0
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         if (res['ID'] == '200') {
@@ -78,7 +78,7 @@ export class DashboardAdminComponent implements OnInit {
         flag: 'DELETE',
         Event_Name: eventname,
       };
-      //retrieving activities based on event name
+      //deleting event
       this.apicall
         .eventapiservice(JSON.stringify(data))
         .subscribe((res: any) => {

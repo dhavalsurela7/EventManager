@@ -1,3 +1,4 @@
+<app-toasts aria-live="polite" aria-atomic="true" class="ngb-toasts"></app-toasts>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Add Price</h1>
 
@@ -28,9 +29,9 @@
 
             <div class="form-group m-2">
                 <label>Activity Price</label>
-                <input type="text" formControlName="Activity_Price" class="form-control" (keypress)="mobile($event)"
-                    [ngClass]="{ 'is-invalid': submitted && f['Activity_Price'].errors }" />
-                <div *ngIf="submitted && f['Activity_Price'].errors" class="invalid-feedback">
+                <input type="currency" formControlName="Activity_Price" class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f['Activity_Price'].errors }"  />
+                <div *ngIf="submitted && f['Activity_Price'].errors" class="text-warning">
                     <div *ngIf="f['Activity_Price'].errors['required']">Activity Price is required</div>
 
                 </div>
@@ -52,14 +53,7 @@
 
             </div>
 
-            <div class="alert alert-success" id="result" style="display: none;" role="alert">
-                Price Added Successfully !!
-            </div>
-
-
-            <div class="alert alert-danger" id="failure" style="display: none;" role="alert">
-                Failed !
-            </div>
+       
         
 
     </form>

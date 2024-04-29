@@ -17,7 +17,8 @@ export class DashboardUserComponent implements OnInit {
     var data = {
       flag: 'SELECTONGOING',
     };
-
+    //select ongoing events
+    //event start date < current date < event end date
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
   
