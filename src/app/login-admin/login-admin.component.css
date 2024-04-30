@@ -2,7 +2,6 @@
     margin: 0px;
     padding: 0px;
     height: 100vh;
-
     background-color: #e3dceb;
     background-size: cover;
     display: flex;
@@ -14,5 +13,4 @@ form {
     height: fit-content;
     background-color: #8c5480;
     color: white;
-  
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe} from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,9 +9,9 @@ import {
 } from '@angular/forms';
 import { ApiCallService } from '../Services/api-call.service';
 import { DashboardService } from '../Services/dashboard.service';
-import {number} from '../Validation'
+import { number } from '../Validation';
 import { ToastService } from '../Services/toast.service';
-import $ from "jquery";
+
 
 @Component({
   selector: 'app-activity-price',
@@ -31,9 +31,8 @@ export class ActivityPriceComponent {
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
     public share: DashboardService,
-    private toastService : ToastService,
-    private currencyPipe : CurrencyPipe,
-    
+    private toastService: ToastService,
+    private currencyPipe: CurrencyPipe
   ) {
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
@@ -46,7 +45,7 @@ export class ActivityPriceComponent {
     var data = {
       flag: 'SELECTNAME',
     };
-  
+
     //retrieving event names
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
@@ -96,34 +95,27 @@ export class ActivityPriceComponent {
         if (res != null && res != '' && res != undefined) {
           if (res['ID'] == '200') {
             this.result = res.ArrayOfResponse;
-            this.toastService.show('Price added successfuly', { classname: 'bg-success text-light', delay: 2000 });
-
+            this.toastService.show('Price added successfuly', {
+              classname: 'bg-success text-light',
+              delay: 2000,
+            });
+            this.toastService.remove();
             this.form.reset();
           } else {
-            this.toastService.show('Error in Price adding', { classname: 'bg-danger text-light', delay: 2000 });
-
+            this.form.reset();
+            this.toastService.show('Error in Price adding', {
+              classname: 'bg-danger text-light',
+              delay: 2000,
+            });
+            this.toastService.remove();
           }
         }
       });
     this.submitted = false;
   }
 
-
-
- 
-
   //validation on keypress for numbers only
   number(event) {
-    return number(event)
+    return number(event);
+  }
 }
-
-
-}
-
-
-
-
-
-
-
-

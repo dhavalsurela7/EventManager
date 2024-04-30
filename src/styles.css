@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+.register-form {
+    margin: 0px;
+    padding: 0px;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    height: fit-content;
+    background-color: #8c5480;
+    color: white;
+}

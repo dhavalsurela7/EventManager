@@ -1,4 +1,29 @@
 <app-toasts aria-live="polite" aria-atomic="true" class="ngb-toasts"></app-toasts>
+<div class="content">
+  <nav class="navbar border-bottom " style="background-color: #8c5480;">
+    <div class="container-fluid ">
+      <a class="navbar-brand text-light"  routerLink="/home">
+        <img src="../../assets/android-chrome-192x192.png" alt="Logo" width="30" height="30"
+          class="d-inline-block align-text-top">
+        EVENT MANAGEMENT
+      </a>
+      <form class="d-flex" role="search">
+
+        <button class="btn btn-outline text-light dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            User
+          </a>
+          <ul class="dropdown-menu" style="  background-color: #e3dceb;">
+            <li><a class="dropdown-item btn btn-outline" routerLink="/login-user">Login</a></li>
+            <li><a class="dropdown-item btn btn-outline" routerLink="/register-user">Register</a></li>
+
+          </ul>
+        </button>
+        <button class="btn btn-outline text-light mx-3" routerLink="/login-admin" type="button">Admin</button>
+
+      </form>
+    </div>
+  </nav>
 <div class="register-form ">
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5  rounded ">

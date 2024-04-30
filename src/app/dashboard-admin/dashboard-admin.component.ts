@@ -43,7 +43,7 @@ export class DashboardAdminComponent implements OnInit {
       flag: 'PUBLISH',
       Event_Name: eventname,
     };
-    //update isactive to 1 
+    //update isactive to 1
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         if (res['ID'] == '200') {
@@ -71,20 +71,23 @@ export class DashboardAdminComponent implements OnInit {
     });
   }
 
+  //deleting event
   delete(eventname: string) {
     var del = confirm('Are you sure ?');
+
     if (del) {
       var data = {
         flag: 'DELETE',
         Event_Name: eventname,
       };
-      //deleting event
+      debugger;
       this.apicall
         .eventapiservice(JSON.stringify(data))
         .subscribe((res: any) => {
           if (res != null && res != '' && res != undefined) {
             if (res['ID'] == '200') {
-              this.deleteresult = res.ArrayOfResponse;
+              debugger;
+
               this.ngOnInit();
             }
           }

@@ -42,7 +42,7 @@ export class EventUpdateComponent implements OnInit {
       New_Event_Name: ['', [Validators.required,Validators.pattern(CharacterAndOptionalSpace)]],
       Event_Start_Date: ['', [Validators.required]],
       Event_End_Date: ['', [Validators.required]],
-      Event_Image: ['', Validators.required],
+      Event_Image: [''],
       Event_Description: ['', [Validators.required]],
     });
   }
@@ -98,6 +98,7 @@ export class EventUpdateComponent implements OnInit {
   }
 
   onSubmit(): void {
+    debugger
     this.submitted = true;
     if (this.select == false) {
       return;
@@ -117,14 +118,17 @@ export class EventUpdateComponent implements OnInit {
     };
     //update event
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((result) => {
+      debugger
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
+          this.form.reset();
           this.toastService.show('Event updated successfuly', { classname: 'bg-success text-light', delay: 2000 });
-
+          this.toastService.remove();
           this.ngOnInit();
         } else {
+          this.form.reset();
           this.toastService.show('Error in Event updating', { classname: 'bg-danger text-light', delay: 2000 });
-
+          this.toastService.remove();
         }
       }
     });

@@ -9,6 +9,7 @@ import {
 
 import { ApiCallService } from '../Services/api-call.service';
 import { ToastService } from '../Services/toast.service';
+import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-event-delete',
@@ -24,7 +25,7 @@ export class EventDeleteComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
-    private toastService : ToastService
+    private toastService: ToastService
   ) {
     this.form = this.formBuilder.group({
       Event_Name: ['', Validators.required],
@@ -32,8 +33,6 @@ export class EventDeleteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-
     var data = {
       flag: 'SELECTALL',
     };
@@ -51,11 +50,9 @@ export class EventDeleteComponent implements OnInit {
   }
 
   onSubmit(): void {
-   
     this.submitted = true;
-    if (this.select==false) {
-      return
-      
+    if (this.select == false) {
+      return;
     }
 
     var data = {
@@ -66,18 +63,25 @@ export class EventDeleteComponent implements OnInit {
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         if (res['ID'] == '200') {
-          this.toastService.show('Event added successfuly', { classname: 'bg-success text-light', delay: 2000 });
+          this.form.reset();
+          this.toastService.show('Event deleted successfuly', {
+            classname: 'bg-success text-light',
+            delay: 2000,
+          });
+          this.toastService.remove();
 
           this.ngOnInit();
-     
         } else {
-          this.toastService.show('Error in Event adding', { classname: 'bg-danger text-light', delay: 2000 });
-
- 
+          this.form.reset();
+          this.toastService.show('Error in Event deleting', {
+            classname: 'bg-danger text-light',
+            delay: 2000,
+          });
+          this.toastService.remove();
         }
       }
     });
     this.submitted = false;
-    this.select= false
+    this.select = false;
   }
 }

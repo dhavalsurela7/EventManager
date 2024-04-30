@@ -2,5 +2,6 @@ ngb-toast {
     opacity: 50%;
     position: fixed;
     left: 73%;
+    top:90%;
     z-index: 1200;
 }

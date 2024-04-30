@@ -1,4 +1,4 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 
 import {
   AbstractControl,
@@ -10,9 +10,8 @@ import {
 
 import { ApiCallService } from '../Services/api-call.service';
 import { DashboardService } from '../Services/dashboard.service';
-import {CharacterAndOptionalSpace,name} from '../Validation'
-import {NgbToast} from '@ng-bootstrap/ng-bootstrap';
-import { ToastService } from '../Services/toast.service'
+import { CharacterAndOptionalSpace, name } from '../Validation';
+import { ToastService } from '../Services/toast.service';
 
 @Component({
   selector: 'app-event-add',
@@ -23,7 +22,7 @@ export class EventAddComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   Base64: string;
-  bootstrap : any = ""
+  bootstrap: any = '';
   Currentdate: string;
 
   constructor(
@@ -33,14 +32,19 @@ export class EventAddComponent implements OnInit {
     public toastService: ToastService
   ) {
     this.form = this.formBuilder.group({
-      Event_Name: ['', [Validators.required,Validators.pattern(CharacterAndOptionalSpace)]],
+      Event_Name: [
+        '',
+        [Validators.required, Validators.pattern(CharacterAndOptionalSpace)],
+      ],
       Event_Start_Date: ['', [Validators.required]],
       Event_End_Date: ['', [Validators.required]],
       Event_Image: ['', Validators.required],
       Event_Description: ['', [Validators.required]],
     });
   }
-  isTemplate(toast) { return toast.textOrTpl instanceof TemplateRef; }
+  isTemplate(toast) {
+    return toast.textOrTpl instanceof TemplateRef;
+  }
   ngOnInit(): void {
     //getting current date
     this.Currentdate = new Date().toISOString().slice(0, 10);
@@ -49,9 +53,9 @@ export class EventAddComponent implements OnInit {
   get f(): {} {
     return this.form.controls;
   }
-name(event){
-  return name(event)
-}
+  name(event) {
+    return name(event);
+  }
   onSubmit(): void {
     this.submitted = true;
 
@@ -71,9 +75,19 @@ name(event){
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
-        this.toastService.show('Event added successfuly', { classname: 'bg-success text-light', delay: 2000 });
+          this.form.reset();
+          this.toastService.show('Event added successfuly', {
+            classname: 'bg-success text-light',
+            delay: 2000,
+          });
+          this.toastService.remove();
         } else {
-          this.toastService.show('Error in Event adding', { classname: 'bg-danger text-light', delay: 2000 });
+          this.form.reset();
+          this.toastService.show('Error in Event adding', {
+            classname: 'bg-danger text-light',
+            delay: 2000,
+          });
+          this.toastService.remove();
         }
       }
     });
@@ -81,7 +95,7 @@ name(event){
   }
 
   //converting image to base64 string
-  //if image is in jpeg,png.jpg format and less than 2mb 
+  //if image is in jpeg,png.jpg format and less than 2mb
   base(event: any) {
     if (event.target.files && event.target.files[0]) {
       if (

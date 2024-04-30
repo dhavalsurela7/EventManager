@@ -36,7 +36,7 @@ export class RegisterUserComponent implements OnInit {
     private toastService : ToastService
   ) {
     this.form = this.formBuilder.group({
-      User_Name: ['', Validators.required, Validators.pattern(IsValidName)],
+      User_Name: ['', [Validators.required, Validators.pattern(IsValidName)]],
       User_Email: ['', [Validators.required, Validators.pattern(IsValidEmail)]],
       User_Address: ['',[Validators.required, Validators.pattern(IsValidAddress)],],
       User_Password: ['',[Validators.required,Validators.pattern(IsValidPassword),],],
@@ -54,6 +54,7 @@ export class RegisterUserComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
+      debugger
       return;
     }
 
@@ -69,12 +70,15 @@ export class RegisterUserComponent implements OnInit {
     this.apicall.userapiservice(JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
+          this.form.reset();
+          this.toastService.show('Registation Successful, Please login', { classname: 'bg-success text-light', delay: 2000 });
+          this.toastService.remove();
           this.router.navigate(['/login-user']);
         } else {
           document.getElementById('failure').style.display = 'block';
           this.form.reset();
           this.toastService.show('Registration failed', { classname: 'bg-danger text-light', delay: 2000 });
-
+          this.toastService.remove();
         }
       }
     });

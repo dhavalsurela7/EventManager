@@ -8,12 +8,15 @@ import { DashboardService } from '../Services/dashboard.service';
   styleUrl: './dashboard-user.component.css',
 })
 export class DashboardUserComponent implements OnInit {
-  result:any
+  result: any;
 
-  constructor(private apicall: ApiCallService,public share : DashboardService) {}
+  constructor(
+    private apicall: ApiCallService,
+    public share: DashboardService
+  ) {}
   ngOnInit(): void {
     this.share.selectedcomponent = '';
- 
+
     var data = {
       flag: 'SELECTONGOING',
     };
@@ -21,7 +24,6 @@ export class DashboardUserComponent implements OnInit {
     //event start date < current date < event end date
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
-  
         this.result = res.ArrayOfResponse;
 
         this.result.map((e) => {
@@ -31,6 +33,4 @@ export class DashboardUserComponent implements OnInit {
       }
     });
   }
-
-
 }

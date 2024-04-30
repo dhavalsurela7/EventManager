@@ -4,88 +4,91 @@
 
 </div>
 <div class="container" *ngIf="show">
-<div class="register-form " *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
+    <div class="register-form " *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 rounded ">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class=" p-4 mb-5 rounded ">
 
-        <div class="form-group m-2">
-            <label>Event Name</label>
-            <select formControlName="Event_Name" class="form-control" (change)="eventdate()"
-                [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
+            <div class="form-group m-2">
+                <label>Event Name</label>
+                <select formControlName="Event_Name" class="form-control" (change)="eventdate()"
+                    [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
 
-                <option *ngFor=" let e of result" value={{e.Event_Name}}>{{e.Event_Name}}</option>
-            </select>
-        </div>
-
-        <div class="form-group m-2">
-            <label>Activity Name</label>
-            <input type="text" formControlName="Activity_Name" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Activity_Name'].errors }" (keypress)="name($event)"/>
-            <div *ngIf="submitted && f['Activity_Name'].errors" class="text-warning">
-                <div *ngIf="f['Activity_Name'].errors['required']">Activity Name is required</div>
-                <div *ngIf="f['Activity_Name'].errors['pattern']">Activity Name is invalid</div>
-
-            </div>
-        </div>
-
-        <div class="form-group m-2">
-            <label>Starting DateTime</label>
-            <input type="datetime-local" formControlName="Activity_Start_Datetime" [max]="form.get('Activity_End_Datetime')?.value" [min]="Mindate" [max]="Maxdate" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Activity_Start_Datetime'].errors }" />
-            <div *ngIf="submitted && f['Activity_Start_Datetime'].errors" class="text-warning">
-                <div *ngIf="f['Activity_Start_Datetime'].errors['required']">Starting DateTime is required</div>
-            </div>
-        </div>
-
-        <div class="form-group m-2">
-            <label>Ending DateTime</label>
-            <input type="datetime-local" formControlName="Activity_End_Datetime" [min]="form.get('Activity_Start_Datetime')?.value" [min]="Mindate" [max]="Maxdate" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Activity_End_Datetime'].errors }" />
-            <div *ngIf="submitted && f['Activity_End_Datetime'].errors" class="text-warning">
-                <div *ngIf="f['Activity_End_Datetime'].errors['required']">Ending DateTime is required</div>
-
-            </div>
-        </div>
-
-
-
-
-
-        <div class="form-group m-2">
-            <label>Description</label>
-            <input type="text" formControlName="Activity_Description" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Activity_Description'].errors }" />
-            <div *ngIf="submitted && f['Activity_Description'].errors" class="text-warning">
-                <div *ngIf="f['Activity_Description'].errors['required']">Description is required</div>
-
-
-            </div>
-        </div>
-
-
-
-
-        <div class="form-group m-3 d-flex justify-content-evenly">
-            <div class="p-3">
-                <button type="button" class="btn  btn-light" (click)="share.load('event-add')">Back</button>
-            </div>
-            <div class="p-3">
-                <button type="submit" class="btn   btn-light">Add</button>
-            </div>
-            <div class="p-3">
-                <button type="button" class="btn  btn-light" (click)="share.load('activity-price')">Next</button>
+                    <option *ngFor=" let e of result" value={{e.Event_Name}}>{{e.Event_Name}}</option>
+                </select>
             </div>
 
-        </div>
+            <div class="form-group m-2">
+                <label>Activity Name</label>
+                <input type="text" formControlName="Activity_Name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['Activity_Name'].errors }" (keypress)="name($event)" />
+                <div *ngIf="submitted && f['Activity_Name'].errors" class="text-warning">
+                    <div *ngIf="f['Activity_Name'].errors['required']">Activity Name is required</div>
+                    <div *ngIf="f['Activity_Name'].errors['pattern']">Activity Name is invalid</div>
+
+                </div>
+            </div>
+
+            <div class="form-group m-2">
+                <label>Starting DateTime</label>
+                <input type="datetime-local" formControlName="Activity_Start_Datetime"
+                    [max]="form.get('Activity_End_Datetime')?.value" [min]="Mindate" [max]="Maxdate"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['Activity_Start_Datetime'].errors }" />
+                <div *ngIf="submitted && f['Activity_Start_Datetime'].errors" class="text-warning">
+                    <div *ngIf="f['Activity_Start_Datetime'].errors['required']">Starting DateTime is required</div>
+                </div>
+            </div>
+
+            <div class="form-group m-2">
+                <label>Ending DateTime</label>
+                <input type="datetime-local" formControlName="Activity_End_Datetime"
+                    [min]="form.get('Activity_Start_Datetime')?.value" [min]="Mindate" [max]="Maxdate"
+                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f['Activity_End_Datetime'].errors }" />
+                <div *ngIf="submitted && f['Activity_End_Datetime'].errors" class="text-warning">
+                    <div *ngIf="f['Activity_End_Datetime'].errors['required']">Ending DateTime is required</div>
+
+                </div>
+            </div>
 
 
 
-    </form>
-</div>
 
-<ng-template #elseblock >
-    <div class="alert my-3 " role="alert" style="background-color: #e3dceb;">
-        No Events Available
+
+            <div class="form-group m-2">
+                <label>Description</label>
+                <input type="text" formControlName="Activity_Description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['Activity_Description'].errors }" />
+                <div *ngIf="submitted && f['Activity_Description'].errors" class="text-warning">
+                    <div *ngIf="f['Activity_Description'].errors['required']">Description is required</div>
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group m-3 d-flex justify-content-evenly">
+                <div class="p-3">
+                    <button type="button" class="btn  btn-light" (click)="share.load('event-add')">Back</button>
+                </div>
+                <div class="p-3">
+                    <button type="submit" class="btn   btn-light">Add</button>
+                </div>
+                <div class="p-3">
+                    <button type="button" class="btn  btn-light" (click)="share.load('activity-price')">Next</button>
+                </div>
+
+            </div>
+
+
+
+        </form>
     </div>
-</ng-template>
+
+    <ng-template #elseblock>
+        <div class="alert my-3 " role="alert" style="background-color: #e3dceb;">
+            No Events Available
+        </div>
+    </ng-template>
 </div>

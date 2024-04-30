@@ -68,13 +68,15 @@ export class LoginAdminComponent implements OnInit {
     this.apicall.adminapiservice(JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
+          this.form.reset();
           sessionStorage.clear();
           sessionStorage.setItem('Role', 'Admin');
           sessionStorage.setItem('IsLoggedIn', String(true));
           this.router.navigate(['/dashboard-admin']);
         } else {
+          this.form.reset();
           this.toastService.show('Login Failed', { classname: 'bg-danger text-light', delay: 2000 });
-
+          this.toastService.remove();
         }
       }
     });

@@ -67,6 +67,7 @@ export class LoginUserComponent implements OnInit {
     this.apicall.userapiservice(JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
+          this.form.reset();
           this.share.JWTToken = result['Message'];
           sessionStorage.clear();
           sessionStorage.setItem('Role', 'User');
@@ -74,10 +75,10 @@ export class LoginUserComponent implements OnInit {
           sessionStorage.setItem('IsLoggedIn', String(true));
           this.router.navigate(['/dashboard-user']);
         } else {
-          document.getElementById('failure').style.display = 'block';
+     
           this.form.reset();
           this.toastService.show('Login failed', { classname: 'bg-danger text-light', delay: 2000 });
-
+          this.toastService.remove();
         }
       }
     });

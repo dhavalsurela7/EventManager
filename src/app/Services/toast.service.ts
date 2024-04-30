@@ -7,11 +7,16 @@ export class ToastService {
 
   toasts: any[] = [];
 
+  //Show toast
   show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
     this.toasts.push({ textOrTpl, ...options });
   }
 
-  remove(toast) {
-    this.toasts = this.toasts.filter(t => t !== toast);
+  //Remove toast from toasts array
+  remove() {
+    setTimeout(() => {
+      this.toasts = []
+      
+    }, 2000);
   }
 }

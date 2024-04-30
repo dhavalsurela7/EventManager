@@ -9,11 +9,10 @@ import {
 
 import { ApiCallService } from '../Services/api-call.service';
 import { DashboardService } from '../Services/dashboard.service';
-import { min } from 'rxjs';
-import { CharacterAndOptionalSpace, name } from '../Validation';
-import { event } from '../Models/Event';
-import { ToastService } from '../Services/toast.service';
 
+import { CharacterAndOptionalSpace, name } from '../Validation';
+
+import { ToastService } from '../Services/toast.service';
 
 @Component({
   selector: 'app-activity-add',
@@ -33,7 +32,7 @@ export class ActivityAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private apicall: ApiCallService,
     public share: DashboardService,
-    private toastService : ToastService
+    private toastService: ToastService
   ) {
     this.form = this.formBuilder.group({
       Activity_Name: [
@@ -90,13 +89,21 @@ export class ActivityAddComponent implements OnInit {
       .subscribe((result) => {
         if (result != null && result != '' && result != undefined) {
           if (result['ID'] == '200') {
-            this.toastService.show('Activity added successfuly', { classname: 'bg-success text-light', delay: 2000 });
+            this.form.reset();
+            this.toastService.show('Activity added successfuly', {
+              classname: 'bg-success text-light',
+              delay: 2000,
+            });
 
-
+            this.toastService.remove();
             this.ngOnInit();
           } else {
-            this.toastService.show('Error in Activity adding', { classname: 'bg-danger text-light', delay: 2000 });
-
+            this.form.reset();
+            this.toastService.show('Error in Activity adding', {
+              classname: 'bg-danger text-light',
+              delay: 2000,
+            });
+            this.toastService.remove();
           }
         }
       });
