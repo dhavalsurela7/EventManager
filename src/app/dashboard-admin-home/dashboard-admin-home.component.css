@@ -1,0 +1,17 @@
+.bi {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+}
+
+.spinner {
+    margin-top: 45vh;
+}
+
+.Activity th {
+    background-color: #8c5480;
+}
+
+.Activity td {
+    background-color: #e3dceb;
+}

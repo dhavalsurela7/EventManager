@@ -23,6 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { CommonModule, CurrencyPipe} from '@angular/common';
 import { FormatDirective } from './format.directive';
+import { DashboardAdminHomeComponent } from './dashboard-admin-home/dashboard-admin-home.component';
 
 
 
@@ -46,7 +47,8 @@ import { FormatDirective } from './format.directive';
     EventUpdateComponent,
     EventDeleteComponent,
     ToastsContainerComponent,
-    FormatDirective
+    FormatDirective,
+    DashboardAdminHomeComponent
  
    
  
