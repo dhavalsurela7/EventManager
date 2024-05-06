@@ -48,7 +48,12 @@
         <path fill-rule="evenodd"
             d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
     </symbol>
-
+    <symbol id="calendar3" viewBox="0 0 16 16">
+        <path
+            d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+        <path
+            d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+    </symbol>
 
 </svg>
 
@@ -175,37 +180,42 @@
         </div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="container m-1" *ngIf="show; else spinner">
             <div *ngIf=" share.selectedcomponent ==''" class="container m-3">
                 <table class="table  table-bordered border-secondary table-hover text-center "
                     *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
                     <thead>
                         <tr>
-                            <td class="text-light" style="background-color: #8c5480;" colspan="7">All Events</td>
+                            <td class="text-light" style="background-color: #8c5480;" colspan="8">All Events</td>
                         </tr>
                         <tr>
                             <th>Event Name</th>
                             <th>Event Description</th>
                             <th>Start Date</th>
                             <th>End Date</th>
+                            <th>Details</th>
                             <th>Publish</th>
-                            <th>Unpublish</th>
                             <th>Delete</th>
 
 
                         </tr>
                     </thead>
 
-                    <tbody *ngFor="let exp of result">
+                    <tbody *ngFor="let exp of result; index as i">
                         <tr>
                             <td>{{exp.Event_Name}}</td>
                             <td>{{exp.Event_Description }}</td>
                             <td>{{exp.Event_Start_Date }}</td>
                             <td>{{exp.Event_End_Date }}</td>
-                            <td><button class="btn text-light" style="background-color: #8c5480"
-                                    [disabled]="exp.isActive=='True'" (click)="publish(exp.Event_Name)">Publish</button>
+                            <td><button class="btn" style="border-color: #8c5480"
+                                    (click)="details(result[i])">Details</button>
                             </td>
-                            <td><button class="btn text-light" style="background-color: #8c5480"
-                                    [disabled]="exp.isActive=='False'"
+                            <td *ngIf="exp.isActive=='False'"><button class="btn btn-outline-warning text-black"
+                                    [disabled]="exp.isActive=='True'"
+                                    (click)="publish(exp.Event_Name)">Publish</button>
+                            </td>
+                            <td *ngIf="exp.isActive=='True'"><button class="btn btn-outline-warning text-black"
+                                   [disabled]="exp.isActive=='False'"
                                     (click)="unpublish(exp.Event_Name)">Unpublish</button></td>
                             <td><button class="btn text-light" style="background-color: #B33D68"
                                     (click)="delete(exp.Event_Name)">Delete</button></td>
@@ -216,8 +226,55 @@
 
 
                 </table>
+                <div *ngIf="flag == true">
+                    <div class="card text-center m-4" style="background-color: #e3dceb;">
+                        <div class="card-header">
+                            Start Date : {{estartdate }} &nbsp; &nbsp; End Date : {{eenddate }}
+                        </div>
+                        <img [src]="'data:image/jpeg;base64,'+eimage" class="card-img-top" alt="Event Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ename}}</h5>
+                            <p class="card-text">{{edescription}}</p>
+                
+                        </div>
+                
+                        <div class="container">
+                
+                            <table class="table  table-bordered border-secondary table-hover text-center Activity" id="pdfTable"
+                                *ngIf="activityresult!=null && activityresult.length!=0 && activityresult!=undefined">
+                                <thead>
+                
+                                    <tr>
+                                        <th class="text-light">Activity Name</th>
+                                        <th class="text-light">Activity Description</th>
+                                        <th class="text-light">Start Date</th>
+                                        <th class="text-light">End Date</th>
+                                        <th class="text-light">Price</th>
+                
+                                    </tr>
+                                </thead>
+                
+                                <tbody *ngFor="let exp of activityresult">
+                                    <tr>
+                                        <td>{{exp.Activity_Name}}</td>
+                                        <td>{{exp.Activity_Description }}</td>
+                                        <td>{{exp.Activity_Start_Datetime }}</td>
+                                        <td>{{exp.Activity_End_Datetime }}</td>
+                                        <td>{{exp.Activity_Price}}</td>
+                
+                                    </tr>
+                                </tbody>
+                
+                
+                            </table>
+                        </div>
+                
+                    </div>
+                </div>
+                
 
             </div>
+        </div>
             <app-event-add *ngIf=" share.selectedcomponent =='event-add'"></app-event-add>
             <app-event-publish *ngIf=" share.selectedcomponent =='event-publish'"></app-event-publish>
             <app-activity-add *ngIf=" share.selectedcomponent =='activity-add'"></app-activity-add>
@@ -238,5 +295,13 @@
 <ng-template #elseblock>
     <div class="alert my-3 " role="alert" style="background-color: #e3dceb;">
         No Events !!
+    </div>
+</ng-template>
+
+<ng-template #spinner>
+    <div class="spinner d-flex justify-content-center ">
+        <div class="spinner-border" role="status" style="color: #8c5480;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
 </ng-template>

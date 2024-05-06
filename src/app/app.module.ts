@@ -28,6 +28,7 @@ import { FormatDirective } from './format.directive';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { FormatDirective } from './format.directive';
     EventUpdateComponent,
     EventDeleteComponent,
     ToastsContainerComponent,
-    FormatDirective,
+    FormatDirective
+ 
    
  
 

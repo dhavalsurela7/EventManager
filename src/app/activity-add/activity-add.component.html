@@ -12,8 +12,8 @@
                 <label>Event Name</label>
                 <select formControlName="Event_Name" class="form-control" (change)="eventdate()"
                     [ngClass]="{ 'is-invalid': submitted && f['Event_Name'].errors }">
-
-                    <option *ngFor=" let e of result" value={{e.Event_Name}}>{{e.Event_Name}}</option>
+                    <option value="">select</option>
+                    <option *ngFor=" let e of result" value={{e.Event_Id}}>{{e.Event_Name}}</option>
                 </select>
             </div>
 

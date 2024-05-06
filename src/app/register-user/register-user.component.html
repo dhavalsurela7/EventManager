@@ -27,7 +27,7 @@
 <div class="register-form ">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="m-3 p-4 rounded ">
 
-    <h1 class="h3  fw-normal d-flex justify-content-center">Register User</h1>
+    <h1 class="h3  fw-normal d-flex justify-content-center" style="margin-bottom: 20px;">Register User</h1>
 
     <div class="form-group m-2">
       <label>Full Name</label>
@@ -90,7 +90,10 @@
       <div class="p-2">
         <button type="submit" class="btn" style=" background-color: #e3dceb;">Register</button>
       </div>
+    </div>
 
+    <div class="form-group m-2">
+      <p>Already Have Account ?&nbsp;<a routerLink="/login-user" class="link-warning" >Login here</a></p>
     </div>
 
   </form>

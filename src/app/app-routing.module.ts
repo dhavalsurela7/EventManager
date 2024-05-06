@@ -4,10 +4,6 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
-import { EventAddComponent } from './event-add/event-add.component';
-import { EventPublishComponent } from './event-publish/event-publish.component';
-import { ActivityAddComponent } from './activity-add/activity-add.component';
-import { ActivityPriceComponent } from './activity-price/activity-price.component';
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
 import { myauthGuard } from './myauth.guard';
 import { HomeComponent } from './home/home.component';
@@ -24,12 +20,10 @@ const routes: Routes = [
   {
     path: 'login-user',
     component: LoginUserComponent,
-
   },
   {
     path: 'login-admin',
     component: LoginAdminComponent,
-   
   },
   {
     path: 'dashboard-admin',

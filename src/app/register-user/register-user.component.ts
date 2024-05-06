@@ -74,11 +74,18 @@ export class RegisterUserComponent implements OnInit {
           this.toastService.show('Registation Successful, Please login', { classname: 'bg-success text-light', delay: 2000 });
           this.toastService.remove();
           this.router.navigate(['/login-user']);
-        } else {
-          document.getElementById('failure').style.display = 'block';
-          this.form.reset();
-          this.toastService.show('Registration failed', { classname: 'bg-danger text-light', delay: 2000 });
+        } else if(result['ID'] == '400')  {
+    
+          this.toastService.show('User Already Exists', { classname: 'bg-danger text-light', delay: 2000 });
           this.toastService.remove();
+          this.form.reset();
+          this.submitted= false
+        }
+        else{
+          this.toastService.show('Registration Failed', { classname: 'bg-danger text-light', delay: 2000 });
+          this.toastService.remove();
+          this.form.reset();
+          this.submitted= false
         }
       }
     });

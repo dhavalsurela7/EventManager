@@ -11,7 +11,13 @@ export class DashboardAdminComponent implements OnInit {
   publishresult: any;
   unpublishresult: any;
   deleteresult: any;
-
+  flag = false;
+  ename: string;
+  estartdate: string;
+  eenddate: string;
+  edescription: string;
+  eimage: string;
+  activityresult : any
   constructor(
     public share: DashboardService,
     private apicall: ApiCallService
@@ -93,5 +99,29 @@ export class DashboardAdminComponent implements OnInit {
           }
         });
     }
+  }
+
+  details(
+    result
+  ) {
+    this.flag = true;
+    this.ename = result.Event_Name;
+    this.estartdate = result.Event_Start_Date;
+    this.eenddate = result.Event_End_Date;
+    this.edescription = result.Event_Description;
+    this.eimage = result.Event_Image;
+ 
+    var data2 = {
+      flag: 'SELECT',
+      Event_Id: result.Event_Id,
+    };
+    //retrieving activities based on event name
+    this.apicall
+      .activityapiservice(JSON.stringify(data2))
+      .subscribe((res: any) => {
+        if (res != null && res != '' && res != undefined) {
+          this.activityresult = res.ArrayOfResponse;
+        }
+      });
   }
 }

@@ -49,22 +49,18 @@ export class EventListComponent implements OnInit {
   }
 
   details(
-    Event_Name: string,
-    Event_Start_Date: string,
-    Event_End_Date: string,
-    Event_Description: string,
-    Event_Image: string
+  result
   ) {
     this.flag = true;
-    this.ename = Event_Name;
-    this.estartdate = Event_Start_Date;
-    this.eenddate = Event_End_Date;
-    this.edescription = Event_Description;
-    this.eimage = Event_Image;
+    this.ename = result.Event_Name;
+    this.estartdate = result.Event_Start_Date;
+    this.eenddate = result.Event_End_Date;
+    this.edescription = result.Event_Description;
+    this.eimage = result.Event_Image;
 
     var data2 = {
       flag: 'SELECT',
-      Event_Name: Event_Name,
+      Event_Id: result.Event_Id,
     };
     //retrieving activities based on event name
     this.apicall

@@ -1,56 +1,48 @@
 .bi {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (min-width: 768px) {
+  .sidebar .offcanvas-lg {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 48px;
   }
 
-  @media (min-width: 768px) {
-    .sidebar .offcanvas-lg {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 48px;
-    }
-    .navbar-search {
-      display: block;
-    }
+  .navbar-search {
+    display: block;
   }
-  
-  .sidebar .nav-link {
-    font-size: .875rem;
-    font-weight: 500;
+}
+
+.sidebar .nav-link {
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+.sidebar .nav-link.active {
+  color: #2470dc;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+}
+
+.spinner {
+  margin-top: 45vh;
+}
+
+.Activity th{
+  background-color: #8c5480;
+}
+
+.Activity td{
+  background-color: #e3dceb;
+}
+
+@media (max-width: 600px) {
+  table{
+    width: 100px;
   }
-  
-  .sidebar .nav-link.active {
-    color: #2470dc;
-  }
-  
-  .sidebar-heading {
-    font-size: .75rem;
-  }
-  
-  @media (min-width: 768px) {
-    .sidebar .offcanvas-lg {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 48px;
-    }
-    .navbar-search {
-      display: block;
-    }
-  }
-  
-  .sidebar .nav-link {
-    font-size: .875rem;
-    font-weight: 500;
-  }
-  
-  .sidebar .nav-link.active {
-    color: #2470dc;
-  }
-  
-  .sidebar-heading {
-    font-size: .75rem;
-  }
-  
- 
-  
+}

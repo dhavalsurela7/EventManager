@@ -74,10 +74,16 @@ export class LoginUserComponent implements OnInit {
           sessionStorage.setItem('Token', result['Message']);
           sessionStorage.setItem('IsLoggedIn', String(true));
           this.router.navigate(['/dashboard-user']);
-        } else {
+        } else if (result['ID'] == '400') {
+     
+          this.form.controls['User_Password'].reset();
+          this.toastService.show('Password Incorrect', { classname: 'bg-danger text-light', delay: 2000 });
+          this.toastService.remove();
+        }
+        else if (result['ID'] == '404') {
      
           this.form.reset();
-          this.toastService.show('Login failed', { classname: 'bg-danger text-light', delay: 2000 });
+          this.toastService.show('User Does Not Exists', { classname: 'bg-danger text-light', delay: 2000 });
           this.toastService.remove();
         }
       }

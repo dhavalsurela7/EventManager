@@ -14,14 +14,14 @@
             </tr>
         </thead>
 
-        <tbody *ngFor="let exp of result">
+        <tbody *ngFor="let exp of result; index as i">
             <tr>
                 <td>{{exp.Event_Name}}</td>
                 <td>{{exp.Event_Description }}</td>
                 <td>{{exp.Event_Start_Date }}</td>
                 <td>{{exp.Event_End_Date }}</td>
                 <td><button class="btn" style="border-color: #8c5480"
-                        (click)="details(exp.Event_Name,exp.Event_Start_Date,exp.Event_End_Date,exp.Event_Description,exp.Event_Image)">Click</button>
+                        (click)="details(result[i])">Click</button>
                 </td>
 
             </tr>
@@ -46,7 +46,7 @@
         <div class="container">
 
             <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
-                *ngIf="activityresult!=null">
+                *ngIf="activityresult!=null && activityresult.length!=0 && activityresult!=undefined">
                 <thead>
 
                     <tr>

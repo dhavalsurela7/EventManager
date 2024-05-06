@@ -63,7 +63,7 @@ export class ActivityPriceComponent {
   activity(event: any) {
     var data = {
       flag: 'SELECTNAME',
-      Event_Name: this.form.controls['Event_Name'].value,
+      Event_Id: this.form.controls['Event_Name'].value,
     };
     //retrieving activity names based on event name
     this.apicall

@@ -20,7 +20,7 @@ import { ToastService } from '../Services/toast.service';
   styleUrl: './activity-add.component.css',
 })
 export class ActivityAddComponent implements OnInit {
-  EventName: string;
+  EventId: string;
   Mindate: string;
   Maxdate: string;
   form: FormGroup;
@@ -43,7 +43,7 @@ export class ActivityAddComponent implements OnInit {
 
       Activity_Start_Datetime: ['', [Validators.required]],
       Activity_End_Datetime: ['', [Validators.required]],
-      Event_Name: ['', [Validators.required]],
+      Event_Name: [''],
     });
   }
 
@@ -55,7 +55,7 @@ export class ActivityAddComponent implements OnInit {
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         this.result = res.ArrayOfResponse;
-
+        console.log(this.result)
         this.show = true;
       }
     });
@@ -81,9 +81,10 @@ export class ActivityAddComponent implements OnInit {
       Activity_Start_Datetime:
         this.form.controls['Activity_Start_Datetime'].value,
       Activity_End_Datetime: this.form.controls['Activity_End_Datetime'].value,
-      Event_Name: this.form.controls['Event_Name'].value,
+      Event_Id: this.form.controls['Event_Name'].value,
     };
     //insert activity
+    debugger
     this.apicall
       .activityapiservice(JSON.stringify(data))
       .subscribe((result) => {
@@ -113,16 +114,16 @@ export class ActivityAddComponent implements OnInit {
   //getting event start date and end date
   //to use for activity start and end date validtions
   eventdate() {
-    (this.EventName = this.form.controls['Event_Name'].value),
+    (this.EventId = this.form.controls['Event_Name'].value),
       this.result.forEach((element) => {
-        if (element.Event_Name == this.EventName) {
+        if (element.Event_Id == this.EventId) {
           this.Mindate =
             element.Event_Start_Date.toString()
               .substring(0, 10)
               .split('-')
               .reverse()
               .join('-') + 'T00:00';
-
+console.log(this.Maxdate)
           this.Maxdate =
             element.Event_End_Date.toString()
               .substring(0, 10)
