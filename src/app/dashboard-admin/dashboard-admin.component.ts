@@ -18,6 +18,7 @@ export class DashboardAdminComponent implements OnInit {
   edescription: string;
   eimage: string;
   activityresult : any
+  close = false;
   constructor(
     public share: DashboardService,
     private apicall: ApiCallService
@@ -26,7 +27,7 @@ export class DashboardAdminComponent implements OnInit {
   show = false;
   ngOnInit(): void {
     this.share.selectedcomponent = '';
-
+    this.close = false;
     var data = {
       flag: 'SELECTALL',
     };
