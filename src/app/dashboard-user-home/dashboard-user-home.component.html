@@ -1,0 +1,37 @@
+<div *ngIf=" share.selectedcomponent ==''" class="container m-3">
+    <table class="table  table-bordered border-secondary table-hover text-center "
+        *ngIf="result!= null && result!=''&& result!= undefined; else elseblock">
+        <thead>
+            <tr>
+                <td class=" text-light" style="background-color: #8c5480;" colspan="4">Ongoing Events</td>
+            </tr>
+            <tr>
+                <th>Event Name</th>
+                <th>Event Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+
+
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let exp of result">
+            <tr>
+                <td>{{exp.Event_Name}}</td>
+                <td>{{exp.Event_Description }}</td>
+                <td>{{exp.Event_Start_Date }}</td>
+                <td>{{exp.Event_End_Date }}</td>
+
+
+            </tr>
+        </tbody>
+
+
+    </table>
+
+</div>
+<ng-template #elseblock>
+    <div class="alert my-3 " role="alert" style="background-color: #e3dceb;">
+        No Ongoing Events !!
+    </div>
+</ng-template>

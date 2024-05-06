@@ -73,7 +73,7 @@ export class LoginUserComponent implements OnInit {
           sessionStorage.setItem('Role', 'User');
           sessionStorage.setItem('Token', result['Message']);
           sessionStorage.setItem('IsLoggedIn', String(true));
-          this.router.navigate(['/dashboard-user']);
+          this.router.navigate(['/user']);
         } else if (result['ID'] == '400') {
      
           this.form.controls['User_Password'].reset();

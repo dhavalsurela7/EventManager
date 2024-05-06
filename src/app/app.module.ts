@@ -24,6 +24,7 @@ import { ToastsContainerComponent } from './toasts-container/toasts-container.co
 import { CommonModule, CurrencyPipe} from '@angular/common';
 import { FormatDirective } from './format.directive';
 import { DashboardAdminHomeComponent } from './dashboard-admin-home/dashboard-admin-home.component';
+import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user-home.component';
 
 
 
@@ -48,7 +49,8 @@ import { DashboardAdminHomeComponent } from './dashboard-admin-home/dashboard-ad
     EventDeleteComponent,
     ToastsContainerComponent,
     FormatDirective,
-    DashboardAdminHomeComponent
+    DashboardAdminHomeComponent,
+    DashboardUserHomeComponent
  
    
  

@@ -72,7 +72,7 @@ export class LoginAdminComponent implements OnInit {
           sessionStorage.clear();
           sessionStorage.setItem('Role', 'Admin');
           sessionStorage.setItem('IsLoggedIn', String(true));
-          this.router.navigate(['/dashboard-admin']);
+          this.router.navigate(['/admin']);
         } else {
           this.form.reset();
           this.toastService.show('Login Failed', { classname: 'bg-danger text-light', delay: 2000 });

@@ -62,7 +62,7 @@
 </svg>
 
 <header class="navbar" style="background-color: #8c5480;">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-light " routerLink="/dashboard-admin">Admin
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-light " routerLink="/admin">Admin
         Dashboard</a>
 
     <ul class="navbar-nav flex-row d-md-none">
@@ -93,7 +93,7 @@
                 <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <button class="nav-link d-flex align-items-center gap-2 active text-black" [routerLink]="['/dashboard-admin/dashboard']"
+                            <button class="nav-link d-flex align-items-center gap-2 active text-black" [routerLink]="['/admin/dashboard']"
                                 aria-current="page">
                                 <svg class="bi">
                                     <use xlink:href="#house-fill" />
@@ -102,7 +102,7 @@
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button [routerLink]="['/dashboard-admin/event-add']"
+                            <button [routerLink]="['/admin/event-add']"
                                 class="nav-link d-flex align-items-center gap-2 text-black">
                                 <svg class="bi">
                                     <use xlink:href="#plus-circle" />
@@ -111,7 +111,7 @@
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button [routerLink]="['/dashboard-admin/event-update']"
+                            <button [routerLink]="['/admin/event-update']"
                                 class="nav-link d-flex align-items-center gap-2 text-black">
                                 <svg class="bi">
                                     <use xlink:href="#update" />
@@ -120,7 +120,7 @@
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button [routerLink]="['/dashboard-admin/event-delete']"
+                            <button [routerLink]="['/admin/event-delete']"
                                 class="nav-link d-flex align-items-center gap-2 text-black">
                                 <svg class="bi">
                                     <use xlink:href="#delete" />
@@ -135,7 +135,7 @@
 
 
                         <li class="nav-item">
-                            <button [routerLink]="['/dashboard-admin/activity-add']"
+                            <button [routerLink]="['/admin/activity-add']"
                                 class="nav-link d-flex align-items-center gap-2 text-black">
                                 <svg class="bi">
                                     <use xlink:href="#file-earmark-text" />
@@ -144,7 +144,7 @@
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button [routerLink]="['/dashboard-admin/activity-price']"
+                            <button [routerLink]="['/admin/activity-price']"
                                 class="nav-link d-flex align-items-center gap-2 text-black" href="#">
                                 <svg class="bi">
                                     <use xlink:href="#rupee" />
@@ -154,7 +154,7 @@
                         </li>
                         <hr class="my-3">
                         <li class="nav-item">
-                            <button [routerLink]="['/dashboard-admin/event-publish']"
+                            <button [routerLink]="['/admin/event-publish']"
                                 class="nav-link d-flex align-items-center gap-2 text-black" href="#">
                                 <svg class="bi">
                                     <use xlink:href="#publish" />

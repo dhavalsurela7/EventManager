@@ -14,6 +14,8 @@ import { EventUpdateComponent } from './event-update/event-update.component';
 import { EventDeleteComponent } from './event-delete/event-delete.component';
 import { ActivityAddComponent } from './activity-add/activity-add.component';
 import { ActivityPriceComponent } from './activity-price/activity-price.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user-home.component';
 
 const routes: Routes = [
   {
@@ -33,7 +35,7 @@ const routes: Routes = [
     component: LoginAdminComponent,
   },
   {
-    path: 'dashboard-admin',
+    path: 'admin',
     component: DashboardAdminComponent,
     canActivate: [myauthGuard],
     data: { role: 'admin' },
@@ -49,10 +51,16 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'dashboard-user',
+    path: 'user',
     component: DashboardUserComponent,
     canActivate: [myauthGuard],
     data: { role: 'user' },
+    children: [
+      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      {path: 'dashboard', component: DashboardUserHomeComponent},
+      {path: 'event-list', component: EventListComponent},
+
+    ]
   },
 ];
 
