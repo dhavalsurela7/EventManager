@@ -21,7 +21,7 @@ export class EventListComponent implements OnInit {
   eimage: string;
   show = false;
   submitted = false;
-
+  close = false;
   transformedEvent: event[];
 
   constructor(
@@ -31,6 +31,7 @@ export class EventListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.close = false;
     var data = {
       flag: 'SELECT',
     };

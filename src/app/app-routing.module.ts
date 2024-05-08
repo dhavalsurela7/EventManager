@@ -16,8 +16,10 @@ import { ActivityAddComponent } from './activity-add/activity-add.component';
 import { ActivityPriceComponent } from './activity-price/activity-price.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user-home.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent , pathMatch: 'full' },
   {
     path: 'register-user',
     component: RegisterUserComponent,
@@ -40,15 +42,15 @@ const routes: Routes = [
     canActivate: [myauthGuard],
     data: { role: 'admin' },
     children: [
-      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-      {path: 'dashboard', component: DashboardAdminHomeComponent},
-      {path: 'event-add', component: EventAddComponent},
-      {path: 'event-publish', component: EventPublishComponent},
-      {path: 'event-update', component: EventUpdateComponent},
-      {path: 'event-delete', component: EventDeleteComponent},
-      {path: 'activity-add', component: ActivityAddComponent},
-      {path: 'activity-price', component: ActivityPriceComponent},
-    ]
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardAdminHomeComponent },
+      { path: 'event-add', component: EventAddComponent },
+      { path: 'event-publish', component: EventPublishComponent },
+      { path: 'event-update', component: EventUpdateComponent },
+      { path: 'event-delete', component: EventDeleteComponent },
+      { path: 'activity-add', component: ActivityAddComponent },
+      { path: 'activity-price', component: ActivityPriceComponent },
+    ],
   },
   {
     path: 'user',
@@ -56,12 +58,12 @@ const routes: Routes = [
     canActivate: [myauthGuard],
     data: { role: 'user' },
     children: [
-      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-      {path: 'dashboard', component: DashboardUserHomeComponent},
-      {path: 'event-list', component: EventListComponent},
-
-    ]
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardUserHomeComponent },
+      { path: 'event-list', component: EventListComponent },
+    ],
   },
+  { path: '**', component: PagenotfoundComponent , pathMatch: 'full' }
 ];
 
 @NgModule({

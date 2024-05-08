@@ -73,9 +73,16 @@ export class LoginAdminComponent implements OnInit {
           sessionStorage.setItem('Role', 'Admin');
           sessionStorage.setItem('IsLoggedIn', String(true));
           this.router.navigate(['/admin']);
-        } else {
+        }  else if (result['ID'] == '400') {
+     
+          this.form.controls['Admin_Password'].reset();
+          this.toastService.show('Password Incorrect', { classname: 'bg-danger text-light', delay: 2000 });
+          this.toastService.remove();
+        }
+        else if (result['ID'] == '404') {
+     
           this.form.reset();
-          this.toastService.show('Login Failed', { classname: 'bg-danger text-light', delay: 2000 });
+          this.toastService.show('Admin Does Not Exists', { classname: 'bg-danger text-light', delay: 2000 });
           this.toastService.remove();
         }
       }

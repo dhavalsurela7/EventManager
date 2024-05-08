@@ -25,6 +25,7 @@ import { CommonModule, CurrencyPipe} from '@angular/common';
 import { FormatDirective } from './format.directive';
 import { DashboardAdminHomeComponent } from './dashboard-admin-home/dashboard-admin-home.component';
 import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user-home.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 
 
@@ -50,7 +51,8 @@ import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user
     ToastsContainerComponent,
     FormatDirective,
     DashboardAdminHomeComponent,
-    DashboardUserHomeComponent
+    DashboardUserHomeComponent,
+    PagenotfoundComponent
  
    
  
@@ -65,9 +67,7 @@ import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    RouterModule.forRoot([
-      {path: '', redirectTo: '/home', pathMatch: 'full'},
-      ]),
+    
   ],
   providers: [
     provideClientHydration(),

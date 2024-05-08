@@ -1,3 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+<symbol id="exit" viewBox="0 0 16 16">
+    <path
+        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+</symbol>
+</svg>
 <div class="container m-1" *ngIf="show; else spinner">
 
     <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
@@ -21,7 +27,7 @@
                 <td>{{exp.Event_Start_Date }}</td>
                 <td>{{exp.Event_End_Date }}</td>
                 <td><button class="btn" style="border-color: #8c5480"
-                        (click)="details(result[i])">Click</button>
+                        (click)="details(result[i]) ; close=false">Click</button>
                 </td>
 
             </tr>
@@ -31,10 +37,19 @@
     </table>
 </div>
 
-<div *ngIf="flag == true">
+<div *ngIf="flag == true && close == false">
     <div class="card text-center m-4" style="background-color: #e3dceb;">
-        <div class="card-header">
-            Start Date : {{estartdate }} &nbsp; &nbsp; End Date : {{eenddate }}
+        <div class="card-header d-flex">
+            <div class="flex-grow-1">
+                Start Date : {{estartdate }} &nbsp; &nbsp; End Date : {{eenddate }}
+            </div>
+            <div>
+                <button class="btn btn-sm" (click)="close=true" style="background-color: #C4647F">
+                    <svg class="bi">
+                        <use xlink:href="#exit" />
+                    </svg>
+                </button>
+            </div>
         </div>
         <img [src]="'data:image/jpeg;base64,'+eimage" class="card-img-top" alt="Event Image">
         <div class="card-body">
@@ -45,7 +60,7 @@
 
         <div class="container">
 
-            <table class="table  table-bordered border-secondary table-hover text-center " id="pdfTable"
+            <table class="table  table-bordered border-secondary table-hover text-center Activity " id="pdfTable"
                 *ngIf="activityresult!=null && activityresult.length!=0 && activityresult!=undefined">
                 <thead>
 
