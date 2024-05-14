@@ -51,7 +51,7 @@ export class myauthGuard implements CanActivate {
         sessionStorage.getItem('Role') == 'Admin' &&
         route.data['role'] == 'user'
       ) {
-        this.route.navigate(['/dashboard-admin']);
+        this.route.navigate(['/admin']);
         return true;
       }
 
@@ -59,7 +59,7 @@ export class myauthGuard implements CanActivate {
         sessionStorage.getItem('Role') == 'User' &&
         route.data['role'] == 'admin'
       ) {
-        this.route.navigate(['/dashboard-user']);
+        this.route.navigate(['/user']);
         return true;
       }
 

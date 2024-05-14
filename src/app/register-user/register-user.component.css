@@ -14,3 +14,15 @@ form {
     background-color: #8c5480;
     color: white;
 }
+.bi {
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.5rem;
+}
+.icon-rtl {
+    padding-right: 35px;
+    margin-right: 10px;
+    background: url("../../assets/istockphoto-1079725292-612x612.jpg") no-repeat right;
+    background-color: white;
+    background-size: 30px;
+  }

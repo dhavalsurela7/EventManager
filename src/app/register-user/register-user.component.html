@@ -24,77 +24,98 @@
       </form>
     </div>
   </nav>
-<div class="register-form ">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="m-3 p-4 rounded ">
+  <div class="register-form ">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="m-3 p-4 rounded ">
 
-    <h1 class="h3  fw-normal d-flex justify-content-center" style="margin-bottom: 20px;">Register User</h1>
+      <h1 class="h3  fw-normal d-flex justify-content-center" style="margin-bottom: 20px;">Register User</h1>
 
-    <div class="form-group m-2">
-      <label>Full Name</label>
-      <input type="text" formControlName="User_Name" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f['User_Name'].errors }" (keypress)="name($event)" />
-      <div *ngIf="submitted && f['User_Name'].errors" class="text-warning">
-        <div *ngIf="f['User_Name'].errors['required']">Fullname is required</div>
-        <div *ngIf="f['User_Name'].errors['pattern']">Fullname is not valid</div>
+      <div class="form-group m-2">
+        <label>Full Name</label>
+        <input type="text" formControlName="User_Name" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['User_Name'].errors }" (keypress)="name($event)" />
+        <div *ngIf="submitted && f['User_Name'].errors" class="text-warning">
+          <div *ngIf="f['User_Name'].errors['required']">Fullname is required</div>
+          <div *ngIf="f['User_Name'].errors['pattern']">Fullname is not valid</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group m-2">
-      <label>Email</label>
-      <input type="text" formControlName="User_Email" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f['User_Email'].errors }" />
-      <div *ngIf="submitted && f['User_Email'].errors" class="text-warning">
-        <div *ngIf="f['User_Email'].errors['required']">Email is required</div>
-        <div *ngIf="f['User_Email'].errors['pattern']">Email is invalid</div>
+
+
+      <div class="form-group m-2">
+        <label>Address</label>
+        <input type="text" formControlName="User_Address" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['User_Address'].errors }" />
+        <div *ngIf="submitted && f['User_Address'].errors" class="text-warning">
+          <div *ngIf="f['User_Address'].errors['required']">Address is required</div>
+          <div *ngIf="f['User_Address'].errors['pattern']">Address is invalid</div>
+        </div>
       </div>
-    </div>
 
 
-    <div class="form-group m-2">
-      <label>Address</label>
-      <input type="text" formControlName="User_Address" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f['User_Address'].errors }" />
-      <div *ngIf="submitted && f['User_Address'].errors" class="text-warning">
-        <div *ngIf="f['User_Address'].errors['required']">Address is required</div>
-        <div *ngIf="f['User_Address'].errors['pattern']">Address is invalid</div>
+      <div class="form-group m-2">
+        <label>Password</label>
+        <input type="password" formControlName="User_Password" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['User_Password'].errors }" />
+        <div *ngIf="submitted && f['User_Password'].errors" class="text-warning">
+          <div *ngIf="f['User_Password'].errors['required']">Password is required</div>
+          <div *ngIf="f['User_Password'].errors['pattern']">Password is weak</div>
+        </div>
       </div>
-    </div>
+
+      <div class="form-group m-2">
+        <label>Mobile</label>
+        <input type="text" formControlName="User_Mobile" class="form-control" (keypress)="number($event)"
+          [ngClass]="{ 'is-invalid': submitted && f['User_Mobile'].errors }" />
+        <div *ngIf="submitted && f['User_Mobile'].errors" class="text-warning">
+          <div *ngIf="f['User_Mobile'].errors['required']">Mobile is required</div>
+          <div *ngIf="f['User_Mobile'].errors['pattern']">Mobile is invalid</div>
 
 
-    <div class="form-group m-2">
-      <label>Password</label>
-      <input type="password" formControlName="User_Password" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f['User_Password'].errors }" />
-      <div *ngIf="submitted && f['User_Password'].errors" class="text-warning">
-        <div *ngIf="f['User_Password'].errors['required']">Password is required</div>
-        <div *ngIf="f['User_Password'].errors['pattern']">Password is weak</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group m-2">
-      <label>Mobile</label>
-      <input type="text" formControlName="User_Mobile" class="form-control" (keypress)="number($event)"
-        [ngClass]="{ 'is-invalid': submitted && f['User_Mobile'].errors }" />
-      <div *ngIf="submitted && f['User_Mobile'].errors" class="text-warning">
-        <div *ngIf="f['User_Mobile'].errors['required']">Mobile is required</div>
-        <div *ngIf="f['User_Mobile'].errors['pattern']">Mobile is invalid</div>
-      
 
+      <div class="form-group m-2">
+        <label>Email</label>
+        <input type="text" formControlName="User_Email" class="form-control "  [ngClass]="{'icon-rtl': otpverified == true}"
+          [ngClass]="{ 'is-invalid': submitted && f['User_Email'].errors }" />
+        <div *ngIf="submitted && f['User_Email'].errors" class="text-warning">
+          <div *ngIf="f['User_Email'].errors['required']">Email is required</div>
+          <div *ngIf="f['User_Email'].errors['pattern']">Email is invalid</div>
+        </div>
       </div>
-    </div>
 
-
-
-
-    <div class="form-group m-2 d-flex justify-content-evenly">
-      <div class="p-2">
-        <button type="submit" class="btn" style=" background-color: #e3dceb;">Register</button>
+      <div class="form-group m-2 d-flex justify-content-evenly" *ngIf="otpsent==false">
+        <div class="p-2">
+          <button type="button" (click)="sendotp()" class="btn" style=" background-color: #e3dceb;">Send OTP</button>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group m-2">
-      <p>Already Have Account ?&nbsp;<a routerLink="/login-user" class="link-warning" >Login here</a></p>
-    </div>
+      <div class="form-group m-2" *ngIf="otpsent==true && otpverified == false">
+        <label>OTP</label>
+        <input type="text" formControlName="User_OTP" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['User_OTP'].errors }" />
+        <div *ngIf="submitted && f['User_OTP'].errors" class="text-warning">
+          <div *ngIf="f['User_OTP'].errors['required']">OTP is required</div>
 
-  </form>
-</div>
+        </div>
+      </div>
+
+      <div class="form-group m-2 d-flex justify-content-evenly" *ngIf="otpsent==true && otpverified == false">
+        <div class="p-2">
+          <button type="button" (click)="verifyotp()" class="btn" style=" background-color: #e3dceb;">Verify</button>
+        </div>
+      </div>
+
+      <div class="form-group m-2 d-flex justify-content-evenly" *ngIf="otpverified==true">
+        <div class="p-2">
+          <button type="submit" class="btn" style=" background-color: #e3dceb;">Register</button>
+        </div>
+      </div>
+
+      <div class="form-group m-2">
+        <p>Already Have Account ?&nbsp;<a routerLink="/login-user" class="link-warning">Login here</a></p>
+      </div>
+
+    </form>
+  </div>

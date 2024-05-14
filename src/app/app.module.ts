@@ -22,10 +22,10 @@ import { EventDeleteComponent } from './event-delete/event-delete.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { CommonModule, CurrencyPipe} from '@angular/common';
-import { FormatDirective } from './format.directive';
 import { DashboardAdminHomeComponent } from './dashboard-admin-home/dashboard-admin-home.component';
 import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user-home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { ChartComponent } from './chart/chart.component';
 
 
 
@@ -49,10 +49,10 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     EventUpdateComponent,
     EventDeleteComponent,
     ToastsContainerComponent,
-    FormatDirective,
     DashboardAdminHomeComponent,
     DashboardUserHomeComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    ChartComponent
  
    
  

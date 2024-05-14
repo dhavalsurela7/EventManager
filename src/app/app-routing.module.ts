@@ -17,6 +17,7 @@ import { ActivityPriceComponent } from './activity-price/activity-price.componen
 import { EventListComponent } from './event-list/event-list.component';
 import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user-home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { ChartComponent } from './chart/chart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent , pathMatch: 'full' },
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: 'event-delete', component: EventDeleteComponent },
       { path: 'activity-add', component: ActivityAddComponent },
       { path: 'activity-price', component: ActivityPriceComponent },
+      { path: 'chart', component: ChartComponent },
     ],
   },
   {

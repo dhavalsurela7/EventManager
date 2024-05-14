@@ -5,7 +5,7 @@ import { ApiCallService } from '../Services/api-call.service';
 @Component({
   selector: 'app-dashboard-admin-home',
   templateUrl: './dashboard-admin-home.component.html',
-  styleUrl: './dashboard-admin-home.component.css'
+  styleUrl: './dashboard-admin-home.component.css',
 })
 export class DashboardAdminHomeComponent {
   publishresult: any;
@@ -17,16 +17,12 @@ export class DashboardAdminHomeComponent {
   eenddate: string;
   edescription: string;
   eimage: string;
-  activityresult : any
+  activityresult: any;
   close = false;
-  constructor(
-
-    private apicall: ApiCallService
-  ) {}
+  constructor(private apicall: ApiCallService) {}
   result: any;
   show = false;
   ngOnInit(): void {
- 
     this.close = false;
     var data = {
       flag: 'SELECTALL',
@@ -87,14 +83,12 @@ export class DashboardAdminHomeComponent {
         flag: 'DELETE',
         Event_Name: eventname,
       };
-      debugger;
+
       this.apicall
         .eventapiservice(JSON.stringify(data))
         .subscribe((res: any) => {
           if (res != null && res != '' && res != undefined) {
             if (res['ID'] == '200') {
-              debugger;
-
               this.ngOnInit();
             }
           }
@@ -102,16 +96,14 @@ export class DashboardAdminHomeComponent {
     }
   }
 
-  details(
-    result
-  ) {
+  details(result) {
     this.flag = true;
     this.ename = result.Event_Name;
     this.estartdate = result.Event_Start_Date;
     this.eenddate = result.Event_End_Date;
     this.edescription = result.Event_Description;
     this.eimage = result.Event_Image;
- 
+
     var data2 = {
       flag: 'SELECT',
       Event_Id: result.Event_Id,

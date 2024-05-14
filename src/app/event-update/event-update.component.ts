@@ -98,7 +98,7 @@ export class EventUpdateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    debugger
+
     this.submitted = true;
     if (this.select == false) {
       return;
@@ -118,7 +118,7 @@ export class EventUpdateComponent implements OnInit {
     };
     //update event
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((result) => {
-      debugger
+   
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
           this.form.reset();

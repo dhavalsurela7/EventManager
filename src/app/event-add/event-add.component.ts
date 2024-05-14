@@ -72,7 +72,7 @@ export class EventAddComponent implements OnInit {
       Event_Description: this.form.controls['Event_Description'].value,
     };
     //insert event
-    debugger
+  
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {

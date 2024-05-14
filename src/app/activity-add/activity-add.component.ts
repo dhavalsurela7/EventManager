@@ -55,7 +55,7 @@ export class ActivityAddComponent implements OnInit {
     this.apicall.eventapiservice(JSON.stringify(data)).subscribe((res: any) => {
       if (res != null && res != '' && res != undefined) {
         this.result = res.ArrayOfResponse;
-        console.log(this.result)
+      
         this.show = true;
       }
     });
@@ -84,7 +84,7 @@ export class ActivityAddComponent implements OnInit {
       Event_Id: this.form.controls['Event_Name'].value,
     };
     //insert activity
-    debugger
+   
     this.apicall
       .activityapiservice(JSON.stringify(data))
       .subscribe((result) => {
@@ -123,7 +123,7 @@ export class ActivityAddComponent implements OnInit {
               .split('-')
               .reverse()
               .join('-') + 'T00:00';
-console.log(this.Maxdate)
+
           this.Maxdate =
             element.Event_End_Date.toString()
               .substring(0, 10)

@@ -37,6 +37,28 @@ export class ApiCallService {
     return this.http.post(this.fullurl, data, { headers: headers });
   }
 
+  public otpservice(data) {
+    const endpoint = 'api/UserController/SendOtp';
+    this.fullurl = this.url + endpoint;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    return this.http.post(this.fullurl, data, { headers: headers });
+  }
+
+  public verifyotpservice(data) {
+    const endpoint = 'api/UserController/VerifyOtp';
+    this.fullurl = this.url + endpoint;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    return this.http.post(this.fullurl, data, { headers: headers });
+  }
+
   public userapiservice(data) {
     const endpoint = 'api/UserController/UserOperation';
     this.fullurl = this.url + endpoint;
@@ -46,6 +68,17 @@ export class ApiCallService {
     };
 
     return this.http.post(this.fullurl, data, { headers: headers });
+  }
+
+  public chartservice(data):any {
+    const endpoint = 'api/EventController/Chart?request=Monthwise';
+    this.fullurl = this.url + endpoint;
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    return this.http.post(this.fullurl, data, { headers: headers }).pipe();
   }
 
   public adminapiservice(data):Observable<any> {
