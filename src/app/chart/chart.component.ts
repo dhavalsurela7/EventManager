@@ -27,15 +27,15 @@ export class ChartComponent implements OnInit {
     return Array(n);
   }
 
-  getRandomColor() {
-   let letters = '0123456789ABCDEF';
-    this.color = '#';
-    for (var i = 0; i < 6; i++) {
-      // this.color += Math.floor(Math.random() * 10);
-      this.color += letters[Math.floor(Math.random() * 16)];
-    }
-    return this.color ;
-  }
+  // getRandomColor() {
+  //  let letters = '0123456789ABCDEF';
+  //   this.color = '#';
+  //   for (var i = 0; i < 6; i++) {
+  //     // this.color += Math.floor(Math.random() * 10);
+  //     this.color += letters[Math.floor(Math.random() * 16)];
+  //   }
+  //   return this.color ;
+  // }
 
   ok() {
     let obj = {
@@ -51,7 +51,7 @@ export class ChartComponent implements OnInit {
             this.EventData = this.EventData.map((el: any) => {
               return {
                 Month: el.Month,
-                HeightOfChart: (el.Count) * 60 + "px",
+                HeightOfChart: (el.Count) * 40 + "px",
                 Eventcnt:el.Count
 
               }

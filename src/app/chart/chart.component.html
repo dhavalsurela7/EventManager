@@ -13,19 +13,23 @@
 
     </div> -->
 
-    <div *ngIf="Flag" class="fullbody">
+
+    <div *ngIf="Flag" class="fullbody ">
 
 
 
-        <hr style="color: black;">
+       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Chart</h1>
+
+</div>
         <!-- <div class="ok1 d-flex justify-content-center">
             <div style="text-align: center;" class="box1" *ngFor="let n of ans;
     let i = index;">
                <p *ngIf="n.Eventcnt != 0"> {{n.Eventcnt}}</p>
             </div>
         </div> -->
-        <div class="box d-flex justify-content-center my-border">
-            <div style="color: white;" class="ok" [ngStyle]="{'height':n.HeightOfChart, 'background-color':n.Eventcnt != 0? getRandomColor():'black' }" *ngFor="let n of ans;
+        <div class="box d-flex justify-content-center my-border m-5" >
+            <div style="color: white;" class="ok" [ngStyle]="{'height':n.HeightOfChart, 'background-color':n.Eventcnt != 0? '#8c5480' :'black','border':n.Eventcnt != 0? '3px solid #e3dceb' : '' }" *ngFor="let n of ans;
         let i = index;">
         <p *ngIf="n.Eventcnt != 0" style="text-align: center;"> {{n.Eventcnt}}</p>
                
@@ -38,7 +42,7 @@
                 {{i+1}}
             </div>
         </div>
-        <p style="margin-left: 500px;">Month</p>
+        <p  class="d-flex justify-content-center m-3">Month</p>
 
     </div>
 
