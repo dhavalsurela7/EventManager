@@ -68,6 +68,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardUserHomeComponent },
       { path: 'event-list', component: EventListComponent },
+      { path: 'chart', component: ChartComponent },
     ],
   },
   { path: '**', component: PagenotfoundComponent , pathMatch: 'full' }
