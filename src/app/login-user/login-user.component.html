@@ -49,9 +49,8 @@
       <div *ngIf="submitted && f['User_Password'].errors" class="text-warning"> 
         <div *ngIf="f['User_Password'].errors['required']">Password is required</div>
         <div *ngIf="f['User_Password'].errors['pattern']">Password is invalid</div>
-      
-
       </div>
+      <a routerLink="/reset-password" style="margin :5px" class="link-warning" >forget password ?</a>
     </div>
 
 
