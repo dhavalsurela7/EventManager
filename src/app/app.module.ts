@@ -27,6 +27,7 @@ import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ChartComponent } from './chart/chart.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { DashboardAdminHomeNewComponent } from './dashboard-admin-home-new/dashboard-admin-home-new.component';
 
 
 
@@ -54,7 +55,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     DashboardUserHomeComponent,
     PagenotfoundComponent,
     ChartComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    DashboardAdminHomeNewComponent,
+
  
    
  

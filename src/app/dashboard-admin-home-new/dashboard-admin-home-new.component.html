@@ -1,0 +1,153 @@
+<div class="container m-1" *ngIf="show; else spinner">
+  <div class="row m-2">
+    <div class="col-6">
+      <label>Sort By : &nbsp;</label>
+      <select (change)="onSortChange($event.currentTarget)">
+        <option value="">Sort By</option>
+        <option value="Event_Name">Name</option>
+        <option value="Event_Start_Date">Start Date</option>
+        <option value="Event_End_Date">End Date</option>
+      </select>
+      <span>&nbsp;</span>
+      <select (change)="onDirectionChange($event.currentTarget)">
+        <option value="Asc">Asc</option>
+        <option value="Desc">Desc</option>
+      </select>
+    </div>
+    <div class="col-6 text-end">
+      <label>Search : &nbsp;</label>
+      <input
+        type="text"
+        placeholder="Name..."
+        (input)="onSearch($event.currentTarget)"
+      />
+    </div>
+  </div>
+  <table
+    class="table table-bordered border-secondary table-hover text-center m-2"
+    *ngIf="
+      result != null && result != '' && result != undefined;
+      else elseblock
+    "
+  >
+    <thead>
+      <tr>
+        <td class="text-light" style="background-color: #8c5480" colspan="8">
+          All Events
+        </td>
+      </tr>
+      <tr>
+        <th>Event Name</th>
+        <th>Event Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Details</th>
+        <th>Publish</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let exp of result; index as i">
+      <tr>
+        <td>{{ exp.Event_Name }}</td>
+        <td>{{ exp.Event_Description }}</td>
+        <td>{{ exp.Event_Start_Date }}</td>
+        <td>{{ exp.Event_End_Date }}</td>
+        <td>
+          <button
+            class="btn"
+            style="border-color: #8c5480"
+            (click)="details(result[i]); close = false"
+          >
+            Details
+          </button>
+        </td>
+        <td *ngIf="exp.isActive == 'False'">
+          <button
+            class="btn btn-outline-warning text-black"
+            [disabled]="exp.isActive == 'True'"
+            (click)="publish(exp.Event_Name)"
+          >
+            Publish
+          </button>
+        </td>
+        <td *ngIf="exp.isActive == 'True'">
+          <button
+            class="btn btn-outline-warning text-black"
+            [disabled]="exp.isActive == 'False'"
+            (click)="unpublish(exp.Event_Name)"
+          >
+            Unpublish
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn text-light"
+            style="background-color: #b33d68"
+            (click)="delete(exp.Event_Name)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="m-2 row">
+    <div class="col-6">
+      <button
+        class="btn btn-outline"
+        [ngClass]="{ shadow: pageNumber !== 1 }"
+        [ngStyle]="{
+          'border-color': pageNumber !== 1 ? '#8c5480' : 'grey',
+          color: pageNumber !== 1 ? '#8c5480' : 'grey'
+        }"
+        (click)="onPageChange(pageNumber - 1)"
+        [disabled]="pageNumber === 1"
+      >
+        Previous
+      </button>
+      <span>&nbsp; Page {{ pageNumber }} &nbsp;</span>
+      <button
+        class="btn btn-outline"
+        [ngClass]="{ shadow: pageNumber != totalpage }"
+        [ngStyle]="{
+          'border-color': pageNumber != totalpage ? '#8c5480' : 'grey',
+          color: pageNumber != totalpage ? '#8c5480' : ''
+        }"
+        (click)="onPageChange(pageNumber + 1)"
+        [disabled]="pageNumber == totalpage"
+      >
+        Next
+      </button>
+    </div>
+    <div class="col-6 text-end">
+      <label>Row : &nbsp;</label>
+      <select (change)="onPageSizeChange($event.currentTarget)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- <div *ngFor="let i of pages">
+    
+    <span (click)="onPageChange(i)" class="pagination">{{i}}</span>
+  </div> -->
+</div>
+
+<ng-template #elseblock>
+  <div class="alert my-3" role="alert" style="background-color: #e3dceb">
+    No Events !!
+  </div>
+</ng-template>
+
+<ng-template #spinner>
+  <div class="spinner d-flex justify-content-center">
+    <div class="spinner-border" role="status" style="color: #8c5480">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ng-template>

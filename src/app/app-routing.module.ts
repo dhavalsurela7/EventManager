@@ -19,6 +19,7 @@ import { DashboardUserHomeComponent } from './dashboard-user-home/dashboard-user
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ChartComponent } from './chart/chart.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { DashboardAdminHomeNewComponent } from './dashboard-admin-home-new/dashboard-admin-home-new.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent , pathMatch: 'full' },
@@ -50,6 +51,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardAdminHomeComponent },
+      { path: 'newdashboard', component: DashboardAdminHomeNewComponent },
       { path: 'event-add', component: EventAddComponent },
       { path: 'event-publish', component: EventPublishComponent },
       { path: 'event-update', component: EventUpdateComponent },
