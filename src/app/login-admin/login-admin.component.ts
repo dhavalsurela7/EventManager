@@ -68,8 +68,10 @@ export class LoginAdminComponent implements OnInit {
     this.apicall.adminapiservice(JSON.stringify(data)).subscribe((result) => {
       if (result != null && result != '' && result != undefined) {
         if (result['ID'] == '200') {
+          debugger
           this.form.reset();
           sessionStorage.clear();
+          sessionStorage.setItem('token',result['Message'])
           sessionStorage.setItem('Role', 'Admin');
           sessionStorage.setItem('IsLoggedIn', String(true));
           this.router.navigate(['/admin']);

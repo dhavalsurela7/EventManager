@@ -51,8 +51,9 @@ loadevents():void{
       
       
         debugger
-        if(  Number( res.ArrayOfResponse2[0].Event_Id)/this.pageSize > 0){
-          this.totalpage =  Math.ceil( Number(  res.ArrayOfResponse2[0].Event_Id)/this.pageSize)
+        if(  Number( res.NoOfPages)/this.pageSize > 0){
+          this.totalpage =  Math.ceil( Number(  res.NoOfPages)/this.pageSize)
+          this.pages = []
           for (let index = 0; index < this.totalpage; index++) {
             this.pages.push(index + 1);
             
@@ -60,6 +61,8 @@ loadevents():void{
          }
          else{
           this.totalpage = 1
+          this.pages = []
+          this.pages.push(1)
          }
      
      

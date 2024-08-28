@@ -1,15 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --btn-padding: 6px 12px 6px 12px;
+}
 .register-form {
-    margin: 0px;
-    padding: 0px;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0px;
+  padding: 0px;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bi {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+}
+form {
+  height: fit-content;
+  background-color: #8c5480;
+  color: white;
 }
 
-form {
-    height: fit-content;
-    background-color: #8c5480;
-    color: white;
+
+/*================= base button ===================*/
+.mybtn {
+  padding: var(--btn-padding);
+  background: transparent;
+  border-radius: 0.375rem;
+  border: 1px solid;
+  border-color: var(--my-color);
+  color: var(--my-color);
+}
+
+.mybtn:hover {
+  background-color: var(--my-color);
+  color: var(--hover-color);
+}
+
+/*================================================*/
+
+.mainbtn {
+  --my-color: #8c5480;
+  --hover-color: white;
+}
+
+.disablebtn {
+  --my-color: gray;
+  pointer-events: none;
+}
+
+.redbtn {
+  --my-color: #b33d68;
+  --hover-color: white;
+}
+
+.numberbtn {
+  --my-color: #8c5480;
+  --hover-color: white;
+  padding: 6px !important;
+  margin: 2px;
+}
+
+.numberbtnselected {
+  --my-color: white;
+  --hover-color: white;
+  background-color: #8c5480 !important;
+  padding: 6px !important;
+  margin: 2px;
 }

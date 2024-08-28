@@ -37,6 +37,7 @@
         </td>
       </tr>
       <tr>
+        <th>No.</th>
         <th>Event Name</th>
         <th>Event Description</th>
         <th>Start Date</th>
@@ -49,16 +50,13 @@
 
     <tbody *ngFor="let exp of result; index as i">
       <tr>
+        <td>{{ startindex + i + 1 }}</td>
         <td>{{ exp.Event_Name }}</td>
         <td>{{ exp.Event_Description }}</td>
         <td>{{ exp.Event_Start_Date }}</td>
         <td>{{ exp.Event_End_Date }}</td>
         <td>
-          <button
-            class="btn"
-            style="border-color: #8c5480"
-            (click)="details(result[i]); close = false"
-          >
+          <button class="mybtn mainbtn" (click)="details(result[i]); close = false">
             Details
           </button>
         </td>
@@ -82,11 +80,10 @@
         </td>
         <td>
           <button
-            class="btn text-light"
-            style="background-color: #b33d68"
+            class="mybtn redbtn"
             (click)="delete(exp.Event_Name)"
           >
-            Delete
+          Delete
           </button>
         </td>
       </tr>
@@ -96,27 +93,23 @@
   <div class="m-2 row">
     <div class="col-6">
       <button
-        class="btn btn-outline"
-        [ngClass]="{ shadow: pageNumber !== 1 }"
-        [ngStyle]="{
-          'border-color': pageNumber !== 1 ? '#8c5480' : 'grey',
-          color: pageNumber !== 1 ? '#8c5480' : 'grey'
-        }"
+        [ngClass]="
+          pageNumber != 1 ? 'mybtn mainbtn ' : 'mybtn disablebtn'
+        "
         (click)="onPageChange(pageNumber - 1)"
         [disabled]="pageNumber === 1"
       >
         Previous
       </button>
-      <span>&nbsp; Page {{ pageNumber }} &nbsp;</span>
+      <div style="display: inline-block;" *ngFor="let e of pages">
+      <button  (click)="onPageChange(e)" [ngClass]="e==pageNumber?'mybtn numberbtnselected': 'mybtn numberbtn'">&nbsp; {{ e }} &nbsp;</button>
+    </div>
       <button
-        class="btn btn-outline"
-        [ngClass]="{ shadow: pageNumber != totalpage }"
-        [ngStyle]="{
-          'border-color': pageNumber != totalpage ? '#8c5480' : 'grey',
-          color: pageNumber != totalpage ? '#8c5480' : ''
-        }"
+        [ngClass]="
+          pageNumber < totalpage ? 'mybtn mainbtn ' : 'mybtn disablebtn'
+        "
         (click)="onPageChange(pageNumber + 1)"
-        [disabled]="pageNumber == totalpage"
+        [disabled]="pageNumber >= totalpage"
       >
         Next
       </button>
