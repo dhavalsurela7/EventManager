@@ -9,6 +9,8 @@ import { EventService } from '../Services/event.service';
   styleUrl: './dashboard-admin-home-new.component.css'
 })
 export class DashboardAdminHomeNewComponent implements OnInit {
+  selectedcolumn : string = "Event_Id"
+  direction : string = "Desc"
   publishresult: any;
   unpublishresult: any;
   deleteresult: any;
@@ -20,6 +22,7 @@ export class DashboardAdminHomeNewComponent implements OnInit {
   eimage: string;
   activityresult: any;
   close = false;
+  NoOfPages: any;
   constructor(private apicall: ApiCallService, private eventservice : EventService) {}
   result: any;
   show = false;
@@ -49,10 +52,10 @@ loadevents():void{
     
       this.result = res.ArrayOfResponse;
       
-      
-        debugger
-        if(  Number( res.NoOfPages)/this.pageSize > 0){
-          this.totalpage =  Math.ceil( Number(  res.NoOfPages)/this.pageSize)
+      this.NoOfPages = Number( res.NoOfPages)
+
+        if(  this.NoOfPages/this.pageSize > 0){
+          this.totalpage =  Math.ceil( this.NoOfPages/this.pageSize)
           this.pages = []
           for (let index = 0; index < this.totalpage; index++) {
             this.pages.push(index + 1);
@@ -84,19 +87,36 @@ onPageChange(page: number): void {
 }
 
 onPageSizeChange($event){
+  debugger
   this.pageSize = $event.value;
+  if (this.pageNumber !=1) {
+    this.pageNumber = 1
+    this.startindex = 0
+  }
   this.loadevents();
 }
 
-onSortChange($event) {
-  this.sortBy = $event.value;
+onSortChange(column) {
+  debugger
+  this.sortBy = column; 
+  if(this.selectedcolumn != column){
+    this.direction = "Asc"
+  }
+  this.sortdirection = this.direction;
   this.loadevents();
+  this.selectedcolumn = column;
+  if (this.direction == "Asc")  {
+    this.direction = "Desc"
+  }
+  else{
+    this.direction = "Asc"
+  }
 }
 
-onDirectionChange($event) {
-  this.sortdirection = $event.value;
-  this.loadevents();
-}
+// onDirectionChange($event) {
+//   this.sortdirection = $event.value;
+//   this.loadevents();
+// }
 
 onSearch($event): void {
   debugger

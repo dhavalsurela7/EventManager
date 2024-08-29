@@ -23,6 +23,7 @@ form {
 
 
 /*================= base button ===================*/
+
 .mybtn {
   padding: var(--btn-padding);
   background: transparent;
@@ -39,29 +40,29 @@ form {
 
 /*================================================*/
 
-.mainbtn {
+.mybtn-primary {
   --my-color: #8c5480;
   --hover-color: white;
 }
 
-.disablebtn {
+.mybtn-secondary {
   --my-color: gray;
   pointer-events: none;
 }
 
-.redbtn {
+.mybtn-red {
   --my-color: #b33d68;
   --hover-color: white;
 }
 
-.numberbtn {
+.mybtn-primary-number {
   --my-color: #8c5480;
   --hover-color: white;
   padding: 6px !important;
   margin: 2px;
 }
 
-.numberbtnselected {
+.mybtn-primary-number-active {
   --my-color: white;
   --hover-color: white;
   background-color: #8c5480 !important;

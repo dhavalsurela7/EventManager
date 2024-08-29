@@ -1,20 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="down" viewBox="0 0 16 16">
+    <path
+      d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+    />
+  </symbol>
+  <symbol id="up" viewBox="0 0 16 16">
+    <path
+      d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
+    />
+  </symbol>
+</svg>
 <div class="container m-1" *ngIf="show; else spinner">
   <div class="row m-2">
-    <div class="col-6">
-      <label>Sort By : &nbsp;</label>
-      <select (change)="onSortChange($event.currentTarget)">
-        <option value="">Sort By</option>
-        <option value="Event_Name">Name</option>
-        <option value="Event_Start_Date">Start Date</option>
-        <option value="Event_End_Date">End Date</option>
-      </select>
-      <span>&nbsp;</span>
-      <select (change)="onDirectionChange($event.currentTarget)">
-        <option value="Asc">Asc</option>
-        <option value="Desc">Desc</option>
-      </select>
-    </div>
-    <div class="col-6 text-end">
+    <div class="col-12 text-end">
       <label>Search : &nbsp;</label>
       <input
         type="text"
@@ -37,26 +35,109 @@
         </td>
       </tr>
       <tr>
-        <th>No.</th>
-        <th>Event Name</th>
-        <th>Event Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Details</th>
-        <th>Publish</th>
-        <th>Delete</th>
+        <td
+          [ngClass]="
+            selectedcolumn == 'Event_Id' || selectedcolumn == '' ? 'fw-bold' : ''
+          "
+          (click)="onSortChange('Event_Id')"
+        >
+          No.
+          <span *ngIf="selectedcolumn == 'Event_Id' && direction == 'Asc'">
+            <svg class="bi">
+              <use xlink:href="#up" />
+            </svg>
+          </span>
+          <span *ngIf="selectedcolumn == 'Event_Id' && direction == 'Desc'">
+            <svg class="bi">
+              <use xlink:href="#down" />
+            </svg>
+          </span>
+        </td>
+        <td
+          [ngClass]="selectedcolumn == 'Event_Name' ? 'fw-bold' : ''"
+          (click)="onSortChange('Event_Name')"
+        >
+          Event Name
+          <span *ngIf="selectedcolumn == 'Event_Name' && direction == 'Asc'">
+            <svg class="bi">
+              <use xlink:href="#up" />
+            </svg>
+          </span>
+          <span *ngIf="selectedcolumn == 'Event_Name' && direction == 'Desc'">
+            <svg class="bi">
+              <use xlink:href="#down" />
+            </svg>
+          </span>
+        </td>
+        <td
+          [ngClass]="selectedcolumn == 'Event_Description' ? 'fw-bold' : ''"
+          (click)="onSortChange('Event_Description')"
+        >
+          Event Description
+          <span *ngIf="selectedcolumn == 'Event_Description' && direction == 'Asc'">
+            <svg class="bi">
+              <use xlink:href="#up" />
+            </svg>
+          </span>
+          <span *ngIf="selectedcolumn == 'Event_Description' && direction == 'Desc'">
+            <svg class="bi">
+              <use xlink:href="#down" />
+            </svg>
+          </span>
+        </td>
+        <td
+          [ngClass]="selectedcolumn == 'Event_Start_Date' ? 'fw-bold' : ''"
+          (click)="onSortChange('Event_Start_Date')"
+        >
+          Start Date
+          <span *ngIf="selectedcolumn == 'Event_Start_Date' && direction == 'Asc'">
+            <svg class="bi">
+              <use xlink:href="#up" />
+            </svg>
+          </span>
+          <span *ngIf="selectedcolumn == 'Event_Start_Date' && direction == 'Desc'">
+            <svg class="bi">
+              <use xlink:href="#down" />
+            </svg>
+          </span>
+        </td>
+        <td
+          [ngClass]="selectedcolumn == 'Event_End_Date' ? 'fw-bold' : ''"
+          (click)="onSortChange('Event_End_Date')"
+        >
+          End Date
+          <span *ngIf="selectedcolumn == 'Event_End_Date' && direction == 'Asc'">
+            <svg class="bi">
+              <use xlink:href="#up" />
+            </svg>
+          </span>
+          <span *ngIf="selectedcolumn == 'Event_End_Date' && direction == 'Desc'">
+            <svg class="bi">
+              <use xlink:href="#down" />
+            </svg>
+          </span>
+        </td>
+        <td>Details</td>
+        <td>Publish</td>
+        <td>Delete</td>
       </tr>
     </thead>
 
     <tbody *ngFor="let exp of result; index as i">
       <tr>
-        <td>{{ startindex + i + 1 }}</td>
+        
+        <td *ngIf="selectedcolumn!='Event_Id'">{{ startindex + i + 1 }}</td>
+        <td *ngIf="selectedcolumn=='Event_Id' && direction=='Desc'">{{ startindex + i + 1 }}</td>
+        <td *ngIf="selectedcolumn=='Event_Id' && direction=='Asc'">{{ NoOfPages - i - startindex }}</td>
         <td>{{ exp.Event_Name }}</td>
         <td>{{ exp.Event_Description }}</td>
         <td>{{ exp.Event_Start_Date }}</td>
         <td>{{ exp.Event_End_Date }}</td>
         <td>
-          <button class="mybtn mainbtn" (click)="details(result[i]); close = false">
+          <button
+            class="mybtn mybtn-primary"
+            (click)="details(result[i]); close = false"
+          >
             Details
           </button>
         </td>
@@ -79,11 +160,8 @@
           </button>
         </td>
         <td>
-          <button
-            class="mybtn redbtn"
-            (click)="delete(exp.Event_Name)"
-          >
-          Delete
+          <button class="mybtn mybtn-red" (click)="delete(exp.Event_Name)">
+            Delete
           </button>
         </td>
       </tr>
@@ -93,20 +171,31 @@
   <div class="m-2 row">
     <div class="col-6">
       <button
-        [ngClass]="
-          pageNumber != 1 ? 'mybtn mainbtn ' : 'mybtn disablebtn'
-        "
+        class="mybtn"
+        [ngClass]="pageNumber != 1 ? 'mybtn-primary ' : 'mybtn-secondary'"
         (click)="onPageChange(pageNumber - 1)"
         [disabled]="pageNumber === 1"
       >
         Previous
       </button>
-      <div style="display: inline-block;" *ngFor="let e of pages">
-      <button  (click)="onPageChange(e)" [ngClass]="e==pageNumber?'mybtn numberbtnselected': 'mybtn numberbtn'">&nbsp; {{ e }} &nbsp;</button>
-    </div>
+      <div style="display: inline-block" *ngFor="let e of pages">
+        <button
+          (click)="onPageChange(e)"
+          class="mybtn"
+          [ngClass]="
+            e == pageNumber
+              ? 'mybtn-primary-number-active'
+              : 'mybtn-primary-number'
+          "
+        >
+          &nbsp; {{ e }} &nbsp;
+        </button>
+      </div>
       <button
         [ngClass]="
-          pageNumber < totalpage ? 'mybtn mainbtn ' : 'mybtn disablebtn'
+          pageNumber < totalpage
+            ? 'mybtn mybtn-primary '
+            : 'mybtn mybtn-secondary'
         "
         (click)="onPageChange(pageNumber + 1)"
         [disabled]="pageNumber >= totalpage"
