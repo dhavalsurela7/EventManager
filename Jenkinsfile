@@ -23,7 +23,7 @@ pipeline {
     stage('Deploy to Netlify') {
       steps {
         bat '''
-        netlify deploy \
+        npx netlify deploy \
           --dir=dist/EventManager \
           --site=$NETLIFY_SITE_ID \
           --auth=$NETLIFY_AUTH_TOKEN \
