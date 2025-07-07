@@ -9,20 +9,20 @@ pipeline {
   stages {
     stage('Install') {
       steps {
-        sh 'npm install -g @angular/cli netlify-cli'
-        sh 'npm install'
+        bat 'npm install -g @angular/cli netlify-cli'
+        bat 'npm install'
       }
     }
 
     stage('Build') {
       steps {
-        sh 'ng build --configuration production'
+        bat 'ng build --configuration production'
       }
     }
 
     stage('Deploy to Netlify') {
       steps {
-        sh '''
+        bat '''
         netlify deploy \
           --dir=dist/EventManager \
           --site=$NETLIFY_SITE_ID \
